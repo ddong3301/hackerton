@@ -189,6 +189,20 @@ class LoginViewController: UIViewController {
         return view
     }()
     
+    let forget: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "아이디 비밀번호 찾기"
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 15)
+        
+        
+        
+        return label
+    }()
+    
     
     
 
@@ -209,6 +223,7 @@ class LoginViewController: UIViewController {
         view.addSubview(signbt)
         view.addSubview(line)
         
+        view.addSubview(forget)
     }
     
     
@@ -266,6 +281,9 @@ class LoginViewController: UIViewController {
             line.centerYAnchor.constraint(equalTo: Loginbt.centerYAnchor),
             line.heightAnchor.constraint(equalTo: Loginbt.heightAnchor),
             line.widthAnchor.constraint(equalToConstant: 2),
+            
+            forget.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            forget.bottomAnchor.constraint(equalTo: signbt.bottomAnchor, constant: 50)
         ])
     }
     
@@ -290,9 +308,9 @@ class LoginViewController: UIViewController {
         passWord.delegate = self
         
         Loginbt.addTarget(self, action: #selector(pressloginbt(_:)), for: .touchUpInside)
+        signbt.addTarget(self, action: #selector(pushsignup(_:)), for: .touchUpInside)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardwillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         // Do any additional setup after loading the view.
@@ -354,6 +372,13 @@ extension LoginViewController {
     @objc func pressloginbt(_ sender: UIButton) {
         
         print("pressLogin bt")
+        let mainViewController = UINavigationController(rootViewController: MainViewController())
+        
+        mainViewController.modalPresentationStyle = .fullScreen
+        mainViewController.modalTransitionStyle = .crossDissolve
+        
+        
+        present(mainViewController, animated: true, completion: nil)
         
     }
     
@@ -379,6 +404,19 @@ extension LoginViewController {
         self.view.frame.origin.y  = 0
         Simbol.isHidden = false
       }
+    
+    @objc private func pushsignup(_ sender: UIButton) {
+        
+        let SingupView = SignupViewController()
+        
+        SingupView.modalTransitionStyle = .crossDissolve
+        SingupView.modalPresentationStyle = .fullScreen
+        
+        present(SingupView, animated: true, completion: nil)
+        
+        
+        
+    }
     }
     
 
@@ -386,7 +424,7 @@ extension LoginViewController {
 
 extension LoginViewController {
     
- 
+    
         
         
         
