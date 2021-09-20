@@ -7,12 +7,15 @@
 
 import UIKit
 
-class SignupViewController: UIViewController, UITableViewDelegate {
+class SignupViewController: UIViewController {
     
     let space: CGFloat = 5
     
+    let indentifier = "SignupTableViewCell"
+    
     let areas = ["배방역","서울역","아산역","천안아산역"]
     
+    let btatate = 1
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -171,7 +174,6 @@ class SignupViewController: UIViewController, UITableViewDelegate {
         bt.setImage(UIImage(systemName: "arrowtriangle.down.fill"), for: .highlighted)
         bt.tintColor = .black
         
-        
         return bt
     }()
     
@@ -193,11 +195,12 @@ class SignupViewController: UIViewController, UITableViewDelegate {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         
-        table.register(areacell.self, forCellReuseIdentifier: "areacellidentifier")
+        table.register(SignupTableViewCell.self, forCellReuseIdentifier: "SignupTableViewCell")
+        
         return table
     }()
     
-    
+
     
     
     func addviews(){
@@ -219,6 +222,7 @@ class SignupViewController: UIViewController, UITableViewDelegate {
         areaview.addSubview(areabt)
         
         alertTableview.addSubview(tableview)
+        
         
         
     }
@@ -296,7 +300,13 @@ class SignupViewController: UIViewController, UITableViewDelegate {
             alertTableview.leadingAnchor.constraint(equalTo: areaview.leadingAnchor),
             alertTableview.trailingAnchor.constraint(equalTo: areaview.trailingAnchor),
             alertTableview.topAnchor.constraint(equalTo: areaview.bottomAnchor, constant: 10),
-            alertTableview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            alertTableview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150),
+            
+            tableview.leadingAnchor.constraint(equalTo: alertTableview.leadingAnchor),
+            tableview.trailingAnchor.constraint(equalTo: alertTableview.trailingAnchor),
+            tableview.bottomAnchor.constraint(equalTo: alertTableview.bottomAnchor),
+            tableview.topAnchor.constraint(equalTo: alertTableview.topAnchor, constant: 30),
+            
 
             
         ])
@@ -314,6 +324,9 @@ class SignupViewController: UIViewController, UITableViewDelegate {
         IDlayout()
         passlayout()
         arealayout()
+        
+        tableview.delegate = self
+        tableview.dataSource = self
         
         areabt.addTarget(self, action: #selector(showtableview(_:)), for: .touchDown)
 
@@ -339,6 +352,8 @@ extension SignupViewController {
     @objc func showtableview(_ sender: UIButton) {
         
         alertTableview.isHidden = false
+        areabt.setImage(UIImage(systemName: "arrowtriangle.up"), for: .normal)
+        areabt.setImage(UIImage(systemName: "arrowtriangle.up.fill"), for: .highlighted)
 
     }
 }
@@ -346,22 +361,29 @@ extension SignupViewController {
 
 extension SignupViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return areas.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SignupTableViewCell", for: indexPath) as? SignupTableViewCell else {return UITableViewCell()}
+        
+        cell.stationname.text = areas[indexPath.row]
+        
+        return  cell
     }
     
 }
 
-
-class areacell: UITableViewCell {
+extension SignupViewController: UITableViewDelegate {
     
-    let cellkey = "areacellidentifier"
-    
-    
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        areaLabel.text = areas[indexPath.row]
+        areabt.setImage(UIImage(systemName: "arrowtriangle.down"), for:.normal )
+        areabt.setImage(UIImage(systemName: "arrowtriangle.down.fill"), for: .highlighted)
+        
+        alertTableview.isHidden = true
+    }
     
     
     
