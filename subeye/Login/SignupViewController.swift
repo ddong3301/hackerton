@@ -13,9 +13,23 @@ class SignupViewController: UIViewController {
     
     let indentifier = "SignupTableViewCell"
     
-    let areas = ["배방역","서울역","아산역","천안아산역"]
+    let areas = ["배방역","서울역","아산역","천안아산역", "천안역", "신창역","수원역"]
     
-    let btatate = 1
+    var btatate = 1
+    
+    static var area = "배방역"
+    
+    let backbt: UIButton = {
+        let bt = UIButton()
+        bt.translatesAutoresizingMaskIntoConstraints = false
+        
+        bt.tintColor = .black
+        
+        bt.setImage(UIImage(systemName: "arrowtriangle.left"), for: .normal)
+        bt.setImage(UIImage(systemName: "arrowtriangle.left.fill"), for: .highlighted)
+        
+        return bt
+    }()
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -31,9 +45,9 @@ class SignupViewController: UIViewController {
     let idtitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "아이디"
+        label.text = "사번"
         label.textColor = .black
-        label.textAlignment = .center
+        
         label.font = UIFont.boldSystemFont(ofSize: 15)
         
         return label
@@ -58,7 +72,7 @@ class SignupViewController: UIViewController {
         TF.borderStyle = .none
         
         
-        TF.placeholder = "아이디를 입력하세요."
+        TF.placeholder = "사번을 입력하세요."
         
         TF.font = UIFont.systemFont(ofSize: 15)
         TF.textColor = .black
@@ -72,7 +86,7 @@ class SignupViewController: UIViewController {
         bt.translatesAutoresizingMaskIntoConstraints = false
         
         
-        bt.setBackgroundColor(.lightGray, for: .highlighted)
+        bt.setBackgroundColor(.systemGray5, for: .highlighted)
         
         
         bt.layer.borderColor = UIColor.black.cgColor
@@ -90,6 +104,10 @@ class SignupViewController: UIViewController {
         
         return bt
     }()
+    
+    
+    
+    
 
     let passtitle: UILabel = {
         let label = UILabel()
@@ -97,7 +115,7 @@ class SignupViewController: UIViewController {
         
         label.text = "비밀번호"
         label.textColor = .black
-        label.textAlignment = .center
+        
         label.font = UIFont.boldSystemFont(ofSize: 15)
         
         return label
@@ -120,6 +138,7 @@ class SignupViewController: UIViewController {
         TF.translatesAutoresizingMaskIntoConstraints = false
         
         TF.borderStyle = .none
+        TF.isSecureTextEntry = true
         
         
         TF.placeholder = "비밀번호를 입력하세요."
@@ -136,7 +155,7 @@ class SignupViewController: UIViewController {
         
         label.text = "지역"
         label.textColor = .black
-        label.textAlignment = .center
+        
         label.font = UIFont.boldSystemFont(ofSize: 15)
         
         return label
@@ -181,8 +200,8 @@ class SignupViewController: UIViewController {
         let tableview = UIView()
         
         tableview.translatesAutoresizingMaskIntoConstraints = false
-        
-        tableview.layer.borderWidth = 2
+        tableview.backgroundColor = .white
+        tableview.layer.borderWidth = 3
         tableview.layer.borderColor = UIColor.black.cgColor
         tableview.layer.cornerRadius = 15
         
@@ -200,11 +219,110 @@ class SignupViewController: UIViewController {
         return table
     }()
     
+    let loginbt: UIButton = {
+        let bt = UIButton()
+        bt.translatesAutoresizingMaskIntoConstraints = false
+        
+        bt.setTitle("SIGN UP", for: .normal)
+        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        bt.setTitleColor(.black, for: .normal)
+        
+        bt.layer.cornerRadius = 15
+        bt.layer.borderWidth = 3
+        bt.layer.borderColor = UIColor.black.cgColor
+        bt.layer.masksToBounds = true
+        
+        bt.setBackgroundColor(.systemGray5, for: .highlighted)
+        
+        
+        return bt
+    }()
+    
+    let alertCheckId = UIAlertController(title: "사번 확인", message: "정상적인 사번입니다..", preferredStyle: .alert)
+    
+    let nametitle: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.text = "이름"
+        label.textColor = .black
+        
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        
+        return label
+    }()
+    
+    let nameview : UIView = {
+        let subview = UIView()
+        subview.translatesAutoresizingMaskIntoConstraints = false
+        
+        subview.layer.borderWidth = 3
+        subview.layer.borderColor = UIColor.black.cgColor
+        subview.layer.cornerRadius = 15
+        
+        
+        return subview
+    }()
+    
+    let nameTF: UITextField = {
+        let TF = UITextField()
+        TF.translatesAutoresizingMaskIntoConstraints = false
+        
+        TF.borderStyle = .none
+        
+        TF.placeholder = "이름을 입력하세요."
+        
+        TF.font = UIFont.systemFont(ofSize: 15)
+        TF.textColor = .black
+        
+        return TF
+    }()
+    
+    let phonetitle: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.text = "핸드폰 번호"
+        label.textColor = .black
+        
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        
+        return label
+    }()
+    
+    let phoneview : UIView = {
+        let subview = UIView()
+        subview.translatesAutoresizingMaskIntoConstraints = false
+        
+        subview.layer.borderWidth = 3
+        subview.layer.borderColor = UIColor.black.cgColor
+        subview.layer.cornerRadius = 15
+        
+        
+        return subview
+    }()
+    
+    let phoneTF: UITextField = {
+        let TF = UITextField()
+        TF.translatesAutoresizingMaskIntoConstraints = false
+        
+        TF.borderStyle = .none
+        
+        TF.placeholder = "핸드폰번호를 입력하세요."
+        
+        TF.font = UIFont.systemFont(ofSize: 15)
+        TF.textColor = .black
+        
+        return TF
+    }()
 
     
     
     func addviews(){
         
+        view.addSubview(loginbt)
+        
+        view.addSubview(backbt)
         view.addSubview(idview)
         view.addSubview(titleLabel)
         view.addSubview(idTF)
@@ -215,14 +333,23 @@ class SignupViewController: UIViewController {
         view.addSubview(passTF)
         view.addSubview(passtitle)
         
+       
+        
+        
+        view.addSubview(nametitle)
+        view.addSubview(nameview)
+        view.addSubview(nameTF)
+        
+        view.addSubview(phonetitle)
+        view.addSubview(phoneview)
+        view.addSubview(phoneTF)
+        
         view.addSubview(areatitle)
         view.addSubview(areaview)
-        view.addSubview(alertTableview)
         areaview.addSubview(areaLabel)
         areaview.addSubview(areabt)
-        
+        view.addSubview(alertTableview)
         alertTableview.addSubview(tableview)
-        
         
         
     }
@@ -232,6 +359,10 @@ class SignupViewController: UIViewController {
     func IDlayout() {
         NSLayoutConstraint.activate([
             
+            backbt.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            backbt.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            backbt.widthAnchor.constraint(equalToConstant: 50),
+            backbt.heightAnchor.constraint(equalTo: backbt.widthAnchor),
         
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
@@ -261,7 +392,7 @@ class SignupViewController: UIViewController {
         NSLayoutConstraint.activate([
         
             passview.leadingAnchor.constraint(equalTo: idview.leadingAnchor),
-            passview.trailingAnchor.constraint(equalTo: idview.trailingAnchor),
+            passview.trailingAnchor.constraint(equalTo: idcheckBT.trailingAnchor),
             passview.topAnchor.constraint(equalTo: passTF.topAnchor, constant: -space),
             passview.bottomAnchor.constraint(equalTo: passTF.bottomAnchor, constant: space),
             
@@ -285,8 +416,8 @@ class SignupViewController: UIViewController {
             areatitle.topAnchor.constraint(equalTo: passview.bottomAnchor, constant: 20),
             
             areaview.leadingAnchor.constraint(equalTo: idview.leadingAnchor),
-            areaview.trailingAnchor.constraint(equalTo: idview.trailingAnchor),
-            areaview.widthAnchor.constraint(equalTo: idview.widthAnchor),
+            areaview.trailingAnchor.constraint(equalTo: passview.trailingAnchor),
+            
             areaview.heightAnchor.constraint(equalTo: idview.heightAnchor),
             areaview.topAnchor.constraint(equalTo: areatitle.bottomAnchor, constant: 5),
             
@@ -307,10 +438,63 @@ class SignupViewController: UIViewController {
             tableview.bottomAnchor.constraint(equalTo: alertTableview.bottomAnchor),
             tableview.topAnchor.constraint(equalTo: alertTableview.topAnchor, constant: 30),
             
+            loginbt.leadingAnchor.constraint(equalTo: areaview.leadingAnchor),
+            loginbt.topAnchor.constraint(equalTo: phoneview.bottomAnchor, constant: 50),
+            loginbt.widthAnchor.constraint(equalTo: areaview.widthAnchor),
+            loginbt.heightAnchor.constraint(equalTo: areaview.heightAnchor)
 
             
         ])
     }
+    
+    func namelayout() {
+        NSLayoutConstraint.activate([
+        
+            nameview.leadingAnchor.constraint(equalTo: idview.leadingAnchor),
+            nameview.trailingAnchor.constraint(equalTo: idcheckBT.trailingAnchor),
+            nameview.topAnchor.constraint(equalTo: nameTF.topAnchor, constant: -space),
+            nameview.bottomAnchor.constraint(equalTo: nameTF.bottomAnchor, constant: space),
+            
+            nameTF.leadingAnchor.constraint(equalTo: passTF.leadingAnchor),
+            nameTF.topAnchor.constraint(equalTo: areaview.bottomAnchor, constant: 50),
+            nameTF.widthAnchor.constraint(equalToConstant: 250),
+            nameTF.heightAnchor.constraint(equalToConstant: 40),
+            
+            nametitle.leadingAnchor.constraint(equalTo: idtitle.leadingAnchor),
+            nametitle.trailingAnchor.constraint(equalTo: idtitle.trailingAnchor),
+            nametitle.bottomAnchor.constraint(equalTo: nameview.topAnchor,constant: -5),
+        
+        ])
+    }
+    
+    
+    func phonelayout() {
+        NSLayoutConstraint.activate([
+        phoneview.leadingAnchor.constraint(equalTo: idview.leadingAnchor),
+        phoneview.trailingAnchor.constraint(equalTo: idcheckBT.trailingAnchor),
+        phoneview.topAnchor.constraint(equalTo: phoneTF.topAnchor, constant: -space),
+        phoneview.bottomAnchor.constraint(equalTo: phoneTF.bottomAnchor, constant: space),
+        
+        phoneTF.leadingAnchor.constraint(equalTo: passTF.leadingAnchor),
+        phoneTF.topAnchor.constraint(equalTo: nameview.bottomAnchor, constant: 50),
+        phoneTF.widthAnchor.constraint(equalToConstant: 250),
+        phoneTF.heightAnchor.constraint(equalToConstant: 40),
+        
+        phonetitle.leadingAnchor.constraint(equalTo: idtitle.leadingAnchor),
+        phonetitle.trailingAnchor.constraint(equalTo: idtitle.trailingAnchor),
+        phonetitle.bottomAnchor.constraint(equalTo: phoneview.topAnchor,constant: -5),
+        
+        ])
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 
@@ -324,12 +508,29 @@ class SignupViewController: UIViewController {
         IDlayout()
         passlayout()
         arealayout()
+        namelayout()
+        phonelayout()
         
         tableview.delegate = self
         tableview.dataSource = self
+        idTF.delegate = self
+        passTF.delegate = self
+        nameTF.delegate = self
+        phoneTF.delegate = self
         
-        areabt.addTarget(self, action: #selector(showtableview(_:)), for: .touchDown)
-
+        
+        areabt.addTarget(self, action: #selector(showtableview(_:)), for: .touchUpInside)
+        backbt.addTarget(self, action: #selector(backloginview(_:)), for: .touchUpInside)
+        loginbt.addTarget(self, action: #selector(backloginview(_:)), for: .touchUpInside)
+        idcheckBT.addTarget(self, action: #selector(showalert(_sender:)), for: .touchUpInside)
+        
+       
+        let OKAction = UIAlertAction(title: "확인", style: .default) { (action) in
+            self.alertCheckId.dismiss(animated: true, completion: nil)
+        }
+        
+        alertCheckId.addAction(OKAction)
+        
         // Do any additional setup after loading the view.
     }
     
@@ -352,10 +553,41 @@ extension SignupViewController {
     @objc func showtableview(_ sender: UIButton) {
         
         alertTableview.isHidden = false
+        
+        if btatate == 1 {
         areabt.setImage(UIImage(systemName: "arrowtriangle.up"), for: .normal)
         areabt.setImage(UIImage(systemName: "arrowtriangle.up.fill"), for: .highlighted)
-
+        btatate = 2
+        } else {
+            areabt.setImage(UIImage(systemName: "arrowtriangle.down"), for:.normal )
+            areabt.setImage(UIImage(systemName: "arrowtriangle.down.fill"), for: .highlighted)
+            
+            alertTableview.isHidden = true
+            btatate = 1
+        }
+        
     }
+    
+    @objc func backloginview(_ sender: UIButton) {
+        
+        let alert = UIAlertController(title: "회원가입이 완료되었습니다.", message: nil, preferredStyle: .alert)
+        let OKaction = UIAlertAction(title: "OK", style: .default) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(OKaction)
+        
+        present(alert, animated: true, completion: nil)
+        
+        
+    }
+    
+    @objc func showalert(_sender: UIButton) {
+        
+        
+        present(alertCheckId, animated: true, completion: nil)
+    }
+    
 }
 
 
@@ -368,6 +600,7 @@ extension SignupViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SignupTableViewCell", for: indexPath) as? SignupTableViewCell else {return UITableViewCell()}
         
         cell.stationname.text = areas[indexPath.row]
+        SignupViewController.area = areas[indexPath.row]
         
         return  cell
     }
@@ -381,10 +614,34 @@ extension SignupViewController: UITableViewDelegate {
         areaLabel.text = areas[indexPath.row]
         areabt.setImage(UIImage(systemName: "arrowtriangle.down"), for:.normal )
         areabt.setImage(UIImage(systemName: "arrowtriangle.down.fill"), for: .highlighted)
+        btatate = 1
         
         alertTableview.isHidden = true
     }
+
+}
+
+extension SignupViewController: UITextFieldDelegate {
     
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        self.view.frame.origin.y  = 0
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == phoneTF {
+            
+            self.view.frame.origin.y  = -200
+            
+            return true
+            
+        }
+        return true
+    }
     
     
 }

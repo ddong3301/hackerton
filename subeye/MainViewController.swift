@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "역이름"
+        label.text = "배방역"
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textAlignment = .center
