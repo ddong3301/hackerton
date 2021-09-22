@@ -9,6 +9,15 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    let extraview: UIView = {
+        let extra = UIView()
+        extra.translatesAutoresizingMaskIntoConstraints = false
+        
+        extra.backgroundColor = .white
+        
+        
+        return extra
+    }()
     
     
     class View1: UIView {
@@ -54,7 +63,8 @@ class LoginViewController: UIViewController {
     let Simbol:UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.image = UIImage(systemName: "heart")
+        imgView.contentMode = .scaleAspectFit
+        imgView.image = UIImage(named: "SUBEYEvec")
         imgView.tintColor = .black
         
         return imgView
@@ -92,7 +102,7 @@ class LoginViewController: UIViewController {
         
         idview.translatesAutoresizingMaskIntoConstraints = false
         idview.backgroundColor = .white
-        idview.layer.borderColor = UIColor.black.cgColor
+        idview.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
         idview.layer.borderWidth = 2
         idview.layer.cornerRadius = 15
         
@@ -131,25 +141,13 @@ class LoginViewController: UIViewController {
         
         idview.translatesAutoresizingMaskIntoConstraints = false
         idview.backgroundColor = .white
-        idview.layer.borderColor = UIColor.black.cgColor
+        idview.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
         idview.layer.borderWidth = 2
         idview.layer.cornerRadius = 15
         
         return idview
     }()
      
-    
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        label.text = "SubEye"
-        label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 70)
-        
-        return label
-    }()
-    
     
     let Loginbt: UIButton = {
         let bt = UIButton()
@@ -211,7 +209,6 @@ class LoginViewController: UIViewController {
     func addView() {
         view.layer.addSublayer(gradeintLayer)
         view.addSubview(Simbol)
-        view.addSubview(titleLabel)
         
         view.addSubview(idview)
         view.addSubview(Id)
@@ -226,47 +223,50 @@ class LoginViewController: UIViewController {
         view.addSubview(line)
         
         view.addSubview(forget)
+        view.addSubview(extraview)
     }
     
     
     func autolayout() {
         NSLayoutConstraint.activate([
-        
-            Simbol.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            Simbol.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            Simbol.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            Simbol.heightAnchor.constraint(equalToConstant: 250),
             
-            titleLabel.centerXAnchor.constraint(equalTo: Simbol.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: Simbol.bottomAnchor, constant: 10),
+            extraview.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            extraview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            extraview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            extraview.heightAnchor.constraint(equalToConstant:  view.frame.height),
+            
+            Simbol.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
+            Simbol.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -60),
+            Simbol.topAnchor.constraint(equalTo: view.topAnchor, constant: 170),
+            Simbol.heightAnchor.constraint(equalToConstant: 250),
             
             idLabel.leadingAnchor.constraint(equalTo: Id.leadingAnchor, constant: 5),
             idLabel.centerYAnchor.constraint(equalTo: Id.topAnchor, constant: -5),
             idLabel.widthAnchor.constraint(equalToConstant: 50),
             idLabel.heightAnchor.constraint(equalToConstant: 30),
             
-            Id.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 70),
-            Id.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -70),
-            Id.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 100),
+            Id.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 75),
+            Id.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -75),
+            Id.topAnchor.constraint(equalTo: Simbol.bottomAnchor, constant: 110),
             Id.heightAnchor.constraint(equalToConstant: 50),
             
-            idview.leadingAnchor.constraint(equalTo: Id.leadingAnchor, constant: -15),
-            idview.trailingAnchor.constraint(equalTo: Id.trailingAnchor, constant: 15),
+            idview.leadingAnchor.constraint(equalTo: Id.leadingAnchor, constant: -20),
+            idview.trailingAnchor.constraint(equalTo: Id.trailingAnchor, constant: 20),
             idview.topAnchor.constraint(equalTo: Id.topAnchor, constant: -5),
             idview.bottomAnchor.constraint(equalTo: Id.bottomAnchor, constant: 5),
             
             passWordLabel.leadingAnchor.constraint(equalTo: Id.leadingAnchor, constant: 5),
             passWordLabel.centerYAnchor.constraint(equalTo: Passwordview.topAnchor, constant: 0),
-            passWordLabel.widthAnchor.constraint(equalToConstant: 100),
+            passWordLabel.widthAnchor.constraint(equalToConstant: 120),
             passWordLabel.heightAnchor.constraint(equalToConstant: 30),
         
             passWord.leadingAnchor.constraint(equalTo: Id.leadingAnchor),
             passWord.trailingAnchor.constraint(equalTo: Id.trailingAnchor),
-            passWord.topAnchor.constraint(equalTo: Id.bottomAnchor, constant: 30),
+            passWord.topAnchor.constraint(equalTo: Id.bottomAnchor, constant: 50),
             passWord.heightAnchor.constraint(equalToConstant: 50),
             
-            Passwordview.leadingAnchor.constraint(equalTo: passWord.leadingAnchor, constant: -15),
-            Passwordview.trailingAnchor.constraint(equalTo: passWord.trailingAnchor, constant: 15),
+            Passwordview.leadingAnchor.constraint(equalTo: passWord.leadingAnchor, constant: -20),
+            Passwordview.trailingAnchor.constraint(equalTo: passWord.trailingAnchor, constant: 20),
             Passwordview.topAnchor.constraint(equalTo: passWord.topAnchor, constant: -5),
             Passwordview.bottomAnchor.constraint(equalTo: passWord.bottomAnchor, constant: 5),
             
@@ -391,7 +391,7 @@ extension LoginViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keybaordRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keybaordRectangle.height
-            self.view.frame.origin.y -= (keyboardHeight - 50)
+            self.view.frame.origin.y -= (keyboardHeight + 150)
             
             Simbol.isHidden = true
             
@@ -400,9 +400,7 @@ extension LoginViewController {
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
-//      if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-//        let keybaordRectangle = keyboardFrame.cgRectValue
-//        let keyboardHeight = keybaordRectangle.height
+
         
         self.view.frame.origin.y  = 0
         Simbol.isHidden = false

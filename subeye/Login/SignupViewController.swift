@@ -9,7 +9,7 @@ import UIKit
 
 class SignupViewController: UIViewController {
     
-    let space: CGFloat = 5
+    let space: CGFloat = 10
     
     let indentifier = "SignupTableViewCell"
     
@@ -23,7 +23,7 @@ class SignupViewController: UIViewController {
         let bt = UIButton()
         bt.translatesAutoresizingMaskIntoConstraints = false
         
-        bt.tintColor = .black
+        bt.tintColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1)
         
         bt.setImage(UIImage(systemName: "arrowtriangle.left"), for: .normal)
         bt.setImage(UIImage(systemName: "arrowtriangle.left.fill"), for: .highlighted)
@@ -31,13 +31,13 @@ class SignupViewController: UIViewController {
         return bt
     }()
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
+    let titleLabel: UIImageView = {
+        let label = UIImageView()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "SubEye"
-        label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 70)
+        label.image = UIImage(named: "SUBEYE2")
+        
+        
         
         return label
     }()
@@ -57,8 +57,8 @@ class SignupViewController: UIViewController {
         let subview = UIView()
         subview.translatesAutoresizingMaskIntoConstraints = false
         
-        subview.layer.borderWidth = 3
-        subview.layer.borderColor = UIColor.black.cgColor
+        subview.layer.borderWidth = 2
+        subview.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
         subview.layer.cornerRadius = 15
         
         
@@ -89,8 +89,8 @@ class SignupViewController: UIViewController {
         bt.setBackgroundColor(.systemGray5, for: .highlighted)
         
         
-        bt.layer.borderColor = UIColor.black.cgColor
-        bt.layer.borderWidth = 3
+        bt.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
+        bt.layer.borderWidth = 2
         bt.layer.cornerRadius = 15
         bt.layer.masksToBounds = true
         
@@ -125,8 +125,8 @@ class SignupViewController: UIViewController {
         let subview = UIView()
         subview.translatesAutoresizingMaskIntoConstraints = false
         
-        subview.layer.borderWidth = 3
-        subview.layer.borderColor = UIColor.black.cgColor
+        subview.layer.borderWidth = 2
+        subview.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
         subview.layer.cornerRadius = 15
         
         
@@ -165,8 +165,8 @@ class SignupViewController: UIViewController {
         let subview = UIView()
         subview.translatesAutoresizingMaskIntoConstraints = false
         
-        subview.layer.borderWidth = 3
-        subview.layer.borderColor = UIColor.black.cgColor
+        subview.layer.borderWidth = 2
+        subview.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
         subview.layer.cornerRadius = 15
         
         
@@ -191,7 +191,7 @@ class SignupViewController: UIViewController {
         
         bt.setImage(UIImage(systemName: "arrowtriangle.down"), for:.normal )
         bt.setImage(UIImage(systemName: "arrowtriangle.down.fill"), for: .highlighted)
-        bt.tintColor = .black
+        bt.tintColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1)
         
         return bt
     }()
@@ -201,8 +201,8 @@ class SignupViewController: UIViewController {
         
         tableview.translatesAutoresizingMaskIntoConstraints = false
         tableview.backgroundColor = .white
-        tableview.layer.borderWidth = 3
-        tableview.layer.borderColor = UIColor.black.cgColor
+        tableview.layer.borderWidth = 2
+        tableview.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
         tableview.layer.cornerRadius = 15
         
         tableview.isHidden = true
@@ -228,8 +228,8 @@ class SignupViewController: UIViewController {
         bt.setTitleColor(.black, for: .normal)
         
         bt.layer.cornerRadius = 15
-        bt.layer.borderWidth = 3
-        bt.layer.borderColor = UIColor.black.cgColor
+        bt.layer.borderWidth = 2
+        bt.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
         bt.layer.masksToBounds = true
         
         bt.setBackgroundColor(.systemGray5, for: .highlighted)
@@ -256,8 +256,8 @@ class SignupViewController: UIViewController {
         let subview = UIView()
         subview.translatesAutoresizingMaskIntoConstraints = false
         
-        subview.layer.borderWidth = 3
-        subview.layer.borderColor = UIColor.black.cgColor
+        subview.layer.borderWidth = 2
+        subview.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
         subview.layer.cornerRadius = 15
         
         
@@ -294,8 +294,8 @@ class SignupViewController: UIViewController {
         let subview = UIView()
         subview.translatesAutoresizingMaskIntoConstraints = false
         
-        subview.layer.borderWidth = 3
-        subview.layer.borderColor = UIColor.black.cgColor
+        subview.layer.borderWidth = 2
+        subview.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
         subview.layer.cornerRadius = 15
         
         
@@ -365,24 +365,27 @@ class SignupViewController: UIViewController {
             backbt.heightAnchor.constraint(equalTo: backbt.widthAnchor),
         
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80),
+            titleLabel.heightAnchor.constraint(equalToConstant: 80),
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             
-            idTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            idTF.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
-            idTF.widthAnchor.constraint(equalToConstant: 250),
+            idTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 55),
+            idTF.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 100),
+            idTF.widthAnchor.constraint(equalToConstant: 230),
             idTF.heightAnchor.constraint(equalToConstant: 40),
             
-            idview.leadingAnchor.constraint(equalTo: idTF.leadingAnchor, constant: -space - 5),
+            idview.leadingAnchor.constraint(equalTo: idTF.leadingAnchor, constant: -space - 10),
             idview.topAnchor.constraint(equalTo: idTF.topAnchor, constant: -space),
             idview.trailingAnchor.constraint(equalTo: idTF.trailingAnchor, constant: space),
             idview.bottomAnchor.constraint(equalTo: idTF.bottomAnchor, constant: space),
             
-            idcheckBT.leadingAnchor.constraint(equalTo: idTF.trailingAnchor, constant: 30),
+            idcheckBT.leadingAnchor.constraint(equalTo: idTF.trailingAnchor, constant: 20),
             idcheckBT.topAnchor.constraint(equalTo: idview.topAnchor),
             idcheckBT.heightAnchor.constraint(equalTo: idview.heightAnchor),
-            idcheckBT.widthAnchor.constraint(equalToConstant: 70),
+            idcheckBT.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             
-            idtitle.leadingAnchor.constraint(equalTo: idTF.leadingAnchor,constant:  5),
+            idtitle.leadingAnchor.constraint(equalTo: idTF.leadingAnchor, constant: -5),
             idtitle.bottomAnchor.constraint(equalTo: idview.topAnchor,constant: -5),
             
         ])
@@ -396,7 +399,7 @@ class SignupViewController: UIViewController {
             passview.topAnchor.constraint(equalTo: passTF.topAnchor, constant: -space),
             passview.bottomAnchor.constraint(equalTo: passTF.bottomAnchor, constant: space),
             
-            passTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            passTF.leadingAnchor.constraint(equalTo: idTF.leadingAnchor),
             passTF.topAnchor.constraint(equalTo: idview.bottomAnchor, constant: 50),
             passTF.widthAnchor.constraint(equalToConstant: 250),
             passTF.heightAnchor.constraint(equalToConstant: 40),
@@ -635,7 +638,7 @@ extension SignupViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == phoneTF {
             
-            self.view.frame.origin.y  = -200
+            self.view.frame.origin.y  = -250
             
             return true
             
