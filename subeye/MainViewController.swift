@@ -101,6 +101,7 @@ class MainViewController: UIViewController {
         layout()
 
         view.backgroundColor = .white
+        navigationController?.navigationBar.barTintColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1)
         navigationItem.title = "메인화면"
         
         // Do any additional setup after loading the view.

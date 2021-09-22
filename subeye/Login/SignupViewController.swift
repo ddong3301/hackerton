@@ -439,7 +439,7 @@ class SignupViewController: UIViewController {
             tableview.leadingAnchor.constraint(equalTo: alertTableview.leadingAnchor),
             tableview.trailingAnchor.constraint(equalTo: alertTableview.trailingAnchor),
             tableview.bottomAnchor.constraint(equalTo: alertTableview.bottomAnchor),
-            tableview.topAnchor.constraint(equalTo: alertTableview.topAnchor, constant: 30),
+            tableview.topAnchor.constraint(equalTo: alertTableview.topAnchor, constant: 5),
             
             loginbt.leadingAnchor.constraint(equalTo: areaview.leadingAnchor),
             loginbt.topAnchor.constraint(equalTo: phoneview.bottomAnchor, constant: 50),
@@ -523,7 +523,7 @@ class SignupViewController: UIViewController {
         
         
         areabt.addTarget(self, action: #selector(showtableview(_:)), for: .touchUpInside)
-        backbt.addTarget(self, action: #selector(backloginview(_:)), for: .touchUpInside)
+        backbt.addTarget(self, action: #selector(backview(_:)), for: .touchUpInside)
         loginbt.addTarget(self, action: #selector(backloginview(_:)), for: .touchUpInside)
         idcheckBT.addTarget(self, action: #selector(showalert(_sender:)), for: .touchUpInside)
         
@@ -589,6 +589,12 @@ extension SignupViewController {
         
         
         present(alertCheckId, animated: true, completion: nil)
+    }
+    
+    @objc func backview(_ sender: UIButton) {
+        
+        self.dismiss(animated: true, completion: nil)
+        
     }
     
 }
