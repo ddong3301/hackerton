@@ -9,7 +9,7 @@ const singleFileUpload = (req, res) => {
         });
         file.save();
         console.log(file);
-        res.status(200).send('file uploded');
+        res.redirect('display');
     } catch(err) {
         res.status(400).send(err.message)
     }

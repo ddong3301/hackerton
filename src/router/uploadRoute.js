@@ -5,7 +5,10 @@ const { upload } = require('../middleware/upload');
 const { singleFileUpload } = require('../controllers/uploadCtrl');
 const displayCtrl = require('../controllers/displayCtrl');
 
-router.post('/singleFile', upload.single('file'), singleFileUpload);
+router.get('/upload', (req, res) => {
+    res.render('upload');
+})
+router.post('/singleFile', upload.single('upload'), singleFileUpload);
 
 router.get('/display', displayCtrl.getImagesFromDB);
 

@@ -7,6 +7,9 @@ const userCtrl = require('../controllers/userCtrl');
 router.get('/login', (req, res) => {
     res.render('login');
 });
+router.get('/', (req, res) => {
+    res.render('main');
+})
 
 // router.get('/register', (req, res) => {
 //     res.render('register');

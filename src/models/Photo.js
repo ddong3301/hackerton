@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
+const dayjs = require('dayjs');
+const date = new Date();
 
 const photoSchema = mongoose.Schema({
+    
     fileName : {
         type: String,
         required: true
@@ -12,6 +15,10 @@ const photoSchema = mongoose.Schema({
     fileType: {
         type: String,
         required: true
+    },
+    date : {
+        type: Date,
+        default: dayjs(date).format('YYYY-MM-DD HH:mm:ss')
     }
 });
 
