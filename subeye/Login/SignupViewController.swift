@@ -19,6 +19,15 @@ class SignupViewController: UIViewController {
     
     static var area = "배방역"
     
+    let tapview: UIView = {
+        let tapview = UIView()
+        tapview.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        
+        return tapview
+    }()
+    
     let backbt: UIButton = {
         let bt = UIButton()
         bt.translatesAutoresizingMaskIntoConstraints = false
@@ -320,6 +329,8 @@ class SignupViewController: UIViewController {
     
     func addviews(){
         
+        view.addSubview(tapview)
+        
         view.addSubview(loginbt)
         
         view.addSubview(backbt)
@@ -348,6 +359,8 @@ class SignupViewController: UIViewController {
         view.addSubview(areaview)
         areaview.addSubview(areaLabel)
         areaview.addSubview(areabt)
+        
+        
         view.addSubview(alertTableview)
         alertTableview.addSubview(tableview)
         
@@ -358,6 +371,11 @@ class SignupViewController: UIViewController {
     
     func IDlayout() {
         NSLayoutConstraint.activate([
+            
+            tapview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tapview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tapview.topAnchor.constraint(equalTo: view.topAnchor),
+            tapview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             backbt.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             backbt.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
@@ -535,7 +553,7 @@ class SignupViewController: UIViewController {
         alertCheckId.addAction(OKAction)
         
         let closeTF = UITapGestureRecognizer(target: self, action: #selector(closeedit(_:)))
-        view.addGestureRecognizer(closeTF)
+        tapview.addGestureRecognizer(closeTF)
         
         // Do any additional setup after loading the view.
     }
@@ -603,7 +621,7 @@ extension SignupViewController {
         
         self.view.endEditing(true)
        
-        
+        print("tap")
         
     }
 }

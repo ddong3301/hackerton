@@ -320,6 +320,7 @@ class LoginViewController: UIViewController {
         let closeTF = UITapGestureRecognizer(target: self, action: #selector(closeedit(_:)))
         view.addGestureRecognizer(closeTF)
         
+        
 
         // Do any additional setup after loading the view.
     }
@@ -371,6 +372,11 @@ extension LoginViewController: UITextFieldDelegate {
         } else {
             return true
         }
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.view.frame.origin.y  = 0
+        return true
     }
     
 }
