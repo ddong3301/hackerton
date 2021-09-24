@@ -599,7 +599,13 @@ extension SignupViewController {
         self.dismiss(animated: true, completion: nil)
         
     }
-    
+    @objc func closeedit(_ sender: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+       
+        
+        
+    }
 }
 
 
