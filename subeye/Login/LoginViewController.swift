@@ -205,6 +205,8 @@ class LoginViewController: UIViewController {
     
     
     
+    
+    
 
     func addView() {
         view.layer.addSublayer(gradeintLayer)
@@ -315,6 +317,9 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardwillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        let closeTF = UITapGestureRecognizer(target: self, action: #selector(closeedit(_:)))
+        view.addGestureRecognizer(closeTF)
+        
 
         // Do any additional setup after loading the view.
     }
@@ -376,7 +381,7 @@ extension LoginViewController {
         
         print("pressLogin bt")
         let mainViewController = UINavigationController(rootViewController: MainViewController())
-        
+        passWord.text = ""
         mainViewController.modalPresentationStyle = .fullScreen
         mainViewController.modalTransitionStyle = .crossDissolve
         
@@ -412,9 +417,17 @@ extension LoginViewController {
         
         SingupView.modalTransitionStyle = .crossDissolve
         SingupView.modalPresentationStyle = .fullScreen
-        
+        passWord.text = ""
         present(SingupView, animated: true, completion: nil)
         
+        
+        
+    }
+    
+    @objc func closeedit(_ sender: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+       
         
         
     }

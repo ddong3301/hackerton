@@ -534,6 +534,9 @@ class SignupViewController: UIViewController {
         
         alertCheckId.addAction(OKAction)
         
+        let closeTF = UITapGestureRecognizer(target: self, action: #selector(closeedit(_:)))
+        view.addGestureRecognizer(closeTF)
+        
         // Do any additional setup after loading the view.
     }
     
