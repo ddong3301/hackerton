@@ -62,6 +62,35 @@ class MainViewController: UIViewController {
         return label
     }()
     
+    let imgtime: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.text = "시간"
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textAlignment = .left
+        
+        
+        
+        return label
+    }()
+    
+    let timelabel: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.text = "2021-09-24 19:53"
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textAlignment = .left
+        
+        
+        
+        return label
+    }()
     
     
     
@@ -114,6 +143,9 @@ class MainViewController: UIViewController {
         view.addSubview(btView)
         
         totalView.addSubview(recentimg)
+        totalView.addSubview(imgtime)
+        totalView.addSubview(timelabel)
+        
         view.addSubview(recenttitle)
         
     }
@@ -153,6 +185,14 @@ class MainViewController: UIViewController {
             recentimg.topAnchor.constraint(equalTo: recenttitle.topAnchor, constant: 40),
             recentimg.bottomAnchor.constraint(equalTo: totalView.bottomAnchor, constant: -40),
             recentimg.widthAnchor.constraint(equalTo: recentimg.heightAnchor, constant: 30),
+            
+            imgtime.leadingAnchor.constraint(equalTo: recentimg.trailingAnchor, constant: 20),
+            imgtime.trailingAnchor.constraint(equalTo: totalView.trailingAnchor),
+            imgtime.topAnchor.constraint(equalTo: recentimg.topAnchor),
+            
+            timelabel.leadingAnchor.constraint(equalTo: imgtime.leadingAnchor),
+            timelabel.trailingAnchor.constraint(equalTo: totalView.trailingAnchor, constant: -10),
+            timelabel.topAnchor.constraint(equalTo: imgtime.bottomAnchor, constant: 10),
     
         
         ])
