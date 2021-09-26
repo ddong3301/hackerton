@@ -6,10 +6,16 @@ const { singleFileUpload } = require('../controllers/uploadCtrl');
 const displayCtrl = require('../controllers/displayCtrl');
 
 router.get('/upload', (req, res) => {
-    res.render('upload');
+    if(req.cookies.x_auth) {
+        res.render('upload');
+    } else {
+        res.redirect('/login');
+    }
 })
 router.post('/singleFile', upload.single('upload'), singleFileUpload);
 
-router.get('/display', displayCtrl.getImagesFromDB);
+router.get('/display', displayCtrl.getSingleImageFromDB);
+
+router.get('/gallery', displayCtrl.getImagesFromDB);
 
 module.exports = router;
