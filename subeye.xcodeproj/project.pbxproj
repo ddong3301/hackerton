@@ -3,12 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		146F2864EA7062E2CE8A206B /* Pods_subeye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E4E250C1D18E0F8058B6AE /* Pods_subeye.framework */; };
 		DF1278D426EF4BB700109AD7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1278D326EF4BB700109AD7 /* MainViewController.swift */; };
 		DF820D6C26E9BB0100BD04CC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF820D6B26E9BB0100BD04CC /* LoginViewController.swift */; };
+		DF8A4E5127017738001A1EBA /* 34593-train-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DF8A4E5027017738001A1EBA /* 34593-train-animation.json */; };
 		DFB30EF126E84A9300686AFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB30EF026E84A9300686AFB /* AppDelegate.swift */; };
 		DFB30EF326E84A9300686AFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB30EF226E84A9300686AFB /* SceneDelegate.swift */; };
 		DFB30EFA26E84A9300686AFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFB30EF926E84A9300686AFB /* Assets.xcassets */; };
@@ -18,8 +20,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		88E4E250C1D18E0F8058B6AE /* Pods_subeye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_subeye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6224E8445676322DC31FAA7 /* Pods-subeye.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-subeye.release.xcconfig"; path = "Target Support Files/Pods-subeye/Pods-subeye.release.xcconfig"; sourceTree = "<group>"; };
+		A649CBA6DCD5045C5C23AAF6 /* Pods-subeye.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-subeye.debug.xcconfig"; path = "Target Support Files/Pods-subeye/Pods-subeye.debug.xcconfig"; sourceTree = "<group>"; };
 		DF1278D326EF4BB700109AD7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DF820D6B26E9BB0100BD04CC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		DF8A4E5027017738001A1EBA /* 34593-train-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "34593-train-animation.json"; sourceTree = "<group>"; };
 		DFB30EED26E84A9300686AFB /* subeye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = subeye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFB30EF026E84A9300686AFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DFB30EF226E84A9300686AFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,17 +41,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				146F2864EA7062E2CE8A206B /* Pods_subeye.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7FCC6A29A33ABCFCF8B08E76 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A649CBA6DCD5045C5C23AAF6 /* Pods-subeye.debug.xcconfig */,
+				A6224E8445676322DC31FAA7 /* Pods-subeye.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		AC980264DE81265929044F5C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				88E4E250C1D18E0F8058B6AE /* Pods_subeye.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DFB30EE426E84A9300686AFB = {
 			isa = PBXGroup;
 			children = (
+				DF8A4E5027017738001A1EBA /* 34593-train-animation.json */,
 				DFB30EEF26E84A9300686AFB /* subeye */,
 				DFB30EEE26E84A9300686AFB /* Products */,
+				7FCC6A29A33ABCFCF8B08E76 /* Pods */,
+				AC980264DE81265929044F5C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,9 +115,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DFB30F0126E84A9300686AFB /* Build configuration list for PBXNativeTarget "subeye" */;
 			buildPhases = (
+				B9FE6FBA4095C2E08B0B182D /* [CP] Check Pods Manifest.lock */,
 				DFB30EE926E84A9300686AFB /* Sources */,
 				DFB30EEA26E84A9300686AFB /* Frameworks */,
 				DFB30EEB26E84A9300686AFB /* Resources */,
+				60BD09BC08EA32EF439F20FC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -139,11 +168,54 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFB30EFD26E84A9300686AFB /* LaunchScreen.storyboard in Resources */,
+				DF8A4E5127017738001A1EBA /* 34593-train-animation.json in Resources */,
 				DFB30EFA26E84A9300686AFB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		60BD09BC08EA32EF439F20FC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-subeye/Pods-subeye-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-subeye/Pods-subeye-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-subeye/Pods-subeye-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B9FE6FBA4095C2E08B0B182D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-subeye-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DFB30EE926E84A9300686AFB /* Sources */ = {
@@ -291,6 +363,7 @@
 		};
 		DFB30F0226E84A9300686AFB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A649CBA6DCD5045C5C23AAF6 /* Pods-subeye.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -310,6 +383,7 @@
 		};
 		DFB30F0326E84A9300686AFB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6224E8445676322DC31FAA7 /* Pods-subeye.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

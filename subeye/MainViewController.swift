@@ -6,9 +6,26 @@
 //
 
 import UIKit
+import Lottie
+
 
 class MainViewController: UIViewController {
 
+    let animationView: AnimationView = {
+        let train = AnimationView(name: "34593-train-animation")
+        train.translatesAutoresizingMaskIntoConstraints = false
+        
+        train.contentMode = .scaleAspectFit
+        train.layer.masksToBounds  = true
+        train.animationSpeed = 0.5
+        train.play()
+        train.loopMode = .loop
+        
+        
+        return train
+    }()
+    
+    
     
     let totalView: UIView = {
         let totalview = UIView()
@@ -17,7 +34,7 @@ class MainViewController: UIViewController {
         totalview.layer.borderWidth = 2
         totalview.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
         totalview.layer.cornerRadius = 15
-        
+        totalview.backgroundColor = .white
         
         
        return totalview
@@ -55,7 +72,7 @@ class MainViewController: UIViewController {
         label.text = "최근 이미지"
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize:  20)
-        label.backgroundColor = .white
+        label.backgroundColor = .clear
         label.textAlignment = .center
         
         
@@ -67,7 +84,7 @@ class MainViewController: UIViewController {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "시간"
+        label.text = "시간 :"
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textAlignment = .left
@@ -76,13 +93,16 @@ class MainViewController: UIViewController {
         
         return label
     }()
+    
+    
+    
     
     let timelabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "2021-09-24 19:53"
+        label.text = "09-24 19:53"
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textAlignment = .left
@@ -92,6 +112,38 @@ class MainViewController: UIViewController {
         return label
     }()
     
+    let outNum: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.text = "출구 번호 :"
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textAlignment = .left
+        
+        
+        
+        return label
+    }()
+    
+    
+    
+    
+    let userOutNum: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.text = "1"
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textAlignment = .left
+        
+        
+        
+        return label
+    }()
     
     
     
@@ -138,13 +190,15 @@ class MainViewController: UIViewController {
     
     
     func addView() {
-        
+        view.addSubview(animationView)
         view.addSubview(totalView)
         view.addSubview(btView)
         
         totalView.addSubview(recentimg)
         totalView.addSubview(imgtime)
         totalView.addSubview(timelabel)
+        totalView.addSubview(outNum)
+        totalView.addSubview(userOutNum)
         
         view.addSubview(recenttitle)
         
@@ -155,16 +209,22 @@ class MainViewController: UIViewController {
     func layout() {
         NSLayoutConstraint.activate([
 
-        
+            animationView.topAnchor.constraint(equalTo: view.topAnchor, constant: (navigationController?.navigationBar.frame.height)! + 50),
+            animationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            animationView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            
+            
             totalView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             totalView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            totalView.topAnchor.constraint(equalTo: view.topAnchor , constant: 130),
+            totalView.topAnchor.constraint(equalTo: animationView.bottomAnchor , constant: -120),
             totalView.heightAnchor.constraint(equalToConstant: 200),
             
             btView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             btView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             btView.topAnchor.constraint(equalTo: totalView.bottomAnchor, constant: 10),
             btView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            
+            
             
             
             
@@ -177,7 +237,7 @@ class MainViewController: UIViewController {
         NSLayoutConstraint.activate([
         
             recenttitle.centerXAnchor.constraint(equalTo: totalView.centerXAnchor),
-            recenttitle.topAnchor.constraint(equalTo: totalView.topAnchor, constant: -10),
+            recenttitle.topAnchor.constraint(equalTo: totalView.topAnchor, constant: 15),
             recenttitle.widthAnchor.constraint(equalToConstant: 130),
         
             recentimg.leadingAnchor.constraint(equalTo: totalView.leadingAnchor, constant: 20),
@@ -187,12 +247,16 @@ class MainViewController: UIViewController {
             recentimg.widthAnchor.constraint(equalTo: recentimg.heightAnchor, constant: 30),
             
             imgtime.leadingAnchor.constraint(equalTo: recentimg.trailingAnchor, constant: 20),
-            imgtime.trailingAnchor.constraint(equalTo: totalView.trailingAnchor),
             imgtime.topAnchor.constraint(equalTo: recentimg.topAnchor),
             
-            timelabel.leadingAnchor.constraint(equalTo: imgtime.leadingAnchor),
-            timelabel.trailingAnchor.constraint(equalTo: totalView.trailingAnchor, constant: -10),
-            timelabel.topAnchor.constraint(equalTo: imgtime.bottomAnchor, constant: 10),
+            timelabel.leadingAnchor.constraint(equalTo: imgtime.trailingAnchor, constant: 10),
+            timelabel.topAnchor.constraint(equalTo: imgtime.topAnchor, constant: 0),
+            
+            outNum.leadingAnchor.constraint(equalTo: imgtime.leadingAnchor),
+            outNum.topAnchor.constraint(equalTo: imgtime.bottomAnchor, constant: 10),
+            
+            userOutNum.leadingAnchor.constraint(equalTo: outNum.trailingAnchor, constant: 10),
+            userOutNum.topAnchor.constraint(equalTo: outNum.topAnchor)
     
         
         ])
@@ -220,9 +284,11 @@ class MainViewController: UIViewController {
         logoutbt.addTarget(self, action: #selector(backLoginview(_:)), for: .touchUpInside)
         let touch = UITapGestureRecognizer(target: self, action: #selector(touchtotalview(_:)))
         self.totalView.addGestureRecognizer(touch)
-
         
-        // Do any additional setup after loading the view.
+        
+        
+        
+        
     }
     
 
