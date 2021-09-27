@@ -27,13 +27,17 @@ class MainViewController: UIViewController {
     
     
     
-    let totalView: UIView = {
-        let totalview = UIView()
+    let totalView: UIButton = {
+        let totalview = UIButton()
         totalview.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        totalview.setBackgroundColor(UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 0.5), for: .highlighted)
         
         totalview.layer.borderWidth = 2
         totalview.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
         totalview.layer.cornerRadius = 15
+        totalview.layer.masksToBounds =  true
         totalview.backgroundColor = .white
         
         
@@ -187,18 +191,59 @@ class MainViewController: UIViewController {
         return bt
     }()
     
+    let developer: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.text = "This app develop by Didimdol project hackerton"
+        label.font = UIFont.systemFont(ofSize: 10)
+        label.textAlignment = .center
+        label.textColor = .gray
+        
+        
+        return label
+    }()
+    
+    let Suspicion: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "의심 종류 :"
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        
+        
+        
+        return label
+    }()
+    
+    let imgSuspicion: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "어린이가 아님"
+        label.textColor = .orange
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        
+        
+        
+        return label
+    }()
     
     
     func addView() {
         view.addSubview(animationView)
         view.addSubview(totalView)
         view.addSubview(btView)
+        view.addSubview(developer)
         
         totalView.addSubview(recentimg)
         totalView.addSubview(imgtime)
         totalView.addSubview(timelabel)
         totalView.addSubview(outNum)
         totalView.addSubview(userOutNum)
+        totalView.addSubview(Suspicion)
+        totalView.addSubview(imgSuspicion)
         
         view.addSubview(recenttitle)
         
@@ -222,9 +267,10 @@ class MainViewController: UIViewController {
             btView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             btView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             btView.topAnchor.constraint(equalTo: totalView.bottomAnchor, constant: 10),
-            btView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            btView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
             
-            
+            developer.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
+            developer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             
             
@@ -253,13 +299,27 @@ class MainViewController: UIViewController {
             timelabel.topAnchor.constraint(equalTo: imgtime.topAnchor, constant: 0),
             
             outNum.leadingAnchor.constraint(equalTo: imgtime.leadingAnchor),
-            outNum.topAnchor.constraint(equalTo: imgtime.bottomAnchor, constant: 10),
+            outNum.topAnchor.constraint(equalTo: imgtime.bottomAnchor, constant: 20),
             
             userOutNum.leadingAnchor.constraint(equalTo: outNum.trailingAnchor, constant: 10),
-            userOutNum.topAnchor.constraint(equalTo: outNum.topAnchor)
-    
+            userOutNum.topAnchor.constraint(equalTo: outNum.topAnchor),
+            
+            Suspicion.leadingAnchor.constraint(equalTo: imgtime.leadingAnchor),
+            Suspicion.topAnchor.constraint(equalTo: outNum.bottomAnchor, constant: 20),
+            
+            imgSuspicion.leadingAnchor.constraint(equalTo: Suspicion.trailingAnchor, constant: 10),
+            imgSuspicion.topAnchor.constraint(equalTo: Suspicion.topAnchor),
+            
         
         ])
+    }
+    
+    func menulayout() {
+        
+        
+        
+        
+        
     }
     
     
@@ -274,6 +334,7 @@ class MainViewController: UIViewController {
         addView()
         layout()
         recentlayout()
+        menulayout()
 
         view.backgroundColor = .white
         navigationController?.navigationBar.barTintColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1)
@@ -282,8 +343,8 @@ class MainViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: userData)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: logoutbt)
         logoutbt.addTarget(self, action: #selector(backLoginview(_:)), for: .touchUpInside)
-        let touch = UITapGestureRecognizer(target: self, action: #selector(touchtotalview(_:)))
-        self.totalView.addGestureRecognizer(touch)
+        
+        totalView.addTarget(self, action: #selector(touchtotalview(_:)), for: .touchUpInside)
         
         
         
@@ -313,7 +374,7 @@ extension MainViewController {
         
     }
     
-    @objc func touchtotalview(_ sender: UIGestureRecognizer) {
+    @objc func touchtotalview(_ sender: UIButton) {
         
         print("touch")
         
