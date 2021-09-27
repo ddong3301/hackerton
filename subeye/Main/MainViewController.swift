@@ -152,18 +152,26 @@ class MainViewController: UIViewController {
     
     
     
-    let btView: UIView = {
-        let totalview = UIView()
+    let imgTableview: UITableView = {
+        let totalview = UITableView()
         totalview.translatesAutoresizingMaskIntoConstraints = false
         
         totalview.layer.borderWidth = 2
         totalview.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
         totalview.layer.cornerRadius = 15
         
+        totalview.separatorStyle = .none
+        totalview.rowHeight = 130
         
+        totalview.register(ImgTableViewCell.self, forCellReuseIdentifier: ImgTableViewCell.identifer)
         
        return totalview
     }()
+    
+    
+    
+    
+    
     
     let userData: UIButton = {
         let bt = UIButton()
@@ -234,7 +242,7 @@ class MainViewController: UIViewController {
     func addView() {
         view.addSubview(animationView)
         view.addSubview(totalView)
-        view.addSubview(btView)
+        view.addSubview(imgTableview)
         view.addSubview(developer)
         
         totalView.addSubview(recentimg)
@@ -264,10 +272,10 @@ class MainViewController: UIViewController {
             totalView.topAnchor.constraint(equalTo: animationView.bottomAnchor , constant: -120),
             totalView.heightAnchor.constraint(equalToConstant: 200),
             
-            btView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            btView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            btView.topAnchor.constraint(equalTo: totalView.bottomAnchor, constant: 10),
-            btView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            imgTableview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            imgTableview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            imgTableview.topAnchor.constraint(equalTo: totalView.bottomAnchor, constant: 10),
+            imgTableview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
             
             developer.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
             developer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -346,6 +354,8 @@ class MainViewController: UIViewController {
         
         totalView.addTarget(self, action: #selector(touchtotalview(_:)), for: .touchUpInside)
         
+        imgTableview.dataSource =  self
+        
         
         
         
@@ -380,4 +390,23 @@ extension MainViewController {
         
         
     }
+}
+
+extension MainViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ImgTableViewCell.identifer, for: indexPath) as? ImgTableViewCell else {return UITableViewCell()}
+        
+        timelabel.text = "2019-10-42"
+        
+        return  cell
+    }
+    
+    
+    
+    
+    
 }

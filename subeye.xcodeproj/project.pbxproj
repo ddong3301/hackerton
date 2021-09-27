@@ -11,6 +11,8 @@
 		DF1278D426EF4BB700109AD7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1278D326EF4BB700109AD7 /* MainViewController.swift */; };
 		DF820D6C26E9BB0100BD04CC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF820D6B26E9BB0100BD04CC /* LoginViewController.swift */; };
 		DF8A4E5127017738001A1EBA /* 34593-train-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DF8A4E5027017738001A1EBA /* 34593-train-animation.json */; };
+		DF8A4E542701A097001A1EBA /* ImgTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A4E532701A097001A1EBA /* ImgTableViewCell.swift */; };
+		DF8A4E572701A10F001A1EBA /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A4E562701A10F001A1EBA /* DataSource.swift */; };
 		DFB30EF126E84A9300686AFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB30EF026E84A9300686AFB /* AppDelegate.swift */; };
 		DFB30EF326E84A9300686AFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB30EF226E84A9300686AFB /* SceneDelegate.swift */; };
 		DFB30EFA26E84A9300686AFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFB30EF926E84A9300686AFB /* Assets.xcassets */; };
@@ -26,6 +28,8 @@
 		DF1278D326EF4BB700109AD7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DF820D6B26E9BB0100BD04CC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DF8A4E5027017738001A1EBA /* 34593-train-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "34593-train-animation.json"; sourceTree = "<group>"; };
+		DF8A4E532701A097001A1EBA /* ImgTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgTableViewCell.swift; sourceTree = "<group>"; };
+		DF8A4E562701A10F001A1EBA /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		DFB30EED26E84A9300686AFB /* subeye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = subeye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFB30EF026E84A9300686AFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DFB30EF226E84A9300686AFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +69,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DF8A4E5227019F5A001A1EBA /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DF1278D326EF4BB700109AD7 /* MainViewController.swift */,
+				DF8A4E532701A097001A1EBA /* ImgTableViewCell.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		DF8A4E552701A0EB001A1EBA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DF8A4E562701A10F001A1EBA /* DataSource.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		DFB30EE426E84A9300686AFB = {
 			isa = PBXGroup;
 			children = (
@@ -87,13 +108,14 @@
 		DFB30EEF26E84A9300686AFB /* subeye */ = {
 			isa = PBXGroup;
 			children = (
+				DF8A4E552701A0EB001A1EBA /* Data */,
+				DF8A4E5227019F5A001A1EBA /* Main */,
 				DFC72BA626F84DBA00A2CCAE /* Login */,
 				DFB30EF026E84A9300686AFB /* AppDelegate.swift */,
 				DFB30EF226E84A9300686AFB /* SceneDelegate.swift */,
 				DFB30EF926E84A9300686AFB /* Assets.xcassets */,
 				DFB30EFB26E84A9300686AFB /* LaunchScreen.storyboard */,
 				DFB30EFE26E84A9300686AFB /* Info.plist */,
-				DF1278D326EF4BB700109AD7 /* MainViewController.swift */,
 			);
 			path = subeye;
 			sourceTree = "<group>";
@@ -228,6 +250,8 @@
 				DFC72BA526F426A000A2CCAE /* SignupViewController.swift in Sources */,
 				DFB30EF326E84A9300686AFB /* SceneDelegate.swift in Sources */,
 				DF1278D426EF4BB700109AD7 /* MainViewController.swift in Sources */,
+				DF8A4E572701A10F001A1EBA /* DataSource.swift in Sources */,
+				DF8A4E542701A097001A1EBA /* ImgTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
