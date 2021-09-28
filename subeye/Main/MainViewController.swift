@@ -10,7 +10,9 @@ import Lottie
 
 
 class MainViewController: UIViewController {
-
+    
+    let datas = imageset.generateData()
+    
     let animationView: AnimationView = {
         let train = AnimationView(name: "34593-train-animation")
         train.translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +75,7 @@ class MainViewController: UIViewController {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "최근 이미지"
+        label.text = "선택 이미지"
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize:  20)
         label.backgroundColor = .clear
@@ -161,7 +163,7 @@ class MainViewController: UIViewController {
         totalview.layer.cornerRadius = 15
         
         totalview.separatorStyle = .none
-        totalview.rowHeight = 130
+        totalview.rowHeight = 100
         
         totalview.register(ImgTableViewCell.self, forCellReuseIdentifier: ImgTableViewCell.identifer)
         
@@ -216,7 +218,7 @@ class MainViewController: UIViewController {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "의심 종류 :"
+        label.text = "의심 확률 :"
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 15)
         
@@ -351,10 +353,12 @@ class MainViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: userData)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: logoutbt)
         logoutbt.addTarget(self, action: #selector(backLoginview(_:)), for: .touchUpInside)
-        
         totalView.addTarget(self, action: #selector(touchtotalview(_:)), for: .touchUpInside)
-        
         imgTableview.dataSource =  self
+        
+        timelabel.text = datas[0].imagetime
+        userOutNum.text = String(datas[0].outNumber)
+        imgSuspicion.text = String(datas[0].suspicion)
         
         
         
@@ -400,13 +404,11 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImgTableViewCell.identifer, for: indexPath) as? ImgTableViewCell else {return UITableViewCell()}
         
-        timelabel.text = "2019-10-42"
+        cell.timelabel.text = datas[indexPath.row].imagetime
         
         return  cell
     }
     
     
-    
-    
-    
+
 }

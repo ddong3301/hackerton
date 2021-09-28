@@ -22,12 +22,22 @@ class ImgTableViewCell: UITableViewCell {
         return image
     }()
     
-    
-    let timelabel: UILabel = {
+    let imgTime: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "09-24 19:53"
+        label.text = "시간 : "
+        label.textColor = .black
+        
+        
+        return label
+    }()
+    
+    var timelabel: UILabel = {
+        var label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = ""
         label.textColor = .black
         
         
@@ -40,6 +50,7 @@ class ImgTableViewCell: UITableViewCell {
     func addviews() {
         
         contentView.addSubview(images)
+        contentView.addSubview(imgTime)
         contentView.addSubview(timelabel)
         
         
@@ -49,12 +60,16 @@ class ImgTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
  
             images.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
-            images.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
-            images.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
+            images.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            images.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             images.widthAnchor.constraint(equalToConstant: 100),
             
+            imgTime.leadingAnchor.constraint(equalTo: images.trailingAnchor, constant: 30),
+            imgTime.topAnchor.constraint(equalTo: timelabel.topAnchor, constant: 0),
             
-            timelabel.leadingAnchor.constraint(equalTo: images.trailingAnchor, constant: 30),
+            
+            
+            timelabel.leadingAnchor.constraint(equalTo: imgTime.trailingAnchor, constant: 10),
             timelabel.centerYAnchor.constraint(equalTo: images.centerYAnchor),
         
         ] )
