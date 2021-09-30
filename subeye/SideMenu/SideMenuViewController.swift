@@ -13,8 +13,6 @@ class SideMenuViewController: UIViewController {
     
     let simbol: UIImageView  = {
         let imgview = UIImageView()
-        
-        
         imgview.translatesAutoresizingMaskIntoConstraints = false
         
         
@@ -24,9 +22,9 @@ class SideMenuViewController: UIViewController {
     
     let sidetableView: UITableView = {
         let tv = UITableView()
-        
         tv.translatesAutoresizingMaskIntoConstraints = false
         
+        tv.rowHeight = 80
         
         
         return tv
@@ -42,10 +40,14 @@ class SideMenuViewController: UIViewController {
     
     
     func layout() {
+        NSLayoutConstraint.activate([
+            
+            sidetableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            sidetableView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:  -20),
+            sidetableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
+            sidetableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         
-        
-        
-        
+        ])
     }
     
     
@@ -63,6 +65,9 @@ class SideMenuViewController: UIViewController {
         
         addviews()
         layout()
+        
+        view.backgroundColor = .white
+        navigationController?.navigationBar.barTintColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1)
 
         // Do any additional setup after loading the view.
     }

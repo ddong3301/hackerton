@@ -8,6 +8,7 @@
 import UIKit
 import Lottie
 import DropDown
+import SideMenu
 
 
 class MainViewController: UIViewController {
@@ -371,7 +372,7 @@ class MainViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: logoutbt)
         
         
-        logoutbt.addTarget(self, action: #selector(presentdrop(_:)), for: .touchUpInside)
+        logoutbt.addTarget(self, action: #selector(presentsidemenu(_:)), for: .touchUpInside)
         totalView.addTarget(self, action: #selector(touchtotalview(_:)), for: .touchUpInside)
         userData.addTarget(self, action: #selector(presentdrop(_:)), for: .touchUpInside)
         
@@ -433,9 +434,19 @@ extension MainViewController {
                 
                 
             }
-            
         }
-
+    }
+    @objc func presentsidemenu(_ sender: UIButton) {
+        
+        let menu = SideMenuNavigationController(rootViewController: SideMenuViewController())
+        
+        menu.leftSide = true
+        menu.presentationStyle = .menuSlideIn
+        menu.menuWidth = view.frame.width/3 * 2
+        
+        
+        present(menu, animated: true, completion: nil)
+        
     }
 }
 
