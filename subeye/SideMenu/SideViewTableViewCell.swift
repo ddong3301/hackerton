@@ -9,11 +9,38 @@ import UIKit
 
 class SideViewTableViewCell: UITableViewCell {
 
-    static let identifer = "Sideviewcell"
+     static let identifer = "Sideviewcell"
+    
+    let cellview: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.layer.cornerRadius = 15
+        view.layer.borderWidth = 2
+        view.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
+        
+        
+        return view
+    }()
+    
+    let menuicons : UIImageView = {
+        let icon = UIImageView()
+        
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.backgroundColor = .gray
+        
+        
+        return icon
+    }()
+    
+    
+    
+    
     
     
     func addviews() {
-        
+        contentView.addSubview(cellview)
+        contentView.addSubview(menuicons)
        
         
         
@@ -22,6 +49,7 @@ class SideViewTableViewCell: UITableViewCell {
     func autolayout() {
         NSLayoutConstraint.activate([
             
+         
             
             
         
