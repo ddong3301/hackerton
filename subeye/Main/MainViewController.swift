@@ -7,11 +7,25 @@
 
 import UIKit
 import Lottie
+import DropDown
 
 
 class MainViewController: UIViewController {
     
     let datas = imageset.generateData()
+    
+    let dropDown: DropDown = {
+        let dropDown = DropDown()
+
+        dropDown.textFont = UIFont.boldSystemFont(ofSize: 20)
+        dropDown.bottomOffset = CGPoint(x: 0, y: 40)
+        dropDown.direction = .bottom
+        dropDown.dataSource = ["Logout","사용자 정보"]
+        dropDown.backgroundColor = .white
+
+       return dropDown
+    }()
+    
     
     let animationView: AnimationView = {
         let train = AnimationView(name: "34593-train-animation")
@@ -194,7 +208,7 @@ class MainViewController: UIViewController {
         let bt = UIButton()
         bt.translatesAutoresizingMaskIntoConstraints = false
         
-        bt.setTitle("Logout", for: .normal)
+        bt.setTitle("MENU", for: .normal)
         bt.setTitleColor(.black, for: .normal)
         bt.setTitleColor(.systemGray4, for: .highlighted)
         bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
@@ -258,6 +272,7 @@ class MainViewController: UIViewController {
         
         view.addSubview(recenttitle)
         
+        
     }
     
     
@@ -292,6 +307,7 @@ class MainViewController: UIViewController {
     func recentlayout() {
         
         NSLayoutConstraint.activate([
+            
         
             recenttitle.centerXAnchor.constraint(equalTo: totalView.centerXAnchor),
             recenttitle.topAnchor.constraint(equalTo: totalView.topAnchor, constant: 15),
@@ -353,8 +369,12 @@ class MainViewController: UIViewController {
         navigationItem.titleView = titleview
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: userData)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: logoutbt)
-        logoutbt.addTarget(self, action: #selector(backLoginview(_:)), for: .touchUpInside)
+        
+        
+        logoutbt.addTarget(self, action: #selector(presentdrop(_:)), for: .touchUpInside)
         totalView.addTarget(self, action: #selector(touchtotalview(_:)), for: .touchUpInside)
+        userData.addTarget(self, action: #selector(presentdrop(_:)), for: .touchUpInside)
+        
         imgTableview.dataSource =  self
         imgTableview.delegate = self
         
@@ -395,6 +415,27 @@ extension MainViewController {
         print("touch")
         
         
+    }
+    @objc func presentdrop(_ sender: UIButton) {
+
+        dropDown.show()
+        dropDown.anchorView = userData
+        print("active")
+
+        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+           
+            print("선택한 아이템 : \(item)")
+            print("인덱스 : \(index)")
+            if index ==  0 {
+                
+                self.dismiss(animated: true, completion: nil)
+                
+                
+                
+            }
+            
+        }
+
     }
 }
 

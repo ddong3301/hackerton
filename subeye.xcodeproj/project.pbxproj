@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		146F2864EA7062E2CE8A206B /* Pods_subeye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E4E250C1D18E0F8058B6AE /* Pods_subeye.framework */; };
 		DF1278D426EF4BB700109AD7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1278D326EF4BB700109AD7 /* MainViewController.swift */; };
+		DF28DC3427059E6D008FAA0D /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF28DC3327059E6D008FAA0D /* SideMenuViewController.swift */; };
+		DF28DC372705A2F4008FAA0D /* SideViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF28DC362705A2F4008FAA0D /* SideViewTableViewCell.swift */; };
 		DF820D6C26E9BB0100BD04CC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF820D6B26E9BB0100BD04CC /* LoginViewController.swift */; };
 		DF8A4E5127017738001A1EBA /* 34593-train-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DF8A4E5027017738001A1EBA /* 34593-train-animation.json */; };
 		DF8A4E542701A097001A1EBA /* ImgTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A4E532701A097001A1EBA /* ImgTableViewCell.swift */; };
@@ -26,6 +28,8 @@
 		A6224E8445676322DC31FAA7 /* Pods-subeye.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-subeye.release.xcconfig"; path = "Target Support Files/Pods-subeye/Pods-subeye.release.xcconfig"; sourceTree = "<group>"; };
 		A649CBA6DCD5045C5C23AAF6 /* Pods-subeye.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-subeye.debug.xcconfig"; path = "Target Support Files/Pods-subeye/Pods-subeye.debug.xcconfig"; sourceTree = "<group>"; };
 		DF1278D326EF4BB700109AD7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		DF28DC3327059E6D008FAA0D /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		DF28DC362705A2F4008FAA0D /* SideViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideViewTableViewCell.swift; sourceTree = "<group>"; };
 		DF820D6B26E9BB0100BD04CC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DF8A4E5027017738001A1EBA /* 34593-train-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "34593-train-animation.json"; sourceTree = "<group>"; };
 		DF8A4E532701A097001A1EBA /* ImgTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgTableViewCell.swift; sourceTree = "<group>"; };
@@ -69,6 +73,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DF28DC352705A2D9008FAA0D /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				DF28DC3327059E6D008FAA0D /* SideMenuViewController.swift */,
+				DF28DC362705A2F4008FAA0D /* SideViewTableViewCell.swift */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
 		DF8A4E5227019F5A001A1EBA /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +121,7 @@
 		DFB30EEF26E84A9300686AFB /* subeye */ = {
 			isa = PBXGroup;
 			children = (
+				DF28DC352705A2D9008FAA0D /* SideMenu */,
 				DF8A4E552701A0EB001A1EBA /* Data */,
 				DF8A4E5227019F5A001A1EBA /* Main */,
 				DFC72BA626F84DBA00A2CCAE /* Login */,
@@ -245,12 +259,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF820D6C26E9BB0100BD04CC /* LoginViewController.swift in Sources */,
+				DF28DC372705A2F4008FAA0D /* SideViewTableViewCell.swift in Sources */,
 				DFC72BA826F84F1E00A2CCAE /* SignupTableViewCell.swift in Sources */,
 				DFB30EF126E84A9300686AFB /* AppDelegate.swift in Sources */,
 				DFC72BA526F426A000A2CCAE /* SignupViewController.swift in Sources */,
 				DFB30EF326E84A9300686AFB /* SceneDelegate.swift in Sources */,
 				DF1278D426EF4BB700109AD7 /* MainViewController.swift in Sources */,
 				DF8A4E572701A10F001A1EBA /* DataSource.swift in Sources */,
+				DF28DC3427059E6D008FAA0D /* SideMenuViewController.swift in Sources */,
 				DF8A4E542701A097001A1EBA /* ImgTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
