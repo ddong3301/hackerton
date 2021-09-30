@@ -163,7 +163,8 @@ class MainViewController: UIViewController {
         totalview.layer.cornerRadius = 15
         
         totalview.separatorStyle = .none
-        totalview.rowHeight = 100
+        totalview.rowHeight = 80
+        
         
         totalview.register(ImgTableViewCell.self, forCellReuseIdentifier: ImgTableViewCell.identifer)
         
@@ -355,6 +356,7 @@ class MainViewController: UIViewController {
         logoutbt.addTarget(self, action: #selector(backLoginview(_:)), for: .touchUpInside)
         totalView.addTarget(self, action: #selector(touchtotalview(_:)), for: .touchUpInside)
         imgTableview.dataSource =  self
+        imgTableview.delegate = self
         
         timelabel.text = datas[0].imagetime
         userOutNum.text = String(datas[0].outNumber)
@@ -398,17 +400,34 @@ extension MainViewController {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return datas.count - 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImgTableViewCell.identifer, for: indexPath) as? ImgTableViewCell else {return UITableViewCell()}
         
-        cell.timelabel.text = datas[indexPath.row].imagetime
+        cell.timelabel.text = datas[indexPath.row + 1].imagetime
+        let selectview  = UIView()
+        selectview.backgroundColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 0.5)
+        cell.selectedBackgroundView = selectview
         
         return  cell
     }
+}
+    
+extension MainViewController: UITableViewDelegate {
+    
+ 
+    
+        
+        
+        
+        
+        
+        
+        
+}
     
     
 
-}
+

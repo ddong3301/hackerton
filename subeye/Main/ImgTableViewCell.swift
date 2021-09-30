@@ -30,6 +30,7 @@ class ImgTableViewCell: UITableViewCell {
         label.textColor = .black
         
         
+        
         return label
     }()
     
@@ -66,11 +67,13 @@ class ImgTableViewCell: UITableViewCell {
             
             imgTime.leadingAnchor.constraint(equalTo: images.trailingAnchor, constant: 30),
             imgTime.topAnchor.constraint(equalTo: timelabel.topAnchor, constant: 0),
+            imgTime.widthAnchor.constraint(equalToConstant: 50),
             
             
             
             timelabel.leadingAnchor.constraint(equalTo: imgTime.trailingAnchor, constant: 10),
             timelabel.centerYAnchor.constraint(equalTo: images.centerYAnchor),
+            timelabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
         
         ] )
     }
