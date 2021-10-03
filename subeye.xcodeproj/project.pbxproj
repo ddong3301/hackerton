@@ -82,6 +82,13 @@
 			path = SideMenu;
 			sourceTree = "<group>";
 		};
+		DF6A17292709C41C000B71F0 /* notice */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = notice;
+			sourceTree = "<group>";
+		};
 		DF8A4E5227019F5A001A1EBA /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +128,7 @@
 		DFB30EEF26E84A9300686AFB /* subeye */ = {
 			isa = PBXGroup;
 			children = (
+				DF6A17292709C41C000B71F0 /* notice */,
 				DF28DC352705A2D9008FAA0D /* SideMenu */,
 				DF8A4E552701A0EB001A1EBA /* Data */,
 				DF8A4E5227019F5A001A1EBA /* Main */,

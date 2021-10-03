@@ -9,7 +9,7 @@ import UIKit
 
 class SideMenuViewController: UIViewController {
 
-    
+    let sidemenuLabels = ["Home","공지사항","통계","고객센터"]
     
     let simbol: UIImageView  = {
         let imgview = UIImageView()
@@ -26,8 +26,9 @@ class SideMenuViewController: UIViewController {
         let tv = UITableView()
         tv.translatesAutoresizingMaskIntoConstraints = false
         
-        tv.rowHeight = 100
+        tv.rowHeight = 80
         tv.register(SideViewTableViewCell.self, forCellReuseIdentifier: SideViewTableViewCell.identifer)
+        tv.separatorStyle = .none
         
         
         return tv
@@ -73,7 +74,13 @@ class SideMenuViewController: UIViewController {
         
         addviews()
         layout()
+        sidetableView.dataSource = self
+        sidetableView.delegate = self
         
+        view.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 100/255, alpha: 1).cgColor
+        view.layer.borderWidth = 2
+        
+    
         view.backgroundColor = .white
         navigationController?.navigationBar.barTintColor = UIColor(red: 123/255, green: 180/255, blue: 100/255, alpha: 1)
 
@@ -101,12 +108,32 @@ extension SideMenuViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SideViewTableViewCell.identifer, for: indexPath) as? SideViewTableViewCell else { return UITableViewCell() }
         
-        
-        
+        let backgroundcolor = UIView()
+        backgroundcolor.backgroundColor = .clear
+        cell.selectedBackgroundView = backgroundcolor
+        cell.menuLabel.text = sidemenuLabels[indexPath.row]
         return cell
     }
 
 
 
+}
 
+extension SideMenuViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            switch indexPath.row {
+            case 0:
+                dismiss(animated: true, completion: nil)
+            case 1:
+                print("present 공지사항")
+            case 2:
+                print("present 통계")
+            case 3:
+                print("present 고객센터")
+            default:
+                return
+        }
+    }
+        
 }

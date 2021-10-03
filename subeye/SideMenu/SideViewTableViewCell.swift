@@ -33,6 +33,18 @@ class SideViewTableViewCell: UITableViewCell {
         return icon
     }()
     
+    let menuLabel: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        
+        
+        return label
+    }()
+    
     
     
     
@@ -40,17 +52,27 @@ class SideViewTableViewCell: UITableViewCell {
     
     func addviews() {
         contentView.addSubview(cellview)
-        contentView.addSubview(menuicons)
-       
+        cellview.addSubview(menuicons)
+        cellview.addSubview(menuLabel)
         
         
     }
     
     func autolayout() {
         NSLayoutConstraint.activate([
+            cellview.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 3),
+            cellview.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -3),
+            cellview.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            cellview.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
+            menuicons.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            menuicons.leadingAnchor.constraint(equalTo: cellview.leadingAnchor, constant: 20),
+            menuicons.topAnchor.constraint(equalTo: cellview.topAnchor, constant: 10),
+            menuicons.bottomAnchor.constraint(equalTo: cellview.bottomAnchor, constant: -10),
+            menuicons.widthAnchor.constraint(equalToConstant: 50),
          
-            
+            menuLabel.leadingAnchor.constraint(equalTo: menuicons.trailingAnchor, constant: 30),
+            menuLabel.centerYAnchor.constraint(equalTo: menuicons.centerYAnchor)
             
         
         ] )

@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
     
     let datas = imageset.generateData()
     
+    
     let dropDown: DropDown = {
         let dropDown = DropDown()
 
@@ -23,7 +24,9 @@ class MainViewController: UIViewController {
         dropDown.direction = .bottom
         dropDown.dataSource = ["Logout","사용자 정보"]
         dropDown.backgroundColor = .white
-
+        dropDown.cornerRadius = 15
+        
+        
        return dropDown
     }()
     
@@ -443,6 +446,8 @@ extension MainViewController {
         menu.leftSide = true
         menu.presentationStyle = .menuSlideIn
         menu.menuWidth = view.frame.width/3 * 2
+        
+        
         
         
         present(menu, animated: true, completion: nil)
