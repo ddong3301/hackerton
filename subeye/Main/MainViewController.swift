@@ -386,12 +386,20 @@ class MainViewController: UIViewController {
         userOutNum.text = String(datas[0].outNumber)
         imgSuspicion.text = String(datas[0].suspicion)
         
+        animationView.play()
+        
         
         
         
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        animationView.play()
+        
+    }
 
     /*
     // MARK: - Navigation

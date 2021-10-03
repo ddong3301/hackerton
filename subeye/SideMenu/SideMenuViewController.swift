@@ -9,7 +9,7 @@ import UIKit
 
 class SideMenuViewController: UIViewController {
 
-    let sidemenuLabels = ["Home","공지사항","통계","고객센터"]
+    let sidemenuLabels = ["Home","공지사항","통계","고객센터", "앱 설명"]
     
     let simbol: UIImageView  = {
         let imgview = UIImageView()
@@ -29,6 +29,7 @@ class SideMenuViewController: UIViewController {
         tv.rowHeight = 80
         tv.register(SideViewTableViewCell.self, forCellReuseIdentifier: SideViewTableViewCell.identifer)
         tv.separatorStyle = .none
+        tv.isScrollEnabled = false
         
         
         return tv
@@ -87,6 +88,8 @@ class SideMenuViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+ 
+    
 
     /*
     // MARK: - Navigation
@@ -102,7 +105,7 @@ class SideMenuViewController: UIViewController {
 
 extension SideMenuViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return sidemenuLabels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -127,6 +130,22 @@ extension SideMenuViewController: UITableViewDelegate {
                 dismiss(animated: true, completion: nil)
             case 1:
                 print("present 공지사항")
+                
+                let notice = noticeViewController()
+                
+                guard let pvc = self.presentingViewController else { return }
+                
+                notice.modalTransitionStyle = .crossDissolve
+                notice.modalPresentationStyle = .fullScreen
+                
+                dismiss(animated: false, completion: nil)
+                navigationController?.pushViewController(notice, animated: true)
+                
+                
+               
+                
+                
+                
             case 2:
                 print("present 통계")
             case 3:
@@ -135,5 +154,6 @@ extension SideMenuViewController: UITableViewDelegate {
                 return
         }
     }
+    
         
 }
