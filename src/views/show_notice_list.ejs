@@ -5,14 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery</title>
+    <title>Show List</title>
 </head>
 
 <body>
-    <h1>Gallery</h1>
-    <% for (var i=0; i < photo.length; i++) {%>
-        <img src="<%= photo[i] %>" width="200" height="150">
-        <%= photoDate[i] %>
+    <h1>Show List</h1>
+    <% for (var i=0; i < title.length; i++) {%>
+        <fieldset>
+            글 번호 : <%= n_seq[i] %><br>
+            제목 : <a href="/showNotice/<%=n_seq[i]%>"><%=title[i]%></a>
+        </fieldset>
     <% } %><br>
     <a href="/">메인</a>
 </body>

@@ -11,7 +11,8 @@ router.get('/upload', (req, res) => {
     } else {
         res.redirect('/login');
     }
-})
+});
+
 router.post('/singleFile', upload.single('upload'), singleFileUpload);
 
 router.get('/display', displayCtrl.getSingleImageFromDB);
