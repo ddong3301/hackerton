@@ -20,17 +20,13 @@ const read_board_List = (req, res) => {
 
 const read_board = (req, res) => {
     var parameters = {
-        title: req.body.title,
-        content: req.body.content,
         n_seq: req.params
     }
-
     Notice.show_one_Notice(parameters).then((data) => {
         if (data.titles == "") {
             res.send("<script>alert('글이 없습니다.'); location.href = '/showNoticeList' </script>");
         } else {
-            console.log(data);
-            res.render('show_notice', { title: data.titles, content: data.contents, n_seq: data.n_seq });
+            res.render('show_notice', { title: data.titles, content: data.contents, n_seq: data.req_n_seq });
         }
     })
 }
