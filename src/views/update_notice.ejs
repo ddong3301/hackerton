@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notice</title>
+</head>
+<body>
+    <h1>update</h1>
+    <!-- <form action = '/updateNotice/<%= n_seq["n_seq"] %>' method = 'POST'> -->
+    <form action = '/updateNotice' method = 'POST'>
+        <% seq = n_seq['n_seq'] %>
+        <input type = 'hidden' name = 'n_seq' value = "<%= seq %>" >
+        <table>
+            <tr>
+                <td>title : <input type = 'text' name = 'title' value = <%= title %>></td>
+            </tr>
+            <tr>
+                <td><textarea name = 'content' cols = "50" rows = "30"><%= content %></textarea></td>
+            </tr>
+            <tr>
+                <td><input type = 'submit' value = '저장'></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
