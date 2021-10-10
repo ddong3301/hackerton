@@ -11,6 +11,8 @@ class SideViewTableViewCell: UITableViewCell {
 
      static let identifer = "Sideviewcell"
     
+    
+    
     let cellview: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -27,7 +29,6 @@ class SideViewTableViewCell: UITableViewCell {
         let icon = UIImageView()
         
         icon.translatesAutoresizingMaskIntoConstraints = false
-        icon.backgroundColor = .gray
         
         
         return icon

@@ -38,6 +38,7 @@
 		DF49965B2713224D00AE57F6 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DF49965C2713252900AE57F6 /* NoticeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListViewController.swift; sourceTree = "<group>"; };
 		DF49965E271325DA00AE57F6 /* noticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noticeTableViewCell.swift; sourceTree = "<group>"; };
+		DF49966027132DA700AE57F6 /* login.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = login.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DF6A172B2709EE99000B71F0 /* noticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noticeViewController.swift; sourceTree = "<group>"; };
 		DF6A172D270A9BC6000B71F0 /* statisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statisticsViewController.swift; sourceTree = "<group>"; };
 		DF6A172F270A9D37000B71F0 /* alertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +127,7 @@
 			children = (
 				DF8A4E562701A10F001A1EBA /* DataSource.swift */,
 				DF49965B2713224D00AE57F6 /* MyPlayground.playground */,
+				DF49966027132DA700AE57F6 /* login.playground */,
 			);
 			path = Data;
 			sourceTree = "<group>";

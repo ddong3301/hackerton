@@ -4,10 +4,12 @@ struct Noticelist: Codable {
     
     struct data: Codable {
         
-        var n_seq: String
         var title: String
+        var n_seq: Int
           
     }
+    
+    var data: [data]
    
 }
 
@@ -29,7 +31,7 @@ func fetch(urlStr: String, completion: @escaping (Result<Noticelist,Error>) -> (
         return
     }
     var request = URLRequest.init(url: url)
-    request.httpMethod = "POST"
+    request.httpMethod = "GET"
     
     let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
         if let error = error {

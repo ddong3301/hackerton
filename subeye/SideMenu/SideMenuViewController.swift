@@ -11,6 +11,8 @@ class SideMenuViewController: UIViewController {
 
     let sidemenuLabels = ["Home","공지사항","통계","고객센터", "앱 설명"]
     
+    let icons = [UIImage(named: "22.png"), UIImage(named: "26.png"), UIImage(named: "25.png"), UIImage(named: "24.png"), UIImage(named: "23.png")]
+    
     let simbol: UIImageView  = {
         let imgview = UIImageView()
         imgview.translatesAutoresizingMaskIntoConstraints = false
@@ -115,6 +117,7 @@ extension SideMenuViewController: UITableViewDataSource {
         backgroundcolor.backgroundColor = .clear
         cell.selectedBackgroundView = backgroundcolor
         cell.menuLabel.text = sidemenuLabels[indexPath.row]
+        cell.menuicons.image = icons[indexPath.row]
         return cell
     }
 
@@ -132,8 +135,6 @@ extension SideMenuViewController: UITableViewDelegate {
                 print("present 공지사항")
                 
                 let notice = noticeViewController()
-                
-                guard let pvc = self.presentingViewController else { return }
                 
                 notice.modalTransitionStyle = .crossDissolve
                 notice.modalPresentationStyle = .fullScreen
