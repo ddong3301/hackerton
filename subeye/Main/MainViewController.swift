@@ -212,10 +212,13 @@ class MainViewController: UIViewController {
         let bt = UIButton()
         bt.translatesAutoresizingMaskIntoConstraints = false
         
-        bt.setTitle("MENU", for: .normal)
-        bt.setTitleColor(.black, for: .normal)
-        bt.setTitleColor(.systemGray4, for: .highlighted)
-        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        bt.setImage(UIImage(named: "11.png"), for: .normal)
+        
+        
+//        bt.setTitle("MENU", for: .normal)
+//        bt.setTitleColor(.black, for: .normal)
+//        bt.setTitleColor(.systemGray4, for: .highlighted)
+//        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         
         return bt
     }()
@@ -397,8 +400,16 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        animationView.play()
         
+        animationView.play()
+        print("apear")
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        print("disapear")
     }
 
     /*
@@ -424,10 +435,20 @@ extension MainViewController {
     
     @objc func touchtotalview(_ sender: UIButton) {
         
-        print("touch")
+        let alertview = alertViewController()
+        
+        alertview.modalPresentationStyle = .overFullScreen
+        alertview.modalTransitionStyle = .crossDissolve
+        present(alertview, animated: true, completion: nil)
+        
         
         
     }
+    
+    
+    
+    
+    
     @objc func presentdrop(_ sender: UIButton) {
 
         dropDown.show()

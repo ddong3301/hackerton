@@ -37,7 +37,7 @@ class noticeViewController: UIViewController {
         text.textColor = .black
         text.font = UIFont.systemFont(ofSize: 20)
         text.text = "10월 4일 업데이트 입니다. 공지사항이 추가되었고 side menu가 완성되었습니다."
-        text.backgroundColor = .systemGray6
+        
         text.isEditable = false
         
         text.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
