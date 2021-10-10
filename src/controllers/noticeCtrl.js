@@ -14,7 +14,9 @@ const create_board = (req, res) => {
 
 const read_board_List = (req, res) => {
     Notice.show_Notice_List().then((data) => {
-        res.render('show_notice_list', { n_seq: data.n_seq, title: data.titles });
+        //res.render('show_notice_list', { n_seq: data.n_seq, title: data.titles });
+        //res.send({ n_seq: data.n_seq, title: data.titles });
+        res.send({ data: data });
     });
 }
 
@@ -26,7 +28,8 @@ const read_board = (req, res) => {
         if (data.titles == "") {
             res.send("<script>alert('글이 없습니다.'); location.href = '/showNoticeList' </script>");
         } else {
-            res.render('show_notice', { title: data.titles, content: data.contents, n_seq: data.req_n_seq });
+            //res.render('show_notice', { title: data.titles, content: data.contents, n_seq: data.req_n_seq });
+            res.send({ title: data.titles, content: data.contents, n_seq: data.req_n_seq })
         }
     })
 }

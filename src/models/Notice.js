@@ -18,23 +18,11 @@ const create_Notice = (parameters) => {
 
 const show_Notice_List = () => {
     return new Promise((resolve, reject) => {
-        var titles = [];
-        var n_seq = []
         db.query(`SELECT title, n_seq FROM notice_board`, (err, noticeData) => {
             if (err) {
                 reject(err)
             } else {
-                noticeData.forEach(data => {
-                    titles.push(data.title);
-                    n_seq.push(data.n_seq);
-                    console.log(noticeData);
-                });
-                var data = {
-                    titles,
-                    n_seq
-                }
-                //console.log(titles);
-                resolve(data);
+                resolve(noticeData);
             }
         })
     })
@@ -61,7 +49,7 @@ const show_one_Notice = (parameters) => {
                     contents,
                     req_n_seq
                 }
-                resolve(data);
+                resolve(noticeData);
             }
         })
     })
