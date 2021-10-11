@@ -594,6 +594,11 @@ extension SignupViewController {
     
     @objc func backloginview(_ sender: UIButton) {
         
+        
+        postsignup(e_num: nameTF.text!, user_pw: passTF.text!, user_name: nameTF.text!, phone: phoneTF.text!, region: areaLabel.text!)
+        
+
+        
         let alert = UIAlertController(title: "회원가입이 완료되었습니다.", message: nil, preferredStyle: .alert)
         let OKaction = UIAlertAction(title: "OK", style: .default) { (action) in
             self.dismiss(animated: true, completion: nil)
@@ -622,6 +627,33 @@ extension SignupViewController {
         self.view.endEditing(true)
        
         print("tap")
+        
+    }
+    
+    func postsignup(e_num: String, user_pw:String, user_name:String, phone:String, region:String) {
+        
+        let signupuser = signup(e_num: e_num, user_pw: user_pw, user_name: user_name, phone: phone, region: region )
+        guard let uploadData = try? JSONEncoder().encode(signupuser) else { return }
+        
+        let url = URL(string: "https://subeye.herokuapp.com/register")
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.uploadTask(with: request, from: uploadData) {(data, response, error) in
+            
+            
+            if let e = error{
+                NSLog("An error")
+                return
+            }
+        
+            print("success")
+
+        }
+        task.resume()
         
     }
 }
