@@ -14,7 +14,7 @@ const login = (req, res) => {
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64')
     }  
 
-    res.send(parameters.e_num, parameters.user_pw);
+   // res.send(parameters.e_num, parameters.user_pw);
 
     User.findUser(parameters).then((db_data) => {
         const token = jwt.sign({ id : db_data.e_num}, 'secret_key');
