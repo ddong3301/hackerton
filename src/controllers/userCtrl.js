@@ -12,20 +12,22 @@ const login = (req, res) => {
     var parameters = { 
         "e_num": req.body.e_num, 
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64')
-    }
+    }  
 
-    User.findUser(parameters).then((db_data) => {
-        const token = jwt.sign({ id : db_data.e_num}, 'secret_key');
-        User.insert_Token(parameters, token).then(() => {
-            console.log(token);
-            res.cookie("x_auth", token);
-            res.redirect('/');
-        }).catch((err) => {
-            console.log(err);
-        }) 
-    }).catch((err) => {
-        console.log(err);
-    })
+    res.send(parameters.e_num);
+
+    // User.findUser(parameters).then((db_data) => {
+    //     const token = jwt.sign({ id : db_data.e_num}, 'secret_key');
+    //     User.insert_Token(parameters, token).then(() => {
+    //         console.log(token);
+    //         res.cookie("x_auth", token);
+    //         res.redirect('/');
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     }) 
+    // }).catch((err) => {
+    //     console.log(err);
+    // })
 }
 
 const logout = (req, res) => {
