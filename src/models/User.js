@@ -20,13 +20,11 @@ const findUser = (parameters) => {
         db.query(`SELECT e_num, user_pw FROM user WHERE e_num = '${parameters.e_num}'&& user_pw = '${parameters.user_pw}'`, (err, db_data) => {
             console.log(db_data);
             if (err) {
-                console.log(err);
                 reject(err);
             } else {
                 if(db_data.length == 0) {
                     resolve("err");
-                }
-                else {
+                } else {
                     resolve(db_data);
                 }
             }
@@ -40,7 +38,6 @@ const insert_Token = (parameters, token) => {
             if (err) {
                 reject(err);
             } else {
-                //console.log(db_data)
                 resolve(db_data);
             }
         });
