@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		146F2864EA7062E2CE8A206B /* Pods_subeye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E4E250C1D18E0F8058B6AE /* Pods_subeye.framework */; };
 		DF1278D426EF4BB700109AD7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1278D326EF4BB700109AD7 /* MainViewController.swift */; };
+		DF1A5E20271480D400C130BF /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1A5E1F271480D400C130BF /* DataType.swift */; };
 		DF28DC3427059E6D008FAA0D /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF28DC3327059E6D008FAA0D /* SideMenuViewController.swift */; };
 		DF28DC372705A2F4008FAA0D /* SideViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF28DC362705A2F4008FAA0D /* SideViewTableViewCell.swift */; };
 		DF49965D2713252900AE57F6 /* NoticeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49965C2713252900AE57F6 /* NoticeListViewController.swift */; };
 		DF49965F271325DA00AE57F6 /* noticeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49965E271325DA00AE57F6 /* noticeTableViewCell.swift */; };
+		DF4996622713DE8400AE57F6 /* noticelist.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4996612713DE8400AE57F6 /* noticelist.swift */; };
 		DF6A172C2709EE99000B71F0 /* noticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A172B2709EE99000B71F0 /* noticeViewController.swift */; };
 		DF6A172E270A9BC6000B71F0 /* statisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A172D270A9BC6000B71F0 /* statisticsViewController.swift */; };
 		DF6A1730270A9D37000B71F0 /* alertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A172F270A9D37000B71F0 /* alertViewController.swift */; };
@@ -33,12 +35,14 @@
 		A6224E8445676322DC31FAA7 /* Pods-subeye.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-subeye.release.xcconfig"; path = "Target Support Files/Pods-subeye/Pods-subeye.release.xcconfig"; sourceTree = "<group>"; };
 		A649CBA6DCD5045C5C23AAF6 /* Pods-subeye.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-subeye.debug.xcconfig"; path = "Target Support Files/Pods-subeye/Pods-subeye.debug.xcconfig"; sourceTree = "<group>"; };
 		DF1278D326EF4BB700109AD7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		DF1A5E1F271480D400C130BF /* DataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
 		DF28DC3327059E6D008FAA0D /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		DF28DC362705A2F4008FAA0D /* SideViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideViewTableViewCell.swift; sourceTree = "<group>"; };
 		DF49965B2713224D00AE57F6 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DF49965C2713252900AE57F6 /* NoticeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListViewController.swift; sourceTree = "<group>"; };
 		DF49965E271325DA00AE57F6 /* noticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noticeTableViewCell.swift; sourceTree = "<group>"; };
 		DF49966027132DA700AE57F6 /* login.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = login.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		DF4996612713DE8400AE57F6 /* noticelist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noticelist.swift; sourceTree = "<group>"; };
 		DF6A172B2709EE99000B71F0 /* noticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noticeViewController.swift; sourceTree = "<group>"; };
 		DF6A172D270A9BC6000B71F0 /* statisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statisticsViewController.swift; sourceTree = "<group>"; };
 		DF6A172F270A9D37000B71F0 /* alertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 				DF8A4E562701A10F001A1EBA /* DataSource.swift */,
 				DF49965B2713224D00AE57F6 /* MyPlayground.playground */,
 				DF49966027132DA700AE57F6 /* login.playground */,
+				DF4996612713DE8400AE57F6 /* noticelist.swift */,
+				DF1A5E1F271480D400C130BF /* DataType.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -301,7 +307,9 @@
 				DF49965D2713252900AE57F6 /* NoticeListViewController.swift in Sources */,
 				DFC72BA526F426A000A2CCAE /* SignupViewController.swift in Sources */,
 				DFB30EF326E84A9300686AFB /* SceneDelegate.swift in Sources */,
+				DF1A5E20271480D400C130BF /* DataType.swift in Sources */,
 				DF6A1730270A9D37000B71F0 /* alertViewController.swift in Sources */,
+				DF4996622713DE8400AE57F6 /* noticelist.swift in Sources */,
 				DF6A172C2709EE99000B71F0 /* noticeViewController.swift in Sources */,
 				DF1278D426EF4BB700109AD7 /* MainViewController.swift in Sources */,
 				DF8A4E572701A10F001A1EBA /* DataSource.swift in Sources */,
