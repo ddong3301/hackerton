@@ -8,21 +8,21 @@
 //     .then(() => { console.log('Database Connected'); })
 //     .catch((err) => { console.log(err); });
 
-const mariadb = require('mariadb');
+// const mariadb = require('mariadb');
 
-const pool = mariadb.createPool({
-    host: '127.0.0.1',
-    port: 3308,
-    user: 'root',
-    password: 'Ehdguq23!',
-    database: 'hackerton'
-})
+// const pool = mariadb.createPool({
+//     host: '127.0.0.1',
+//     port: 3308,
+//     user: 'root',
+//     password: 'Ehdguq23!',
+//     database: 'hackerton'
+// })
 
-pool.getConnection()
-    .then(() => { console.log('MariaDB Connected'); })
-    .catch((err) => { console.log(err); });
+// pool.getConnection()
+//     .then(() => { console.log('MariaDB Connected'); })
+//     .catch((err) => { console.log(err); });
 
-module.exports = mariadb;
+// module.exports = mariadb;
 
 const mysql = require("mysql");
 require('dotenv').config({ path : ".env" });
