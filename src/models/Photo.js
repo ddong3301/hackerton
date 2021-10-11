@@ -7,8 +7,10 @@ const insert_Photo = (parameters) => {
     return new Promise((resolve, reject) => {
         db.query(`INSERT INTO photo SET fileName = '${parameters.fileName}', filePath = '${parameters.filePath}', fileType = '${parameters.fileType}'`, (err, db_data) => {
             if (err) {
+                console.log('model err');
                 reject(err);
             } else {
+                console.log('model err');
                 resolve(db_data);
             }
         })

@@ -18,13 +18,13 @@ const login = (req, res) => {
 
     User.findUser(parameters).then((db_data) => {
         if(db_data == "err") {
-            console.log('아이디 혹은 비밀번호가 틀립니다');
-            res.redirect('/login');
+            res.send({loginSuccess : "1"});
         } else {
             const token = jwt.sign({ id : db_data.e_num}, 'secret_key');
             User.insert_Token(parameters, token).then(() => {
                 res.cookie("x_auth", token);
-                res.redirect('/');
+                //res.redirect('/');
+                res.send({loginSuccess : "0"})
             }).catch((err) => {
                 console.log(err);
             }) 
