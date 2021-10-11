@@ -462,6 +462,7 @@ extension MainViewController {
             print("인덱스 : \(index)")
             if index ==  0 {
                 
+                logout()
                 self.dismiss(animated: true, completion: nil)
                 
                 
@@ -504,7 +505,24 @@ extension MainViewController: UITableViewDataSource {
     
 extension MainViewController: UITableViewDelegate {
     
- 
+    func logout() {
+        
+        let url = URL(string: "https://subeye.herokuapp.com/logout")
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let e = error{
+                NSLog("two error")
+                return
+            }
+            
+            print("Success 2")
+        }
+        task.resume()
+
+    }
     
         
         

@@ -2,7 +2,17 @@ import UIKit
 
 
 
+struct Login: Codable {
+    
+    let e_num:String
+    let user_pw:String
+    
+}
 
+struct signup: Codable {
+    
+    e_num, user_pw, user_name, phone
+}
 
 func postComment(e_num: String,user_pw: String) {
     
@@ -52,4 +62,4 @@ func logout() {
 
 }
 
-logout()
+
