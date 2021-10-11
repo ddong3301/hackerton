@@ -12,9 +12,6 @@ router.get('/updateNoticeSelect/:n_seq', Notice.update_board_select);
 router.post('/updateNotice', Notice.update_board);
 
 router.post('/deleteNotice', Notice.delete_board);
-// router.post('/deleteNotice', () => {
-//     console.log('asd')
-// });
 
 router.get('/showNoticeList', Notice.read_board_List);
 
