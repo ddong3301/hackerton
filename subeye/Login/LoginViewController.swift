@@ -9,6 +9,9 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    
+    
+    
     let extraview: UIView = {
         let extra = UIView()
         extra.translatesAutoresizingMaskIntoConstraints = false
@@ -391,13 +394,7 @@ extension LoginViewController {
         
         
         
-        let mainViewController = UINavigationController(rootViewController: MainViewController())
-        passWord.text = ""
-        mainViewController.modalPresentationStyle = .fullScreen
-        mainViewController.modalTransitionStyle = .crossDissolve
         
-        
-        present(mainViewController, animated: true, completion: nil)
         
     }
     
@@ -454,7 +451,6 @@ extension LoginViewController {
     func postComment(e_num: String,user_pw: String) {
         
         let comment = Login(e_num: e_num, user_pw: user_pw)
-        
         guard let uploadData = try? JSONEncoder().encode(comment) else { return }
         
         let url = URL(string: "https://subeye.herokuapp.com/login")
@@ -464,16 +460,43 @@ extension LoginViewController {
         request.httpMethod = "POST"
         
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = uploadData
         
-        let task = URLSession.shared.uploadTask(with: request, from: uploadData) {(data, response, error) in
+        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
             
             
             if let e = error{
-                NSLog("An error")
+                NSLog("An error: \(e.localizedDescription)")
                 return
             }
+            
+            let outputStr = String(data: data!, encoding: String.Encoding.utf8)
+            
+            print("result: \(outputStr)")
+            
+        if ((outputStr?.contains("0")) == true) {
+            DispatchQueue.main.async {
+                print("loginsuccess")
+                
+                let mainViewController = UINavigationController(rootViewController: MainViewController())
+                self.passWord.text = ""
+                mainViewController.modalPresentationStyle = .fullScreen
+                mainViewController.modalTransitionStyle = .crossDissolve
+                
+                
+                self.present(mainViewController, animated: true, completion: nil)
+                
+                
+                    }
+            
+                }
         
-            print("success")
+        else {DispatchQueue.main.async {
+            print("failed")
+            }
+        }
+        
+            
 
         }
         task.resume()

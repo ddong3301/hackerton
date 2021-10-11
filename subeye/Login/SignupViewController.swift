@@ -649,8 +649,17 @@ extension SignupViewController {
                 NSLog("An error")
                 return
             }
+    
+//            let object = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary
+//
+//            guard let jsonObject = object else {return}
+//
+//            let result = jsonObject["loginSuccess"] as? String
+//
+//            print(result)
+            
         
-            print("success")
+            
 
         }
         task.resume()

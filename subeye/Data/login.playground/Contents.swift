@@ -1,6 +1,12 @@
 import UIKit
 
 
+struct loginpass: Codable {
+    
+    let loginSuccess: String
+    
+}
+
 
 struct Login: Codable {
     
@@ -30,21 +36,54 @@ func postComment(e_num: String,user_pw: String) {
     request.httpMethod = "POST"
     
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.httpBody = uploadData
     
-    let task = URLSession.shared.uploadTask(with: request, from: uploadData) {(data, response, error) in
+    let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
         
         
         if let e = error{
-            NSLog("An error")
+            NSLog("An error: \(e.localizedDescription)")
             return
         }
+        
+       
+            
+            let outputStr = String(data: data!, encoding: String.Encoding.utf8)
+            
+            print("result: \(outputStr)")
+            
+        if ((outputStr?.contains("0")) == true) {
+            DispatchQueue.main.async {
+                print("loginsuccess")
+                    }
+            
+                }
+        
+        else {DispatchQueue.main.async {
+            print("failed")
+            }
+        }
+            
+             
+            
+            
+        
     
-        print("success")
+        
 
     }
     task.resume()
 
 }
+
+postComment(e_num: "20161505", user_pw: "dong123456")
+
+
+
+
+
+
+
 
 func postsignup(e_num: String, user_pw:String, user_name:String, phone:String, region:String) {
     
@@ -73,7 +112,7 @@ func postsignup(e_num: String, user_pw:String, user_name:String, phone:String, r
     
 }
 
-postsignup(e_num: "20161467", user_pw: "jun1234", user_name: "고준혁", phone: "01022813856", region: "배방역")
+//postsignup(e_num: "20161467", user_pw: "jun1234", user_name: "고준혁", phone: "01022813856", region: "배방역")
 
 
 
