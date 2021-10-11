@@ -15,6 +15,18 @@ const insert_userInfo = (parameter) => {
     })
 }
 
+// const dup_UserId = (parameter) => {
+//     return new Promise((resolve, reject) => {
+//         db.query(`SELECT e_num FROM user WHERE e_num = '${parameters.e_num}'`, (err, db_data) => {
+//             if(err) {
+//                 reject(err);
+//             } else {
+//                 resolve(db_data);
+//             }
+//         })
+//     })
+// }
+
 const findUser = (parameters) => {
     return new Promise((resolve, reject) => {
         db.query(`SELECT e_num, user_pw FROM user WHERE e_num = '${parameters.e_num}'&& user_pw = '${parameters.user_pw}'`, (err, db_data) => {
@@ -60,5 +72,6 @@ module.exports = {
     insert_userInfo,
     findUser,
     insert_Token,
-    delete_Token
+    delete_Token,
+   // dup_UserId
 };

@@ -19,5 +19,6 @@ router.get('/logout', userCtrl.logout);
 
 router.post('/login', userCtrl.login);
 router.post('/register', userCtrl.register);
+// router.post('/dup', userCtrl.dup);
 
 module.exports = router;

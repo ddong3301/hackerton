@@ -8,6 +8,16 @@ const cookieParser = require('cookie-parser');
 
 app.use(cookieParser());
 
+// const dup = (req, res) => {
+//     var parameters = {
+//         "e_num" : req.body.e_num
+//     }
+
+//     User.dup_UserId(parameters).then((db_data) => {
+//         console.log(db_data);
+//     })
+// }
+
 const login = (req, res) => {
     var parameters = { 
         "e_num": req.body.e_num, 
@@ -58,5 +68,6 @@ const register = (req, res) => {
 module.exports = {
     login,
     logout,
-    register
+    register,
+    //dup
 }
