@@ -5,7 +5,7 @@ const db = require('../config/dbConn');
 
 const insert_userInfo = (parameter) => {
     return new Promise((resolve, reject) => {
-        db.query(`INSERT INTO user SET e_num = '${parameter.e_num}', user_pw = '${parameter.user_pw}', user_name = '${parameter.user_name}', phone = '${parameter.phone}'`, (err, db_data) => {
+        db.query(`INSERT INTO user SET e_num = '${parameter.e_num}', user_pw = '${parameter.user_pw}', user_name = '${parameter.user_name}', phone = '${parameter.phone}', region = '${parameter.region}'`, (err, db_data) => {
             if (err) {
                 console.log(err);
             } else {

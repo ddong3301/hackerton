@@ -55,7 +55,8 @@ const register = (req, res) => {
         "e_num": req.body.e_num,
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64'),
         "user_name": req.body.user_name,
-        "phone": req.body.phone
+        "phone": req.body.phone,
+        "region": req.body.region
     }
 
     User.insert_userInfo(parameters).then(() => {
