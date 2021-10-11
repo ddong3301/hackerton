@@ -13,6 +13,8 @@ const login = (req, res) => {
         "e_num": req.body.e_num, 
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64')
     }  
+    console.log(typeof(parameters.e_num));
+    console.log(typeof(parameters.user_pw));
 
     User.findUser(parameters).then((db_data) => {
         if(db_data == "err") {

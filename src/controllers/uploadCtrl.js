@@ -25,7 +25,8 @@ const singleFileUpload = (req, res) => {
             fileType: req.file.mimetype,
         }
         Photo.insert_Photo(parameters).then((db_data) => {
-            res.redirect('display');
+            console.log(db_data);
+            // res.redirect('display');
         })
     } catch(err) {
         res.status(400).send(err.message);
