@@ -5,7 +5,8 @@ const date = new Date();
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'src/uploads/');
+        //cb(null, 'src/uploads/');
+        cb(null, '');
     },
     filename: (req, file, cb) => {
         let filename = timezoneDate.toISOString().replace(/:/g, '-') + '-' + file.originalname;

@@ -19,6 +19,7 @@ const singleFileUpload = (req, res) => {
     try {
         path = req.file.path
         path = path.replace(/\\/g, '/');
+        console.log(req.file);
         const parameters = {
             fileName: req.file.originalname,
             filePath: path,
@@ -26,7 +27,7 @@ const singleFileUpload = (req, res) => {
         }
         Photo.insert_Photo(parameters).then((db_data) => {
             console.log(db_data);
-            //res.redirect('display');
+            res.redirect('display');
         })
     } catch(err) {
         res.status(400).send(err.message);
