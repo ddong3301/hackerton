@@ -31,9 +31,9 @@ const display_Photo = () => {
 
 const display_Gallery = () => {
     return new Promise((resolve, reject) => {
-        var i = 0;
-        var allImages = [];
-        var ImagesDate = []
+        // var i = 0;
+        // var allImages = [];
+        // var ImagesDate = []
         db.query(`SELECT filePath, date FROM photo`, (err, fileData) => {
             if (err) {
                 reject(err);
