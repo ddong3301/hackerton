@@ -10,11 +10,11 @@ router.get('/upload', (req, res) => {
 });
 
 //router.post('/singleFile', uploadImg.single('upload'), singleFileUpload);
-router.post('/singleFile', uploadImg.single('file'));
-
-router.get('/display', displayCtrl.getSingleImageFromDB, (req, res) => {
+router.post('/singleFile', uploadImg.single('file'), (req, res) => {
     res.sendStatus(200);
 });
+
+router.get('/display', displayCtrl.getSingleImageFromDB);
 
 router.get('/gallery', displayCtrl.getImagesFromDB);
 
