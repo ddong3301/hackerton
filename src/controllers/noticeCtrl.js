@@ -29,7 +29,9 @@ const read_board = (req, res) => {
             res.send("<script>alert('글이 없습니다.'); location.href = '/showNoticeList' </script>");
         } else {
             //res.render('show_notice', { title: data.titles, content: data.contents, n_seq: data.req_n_seq });
-            res.send({ title: data.titles, content: data.contents, n_seq: data.req_n_seq })
+            console.log(data[0]);
+            console.log(parameters.n_seq);
+            res.send({ title: data[0].title, content: data[0].content, n_seq: data[0].n_seq })
         }
     })
 }

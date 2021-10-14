@@ -38,17 +38,11 @@ const show_one_Notice = (parameters) => {
             if (err) {
                 reject(err)
             } else {
-                console.log(parameters.n_seq);
                 noticeData.forEach(data => {
                     titles.push(data.title);
                     contents.push(data.content);
                     req_n_seq.push(data.n_seq);
                 });
-                var data = {
-                    titles,
-                    contents,
-                    req_n_seq
-                }
                 resolve(noticeData);
             }
         })
