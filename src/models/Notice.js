@@ -31,18 +31,18 @@ const show_Notice_List = () => {
 const show_one_Notice = (parameters) => {
     return new Promise((resolve, reject) => {
         n_seq = parameters.n_seq;
-        var titles = [];
-        var contents = [];
-        var req_n_seq = [];
+        // var titles = [];
+        // var contents = [];
+        // var req_n_seq = [];
         db.query(`SELECT title, content, n_seq FROM notice_board WHERE n_seq = '${n_seq['n_seq']}'`, (err, noticeData) => {
             if (err) {
                 reject(err)
             } else {
-                noticeData.forEach(data => {
-                    titles.push(data.title);
-                    contents.push(data.content);
-                    req_n_seq.push(data.n_seq);
-                });
+                // noticeData.forEach(data => {
+                //     titles.push(data.title);
+                //     contents.push(data.content);
+                //     req_n_seq.push(data.n_seq);
+                // });
                 resolve(noticeData);
             }
         })

@@ -38,16 +38,16 @@ const display_Gallery = () => {
             if (err) {
                 reject(err);
             } else {
-                fileData.forEach(data => {
-                    allImages.push(data.filePath);
-                    ImagesDate.push(data.date);
-                    i++;
-                });
-                var data = {
-                    allImages,
-                    ImagesDate
-                }
-                resolve(data);
+                // fileData.forEach(data => {
+                //     allImages.push(data.filePath);
+                //     ImagesDate.push(data.date);
+                //     i++;
+                // });
+                // var data = {
+                //     allImages,
+                //     ImagesDate
+                // }
+                resolve(fileData);
             }
         })
     })

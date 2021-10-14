@@ -11,8 +11,9 @@ const getSingleImageFromDB = (req, res) => {
 
 const getImagesFromDB = (req, res) => {
     Photo.display_Gallery().then((data) => {
+        console.log(data);
             //res.render('gallery', { photo: data.allImages, photoDate: data.ImagesDate })
-            res.send({ photo: data.allImages, photoDate: data.ImagesDate });
+            res.send({data : data});
     });
 }
 
