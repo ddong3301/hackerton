@@ -6,7 +6,7 @@ const { singleFileUpload } = require('../controllers/uploadCtrl');
 const displayCtrl = require('../controllers/displayCtrl');
 
 router.get('/upload', (req, res) => {
-        res.redirect('/login');
+        res.render('upload');
 });
 
 router.post('/singleFile', uploadImg.single('upload'), singleFileUpload);
