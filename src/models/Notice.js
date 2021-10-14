@@ -18,7 +18,7 @@ const create_Notice = (parameters) => {
 
 const show_Notice_List = () => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT title, n_seq FROM notice_board ORDER BY n_seq DESC`, (err, noticeData) => {
+        db.query(`SELECT title, n_seq, content FROM notice_board ORDER BY n_seq DESC`, (err, noticeData) => {
             if (err) {
                 reject(err)
             } else {
