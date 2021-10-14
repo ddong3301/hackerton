@@ -11,6 +11,7 @@ router.get('/upload', (req, res) => {
 
 //router.post('/singleFile', uploadImg.single('upload'), singleFileUpload);
 router.post('/singleFile', uploadImg.single('file'), (req, res) => {
+    console.log(req.files);
     res.sendStatus(200);
 });
 
