@@ -9,11 +9,10 @@ router.get('/upload', (req, res) => {
         res.redirect('/login');
 });
 
-//router.post('/singleFile', uploadImg.single('upload'), singleFileUpload);
-router.post('/singleFile', uploadImg.single('file'), (req, res) => {
-    console.log(req.files);
-    res.sendStatus(200);
-});
+router.post('/singleFile', uploadImg.single('upload'), singleFileUpload);
+// router.post('/singleFile', uploadImg.single('upload'), (req, res) => {
+//     res.sendStatus(200)
+// });
 
 router.get('/display', displayCtrl.getSingleImageFromDB);
 
