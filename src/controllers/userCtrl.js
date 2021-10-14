@@ -8,15 +8,20 @@ const cookieParser = require('cookie-parser');
 
 app.use(cookieParser());
 
-// const dup = (req, res) => {
-//     var parameters = {
-//         "e_num" : req.body.e_num
-//     }
+const isDuplication = (req, res) => {
+    var parameters = {
+        "e_num" : req.body.e_num
+    }
 
-//     User.dup_UserId(parameters).then((db_data) => {
-//         console.log(db_data);
-//     })
-// }
+    User.dup_UserId(parameters).then((db_data) => {
+        if(db_data.length == 0) {
+            res.send({isDuplication : false});
+        } else {
+            res.send({isDuplication : true});
+        }
+        
+    })
+}
 
 const login = (req, res) => {
     var parameters = {
@@ -32,7 +37,6 @@ const login = (req, res) => {
             User.insert_Token(parameters, token).then(() => {
                 res.cookie("x_auth", token);
                 var decoded_token = jwt.verify(token, 'secret_key');
-                console.log(decoded_token.name);
                 res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
             }).catch((err) => {
                 console.log(err);
@@ -68,5 +72,5 @@ module.exports = {
     login,
     logout,
     register,
-    //dup
+    isDuplication
 }

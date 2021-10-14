@@ -91,6 +91,19 @@ const delete_Token = (x_auth, token) => {
     });
 }
 
+const dup_UserId = (parameters) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT e_num FROM user WHERE e_num = '${parameters.e_num}'`, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                console.log(db_data);
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 module.exports = {
     insert_userInfo,
     read_userInfo,
@@ -99,5 +112,5 @@ module.exports = {
     findUser,
     insert_Token,
     delete_Token,
-   // dup_UserId
+    dup_UserId
 };
