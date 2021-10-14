@@ -595,7 +595,7 @@ extension SignupViewController {
     @objc func backloginview(_ sender: UIButton) {
         
         
-        postsignup(e_num: nameTF.text!, user_pw: passTF.text!, user_name: nameTF.text!, phone: phoneTF.text!, region: areaLabel.text!)
+        postsignup(e_num: idTF.text!, user_pw: passTF.text!, user_name: nameTF.text!, phone: phoneTF.text!, region: areaLabel.text!)
         
 
         

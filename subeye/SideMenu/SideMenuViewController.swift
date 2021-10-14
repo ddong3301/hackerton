@@ -134,7 +134,7 @@ extension SideMenuViewController: UITableViewDelegate {
             case 1:
                 print("present 공지사항")
                 
-                let notice = noticeViewController()
+                let notice = NoticeListViewController()
                 
                 notice.modalTransitionStyle = .crossDissolve
                 notice.modalPresentationStyle = .fullScreen

@@ -24,6 +24,14 @@ struct signup: Codable {
     let region:String
 }
 
+struct imges: Codable {
+    let photo:String
+}
+
+struct imgurl {
+    let url: String
+}
+
 func postComment(e_num: String,user_pw: String) {
     
     let comment = Login(e_num: e_num, user_pw: user_pw)
@@ -76,7 +84,7 @@ func postComment(e_num: String,user_pw: String) {
 
 }
 
-postComment(e_num: "20161505", user_pw: "dong123456")
+//postComment(e_num: "20161505", user_pw: "dong123456")
 
 
 
@@ -135,4 +143,27 @@ func logout() {
 
 }
 
+func loadimges() {
+    
+    let url = URL(string: "https://subeye.herokuapp.com/display")
+    
+    var request = URLRequest(url: url!)
+    request.httpMethod = "GET"
+    
+    let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        
+        if let e = error{
+            NSLog("two error")
+            return
+        }
+        
+        print("Success 2")
+        let urlimg = String(data: data!, encoding: .utf8)
+        print(urlimg)
+    }
+    task.resume()
+
+}
+
+loadimges()
 

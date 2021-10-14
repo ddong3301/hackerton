@@ -463,7 +463,7 @@ extension MainViewController {
             if index ==  0 {
                 
                 logout()
-                self.dismiss(animated: true, completion: nil)
+                
                 
                 
                 
@@ -507,20 +507,37 @@ extension MainViewController: UITableViewDelegate {
     
     func logout() {
         
-        let url = URL(string: "https://subeye.herokuapp.com/logout")
         
-        var request = URLRequest(url: url!)
-        request.httpMethod = "GET"
-        
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let e = error{
-                NSLog("two error")
-                return
-            }
+        let logoutalert = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겟습니까?", preferredStyle: .alert)
+        let Okaction = UIAlertAction(title: "확인", style: .cancel) { (action) in
+            let url = URL(string: "https://subeye.herokuapp.com/logout")
             
-            print("Success 2")
+            var request = URLRequest(url: url!)
+            request.httpMethod = "GET"
+            
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let e = error{
+                    NSLog("two error: \(e.localizedDescription)")
+                    return
+                }
+                
+                print("Success 2")
+            }
+            task.resume()
+            
+            self.dismiss(animated: true, completion: nil)
         }
-        task.resume()
+        
+        let cancelaction = UIAlertAction(title: "취소", style: .default) { (action) in
+            print("logout cancel")
+        }
+        
+        logoutalert.addAction(Okaction)
+        logoutalert.addAction(cancelaction)
+        
+        self.present(logoutalert, animated: true, completion: nil)
+        
+        
 
     }
     

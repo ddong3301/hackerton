@@ -153,7 +153,12 @@ class noticeViewController: UIViewController {
         
         backbt.addTarget(self, action: #selector(presentsidemenu(_:)), for: .touchUpInside)
         userData.addTarget(self, action: #selector(presentdrop(_:)), for: .touchUpInside)
-
+        
+        Noticetitle.shared.fetch {
+            print(Noticetitle.shared.notice.count)
+            print(Noticetitle.shared.notice[0])
+        }
+        
         // Do any additional setup after loading the view.
     }
     

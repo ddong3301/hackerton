@@ -13,6 +13,11 @@ struct Noticelist: Codable {
    
 }
 
+struct list {
+    var title:String
+    var n_seq:Int
+}
+
 enum ApiError: Error {
     case unowned
     case invalidUrl(String)
@@ -80,6 +85,8 @@ fetch(urlStr: urlString) { (result)  in
         print(error)
     }
 }
+
+
 
 
 

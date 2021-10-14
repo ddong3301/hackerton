@@ -472,19 +472,30 @@ extension LoginViewController {
             
             let outputStr = String(data: data!, encoding: String.Encoding.utf8)
             
-            print("result: \(outputStr)")
+            //print("result: \(outputStr)")
+            
+            print(response)
             
         if ((outputStr?.contains("0")) == true) {
             DispatchQueue.main.async {
                 print("loginsuccess")
                 
-                let mainViewController = UINavigationController(rootViewController: MainViewController())
-                self.passWord.text = ""
-                mainViewController.modalPresentationStyle = .fullScreen
-                mainViewController.modalTransitionStyle = .crossDissolve
+                let loginalert = UIAlertController(title: "로그인 성공", message: "로그인되었습니다.", preferredStyle: .alert)
+                let loginaction = UIAlertAction(title: "확인", style: .default) { (action) in
+                    let mainViewController = UINavigationController(rootViewController: MainViewController())
+                    self.passWord.text = ""
+                    mainViewController.modalPresentationStyle = .fullScreen
+                    mainViewController.modalTransitionStyle = .crossDissolve
+                    
+                    
+                    self.present(mainViewController, animated: true, completion: nil)
+                }
+                
+                loginalert.addAction(loginaction)
+                
+                self.present(loginalert, animated: true, completion: nil)
                 
                 
-                self.present(mainViewController, animated: true, completion: nil)
                 
                 
                     }
@@ -493,6 +504,15 @@ extension LoginViewController {
         
         else {DispatchQueue.main.async {
             print("failed")
+            
+            let loginfailedalert = UIAlertController(title: "로그인 실패", message: "사번 또는 비밀번호를 확인하세요", preferredStyle: .alert)
+            let okaction = UIAlertAction(title: "확인", style: .default) { (Action) in
+                self.passWord.text = ""
+            }
+            
+            loginfailedalert.addAction(okaction)
+            
+            self.present(loginfailedalert, animated: true, completion: nil)
             }
         }
         
