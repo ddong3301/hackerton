@@ -7,7 +7,8 @@ require('./config/dbConn');
 
 const userRouter = require('./router/userRoute');
 const uploadRouter = require('./router/uploadRoute');
-const noticeRouter = require('./router/noticeRoute')
+const noticeRouter = require('./router/noticeRoute');
+const vidRouter = require('./router/vidRouter');
 
 const app = express();
 
@@ -22,5 +23,5 @@ app.use(express.static(path.join(__dirname, '../')));
 app.use('/', userRouter);
 app.use('/', uploadRouter);
 app.use('/', noticeRouter);
-
+app.use('/', vidRouter);
 module.exports = app;
