@@ -3,8 +3,14 @@ var timezoneOffset = new Date().getTimezoneOffset() * 60000;
 var timezoneDate = new Date(Date.now() - timezoneOffset);
 const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
-aws.config.loadFromPath(__dirname + '/../config/awsconfig.json');
-const s3 = new aws.S3();
+require('dotenv').config({ path : ".env" });
+// aws.config.loadFromPath(__dirname + '/../config/awsconfig.json');
+// const s3 = new aws.S3();
+const s3 = new aws.S3({
+    "accessKeyId" : process.env.accessKeyId,
+    "secretAccessKey" : process.env.secretAccessKey,
+    "region" : process.env.region
+})
 
 // const storage = multer.diskStorage({
 //     destination: (req, file, cb) => {
@@ -24,7 +30,6 @@ const upload = multer({
         key: (req, file, cb) => {
             let filename = timezoneDate.toISOString().replace(/:/g, '-') + '-' + file.originalname;
             cb(null, filename);
-            //cb(null, Math.floor(Math.random() * 1000).toString() + Date.now() + '.' + file.originalname.split('.').pop());
         },
         limits: {
             fileSize: 1000 * 1000 * 10
