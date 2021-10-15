@@ -11,11 +11,14 @@ router.get('/upload', (req, res) => {
 
 router.post('/singleFile', upload.single('upload'), singleFileUpload);
 // router.post('/singleFile', upload.single('upload'), (req, res) => {
-//     console.log(req.file);
-//     let imgFile = req.file;
-//     res.json(imgFile);
-//     //res.sendStatus(200)
+//     console.log(req.body.ggg);
+//     res.sendStatus(200)
 // });
+
+// router.post('/test', (req, res) => {
+//         res.sendStatus(200);
+//         console.log(req)
+// })
 
 router.get('/display', displayCtrl.getSingleImageFromDB);
 

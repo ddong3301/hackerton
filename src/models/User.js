@@ -28,7 +28,7 @@ const read_userInfo = (parameter) => {
 const update_userInfo = (parameters) => {
     return new Promise((resolve, reject) => {
         console.log(parameters);
-        db.query(`UPDATE user SET user_pw = '${parameters.user_pw}', phone = '${parameters.phone}' WHERE token = '${parameters.token}'`, (err, db_data) => {
+        db.query(`UPDATE user SET region = '${parameters.user_pw}', phone = '${parameters.phone}', user_pw = '${parameters.user_pw}' WHERE token = '${parameters.token}'`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -40,8 +40,7 @@ const update_userInfo = (parameters) => {
 
 const delete_userInfo = (parameters) => {
     return new Promise((resolve, reject) => {
-        console.log(n_seq);
-        db.query(`DELETE FROM user WHERE token = '${parameters.token}'`, (err, db_data) => {
+        db.query(`DELETE FROM user WHERE token = '${parameters.token}' && user_pw = '${parameters.user_pw}'`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {

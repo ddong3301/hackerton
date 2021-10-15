@@ -6,6 +6,7 @@ const aws = require('aws-sdk');
 require('dotenv').config({ path : ".env" });
 // aws.config.loadFromPath(__dirname + '/../config/awsconfig.json');
 // const s3 = new aws.S3();
+
 const s3 = new aws.S3({
     "accessKeyId" : process.env.accessKeyId,
     "secretAccessKey" : process.env.secretAccessKey,

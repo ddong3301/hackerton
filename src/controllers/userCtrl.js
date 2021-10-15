@@ -45,6 +45,39 @@ const login = (req, res) => {
     })
 }
 
+const read_User = (req, res) => {
+    parameter = {
+        "token": req.cookies.x_auth
+    }
+    User.read_userInfo(parameter).then((db_data) => {
+        res.send(db_data);
+    })
+}
+
+const user_Update = (req, res) => {
+    var parameter = {
+        "token": req.cookies.x_auth,
+        "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64'),
+        "phone": req.body.phone,
+        "region": req.body.region
+    }
+    User.update_userInfo(parameter).then((db_data) => {
+        //admin => 0 = false, 1 = true, type = tinyInt
+        res.send({'UpdateSuccess': true})
+    })
+}
+
+const delete_User = (req, res) => {
+    var parameter = {
+        "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64'),
+        "token": req.cookies.x_auth
+    }
+
+    User.delete_userInfo(parameter).then(() => {
+        res.send({'DeleteSuccess': true});
+    })   
+}
+
 const logout = (req, res) => {
     token = ""
     console.log(req.cookies.x_auth);
@@ -72,5 +105,8 @@ module.exports = {
     login,
     logout,
     register,
-    isDuplication
+    isDuplication,
+    user_Update,
+    delete_User,
+    read_User
 }

@@ -5,7 +5,7 @@ const date = new Date();
 
 const insert_Photo = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`INSERT INTO photo SET fileName = '${parameters.fileName}', filePath = '${parameters.filePath}', fileType = '${parameters.fileType}'`, (err, db_data) => {
+        db.query(`INSERT INTO photo SET fileName = '${parameters.fileName}', filePath = '${parameters.filePath}', fileType = '${parameters.fileType}', g_num = '${parameters.g_num}'`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
