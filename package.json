@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1005.0",
+    "aws-sdk": "^2.1008.0",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",
     "crypto": "^1.0.1",
@@ -25,7 +25,7 @@
     "moment-timezone": "^0.5.33",
     "mongoose": "^6.0.6",
     "multer": "^1.4.3",
-    "multer-s3": "^2.9.0",
+    "multer-s3": "^2.9.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.12",
     "path": "^0.12.7",
