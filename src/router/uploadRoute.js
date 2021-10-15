@@ -15,11 +15,6 @@ router.post('/singleFile', upload.single('upload'), singleFileUpload);
 //     res.sendStatus(200)
 // });
 
-// router.post('/test', (req, res) => {
-//         res.sendStatus(200);
-//         console.log(req)
-// })
-
 router.get('/display', displayCtrl.getSingleImageFromDB);
 
 router.get('/gallery', displayCtrl.getImagesFromDB);

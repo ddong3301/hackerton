@@ -29,22 +29,10 @@ const display_Photo = () => {
 
 const display_Gallery = () => {
     return new Promise((resolve, reject) => {
-        // var i = 0;
-        // var allImages = [];
-        // var ImagesDate = []
-        db.query(`SELECT filePath, date FROM photo`, (err, fileData) => {
+        db.query(`SELECT filePath, date, g_num FROM photo`, (err, fileData) => {
             if (err) {
                 reject(err);
             } else {
-                // fileData.forEach(data => {
-                //     allImages.push(data.filePath);
-                //     ImagesDate.push(data.date);
-                //     i++;
-                // });
-                // var data = {
-                //     allImages,
-                //     ImagesDate
-                // }
                 resolve(fileData);
             }
         })

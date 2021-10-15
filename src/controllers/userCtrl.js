@@ -72,10 +72,10 @@ const delete_User = (req, res) => {
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64'),
         "token": req.cookies.x_auth
     }
-
     User.delete_userInfo(parameter).then(() => {
+        res.cookie("x_auth", "", { maxAge: 3000 });
         res.send({'DeleteSuccess': true});
-    })   
+    })  
 }
 
 const logout = (req, res) => {
