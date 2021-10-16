@@ -8,6 +8,8 @@
 import UIKit
 
 class ImgTableViewCell: UITableViewCell {
+    
+    var finishReload:Bool = false
 
     
     static let identifer = "cellidentifier"
@@ -65,13 +67,13 @@ class ImgTableViewCell: UITableViewCell {
             images.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             images.widthAnchor.constraint(equalToConstant: 100),
             
-            imgTime.leadingAnchor.constraint(equalTo: images.trailingAnchor, constant: 30),
+            imgTime.leadingAnchor.constraint(equalTo: images.trailingAnchor, constant: 10),
             imgTime.topAnchor.constraint(equalTo: timelabel.topAnchor, constant: 0),
-            imgTime.widthAnchor.constraint(equalToConstant: 50),
+            imgTime.widthAnchor.constraint(equalToConstant: 40),
             
             
             
-            timelabel.leadingAnchor.constraint(equalTo: imgTime.trailingAnchor, constant: 10),
+            timelabel.leadingAnchor.constraint(equalTo: imgTime.trailingAnchor, constant: 5),
             timelabel.centerYAnchor.constraint(equalTo: images.centerYAnchor),
             timelabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
         

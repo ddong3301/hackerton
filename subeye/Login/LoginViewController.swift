@@ -308,6 +308,7 @@ class LoginViewController: UIViewController {
         //gradeintLayer.frame = view.bounds
         addView()
         autolayout()
+        addkeyboardNotification()
 
         view.backgroundColor = .white
         
@@ -317,8 +318,6 @@ class LoginViewController: UIViewController {
         Loginbt.addTarget(self, action: #selector(pressloginbt(_:)), for: .touchUpInside)
         signbt.addTarget(self, action: #selector(pushsignup(_:)), for: .touchUpInside)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardwillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         let closeTF = UITapGestureRecognizer(target: self, action: #selector(closeedit(_:)))
         view.addGestureRecognizer(closeTF)
@@ -362,7 +361,6 @@ extension LoginViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == LoginViewController.Id {
-            self.view.frame.origin.y  = 0
             LoginViewController.passWord.becomeFirstResponder()
             
             return true
@@ -377,10 +375,7 @@ extension LoginViewController: UITextFieldDelegate {
         }
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        self.view.frame.origin.y  = 0
-        return true
-    }
+
     
 }
 
@@ -443,7 +438,13 @@ extension LoginViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keybaordRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keybaordRectangle.height
-            self.view.frame.origin.y -= (keyboardHeight + 150)
+            if self.view.frame.origin.y == 0 {
+                
+                self.view.frame.origin.y -= (keyboardHeight + 50)
+                
+            }
+            
+            
             
             Simbol.isHidden = true
             
@@ -454,9 +455,13 @@ extension LoginViewController {
     @objc private func keyboardWillHide(_ notification: Notification) {
 
         
-        self.view.frame.origin.y  = 0
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keybaordRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keybaordRectangle.height
+            self.view.frame.origin.y  = 0
         Simbol.isHidden = false
       }
+    }
     
     @objc private func pushsignup(_ sender: UIButton) {
         
@@ -478,6 +483,15 @@ extension LoginViewController {
         
         
     }
+    
+    private func addkeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardwillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    
+    
     }
     
 
@@ -487,74 +501,75 @@ extension LoginViewController {
     
     
         
-    func postComment(e_num: String,user_pw: String) {
-
-        let comment = Login(e_num: e_num, user_pw: user_pw)
-        guard let uploadData = try? JSONEncoder().encode(comment) else { return }
-
-        let url = URL(string: "https://subeye.herokuapp.com/login")
-
-
-        var request = URLRequest(url: url!)
-        request.httpMethod = "POST"
-        
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = uploadData
-
-        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-            
-
-            let outputStr = String(data: data!, encoding: String.Encoding.utf8)
-    
-
-            print(response)
-
-        if ((outputStr?.contains("0")) == true) {
-            DispatchQueue.main.async {
-                print("loginsuccess")
-                print(outputStr)
-
-                let loginalert = UIAlertController(title: "로그인 성공", message: "로그인되었습니다.", preferredStyle: .alert)
-                let loginaction = UIAlertAction(title: "확인", style: .default) { (action) in
-                    let mainViewController = UINavigationController(rootViewController: MainViewController())
-                    LoginViewController.passWord.text = ""
-                    mainViewController.modalPresentationStyle = .fullScreen
-                    mainViewController.modalTransitionStyle = .crossDissolve
-
-
-                    self.present(mainViewController, animated: true, completion: nil)
-                }
-
-                loginalert.addAction(loginaction)
-
-                self.present(loginalert, animated: true, completion: nil)
-
-
-
-
-                    }
-
-                }
-
-        else {DispatchQueue.main.async {
-            print("failed")
-
-            let loginfailedalert = UIAlertController(title: "로그인 실패", message: "사번 또는 비밀번호를 확인하세요", preferredStyle: .alert)
-            let okaction = UIAlertAction(title: "확인", style: .default) { (Action) in
-                LoginViewController.passWord.text = ""
-            }
-
-            loginfailedalert.addAction(okaction)
-
-            self.present(loginfailedalert, animated: true, completion: nil)
-            }
-        }
-
-
-
-        }
-        task.resume()
-
-    }
+//    func postComment(e_num: String,user_pw: String) {
+//
+//        let comment = Login(e_num: e_num, user_pw: user_pw)
+//        guard let uploadData = try? JSONEncoder().encode(comment) else { return }
+//
+//        let url = URL(string: "https://subeye.herokuapp.com/login")
+//
+//
+//        var request = URLRequest(url: url!)
+//        request.httpMethod = "POST"
+//
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.httpBody = uploadData
+//
+//        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
+//
+//
+//            let outputStr = String(data: data!, encoding: String.Encoding.utf8)
+//
+//
+//            print(response)
+//
+//        if ((outputStr?.contains("0")) == true) {
+//            DispatchQueue.main.async {
+//                print("loginsuccess")
+//                print(outputStr)
+//
+//                let loginalert = UIAlertController(title: "로그인 성공", message: "로그인되었습니다.", preferredStyle: .alert)
+//                let loginaction = UIAlertAction(title: "확인", style: .default) { (action) in
+//                    let mainViewController = UINavigationController(rootViewController: MainViewController())
+//                    LoginViewController.passWord.text = ""
+//                    mainViewController.modalPresentationStyle = .fullScreen
+//                    mainViewController.modalTransitionStyle = .crossDissolve
+//
+//
+//                    self.present(mainViewController, animated: true, completion: nil)
+//                }
+//
+//                loginalert.addAction(loginaction)
+//
+//                self.present(loginalert, animated: true, completion: nil)
+//
+//
+//
+//
+//                    }
+//
+//                }
+//
+//        else {DispatchQueue.main.async {
+//            print("failed")
+//
+//            let loginfailedalert = UIAlertController(title: "로그인 실패", message: "사번 또는 비밀번호를 확인하세요", preferredStyle: .alert)
+//            let okaction = UIAlertAction(title: "확인", style: .default) { (Action) in
+//                LoginViewController.passWord.text = ""
+//            }
+//
+//            loginfailedalert.addAction(okaction)
+//
+//            self.present(loginfailedalert, animated: true, completion: nil)
+//            }
+//        }
+//
+//
+//
+//        }
+//        task.resume()
+//
+//    }
 
 }
+

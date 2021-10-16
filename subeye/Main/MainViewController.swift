@@ -326,7 +326,7 @@ class MainViewController: UIViewController {
             recentimg.bottomAnchor.constraint(equalTo: totalView.bottomAnchor, constant: -40),
             recentimg.widthAnchor.constraint(equalTo: recentimg.heightAnchor, constant: 30),
             
-            imgtime.leadingAnchor.constraint(equalTo: recentimg.trailingAnchor, constant: 20),
+            imgtime.leadingAnchor.constraint(equalTo: recentimg.trailingAnchor, constant: 10),
             imgtime.topAnchor.constraint(equalTo: recentimg.topAnchor),
             
             timelabel.leadingAnchor.constraint(equalTo: imgtime.trailingAnchor, constant: 10),
@@ -383,14 +383,18 @@ class MainViewController: UIViewController {
         totalView.addTarget(self, action: #selector(touchtotalview(_:)), for: .touchUpInside)
         userData.addTarget(self, action: #selector(presentdrop(_:)), for: .touchUpInside)
         
-        imgTableview.dataSource =  self
-        imgTableview.delegate = self
+       
         
         userOutNum.text = String(datas[0].outNumber)
         imgSuspicion.text = String(datas[0].suspicion)
         
         animationView.play()
         
+        userData.setTitle(LoginDataSource.shared.summary?.name, for: .normal)
+        titleview.text = LoginDataSource.shared.summary?.region
+        
+        self.imgTableview.dataSource = self
+        self.imgTableview.delegate = self
         
         geturl.shared.fetch {
             print(geturl.shared.imgpath.count)
@@ -398,12 +402,13 @@ class MainViewController: UIViewController {
             
             self.view.reloadInputViews()
             
-            let url = URL(string: "https://subeye.herokuapp.com/\(geturl.shared.imgpath[0].path)")
+            let url = URL(string: geturl.shared.imgpath[0].path)
             let data = try? Data(contentsOf: url!)
-            //self.recentimg.image = UIImage(data: data!)
+            self.recentimg.image = UIImage(data: data!)
             self.timelabel.text = geturl.shared.imgpath[0].date
             
             
+            self.imgTableview.reloadData()
         }
         
         
@@ -512,11 +517,20 @@ extension MainViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImgTableViewCell.identifer, for: indexPath) as? ImgTableViewCell else {return UITableViewCell()}
         
         cell.timelabel.text = datas[indexPath.row + 1].imagetime
+        cell.images.tag = indexPath.row
         
-        let url = URL(string: "https://subeye.herokuapp.com/\(geturl.shared.imgpath[indexPath.row + 1])")
-        let data = try? Data(contentsOf: url!)
-        cell.images.image = UIImage(data: data!)
-        cell.imgTime.text = geturl.shared.imgpath[indexPath.row + 1].date
+        let url: String =  geturl.shared.imgpath[indexPath.row + 1].path
+        let placeholder:UIImage? = UIImage.init(named: "placeholder.png")
+        
+        cell.images.imageFromURL(urlString: url, placeholder: placeholder) {
+            if cell.finishReload == false {
+                cell.finishReload = true
+                tableView.beginUpdates()
+                tableView.reloadRows(at: [IndexPath.init(row: cell.images.tag, section: 0)], with: UITableView.RowAnimation.automatic)
+                tableView.endUpdates()
+            }
+        }
+        cell.timelabel.text = geturl.shared.imgpath[indexPath.row + 1].date
         
         
         let selectview  = UIView()
@@ -564,16 +578,24 @@ extension MainViewController: UITableViewDelegate {
         
 
     }
-    
-        
-        
-        
-        
-        
-        
-        
 }
     
-    
-
-
+extension UIImageView {
+    public func imageFromURL(urlString: String, placeholder: UIImage?, completion: @escaping () -> ()) {
+            if self.image == nil {
+            self.image = placeholder
+            }
+        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
+            if error != nil {
+                print(error)
+                return
+            }
+            DispatchQueue.main.async(execute: { () -> Void in
+                let image = UIImage(data: data!)
+                self.image = image
+                self.setNeedsLayout()
+                completion()
+            })
+        }).resume()
+    }
+}
