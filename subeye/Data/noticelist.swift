@@ -28,17 +28,6 @@ struct noticelist {
     var content: String
 }
 
-enum ApiError: Error {
-    
-    case unowned
-    case invalidUrl(String)
-    case invalidResponse
-    case failed(Int)
-    case emptyData
-    
-}
-
-
 
 class Noticetitle {
 

@@ -29,6 +29,7 @@
 		DFB30EFD26E84A9300686AFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFB30EFB26E84A9300686AFB /* LaunchScreen.storyboard */; };
 		DFC72BA526F426A000A2CCAE /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC72BA426F426A000A2CCAE /* SignupViewController.swift */; };
 		DFC72BA826F84F1E00A2CCAE /* SignupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC72BA726F84F1E00A2CCAE /* SignupTableViewCell.swift */; };
+		DFCC19AA271B583A0061FE92 /* LoginData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCC19A9271B583A0061FE92 /* LoginData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +43,6 @@
 		DF49965B2713224D00AE57F6 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DF49965C2713252900AE57F6 /* NoticeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListViewController.swift; sourceTree = "<group>"; };
 		DF49965E271325DA00AE57F6 /* noticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noticeTableViewCell.swift; sourceTree = "<group>"; };
-		DF49966027132DA700AE57F6 /* login.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = login.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DF4996612713DE8400AE57F6 /* noticelist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noticelist.swift; sourceTree = "<group>"; };
 		DF5717A9271802E80044FAE6 /* imgurl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imgurl.swift; sourceTree = "<group>"; };
 		DF6A172B2709EE99000B71F0 /* noticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noticeViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +60,7 @@
 		DFB30EFE26E84A9300686AFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFC72BA426F426A000A2CCAE /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		DFC72BA726F84F1E00A2CCAE /* SignupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupTableViewCell.swift; sourceTree = "<group>"; };
+		DFCC19A9271B583A0061FE92 /* LoginData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,10 +134,10 @@
 			children = (
 				DF8A4E562701A10F001A1EBA /* DataSource.swift */,
 				DF49965B2713224D00AE57F6 /* MyPlayground.playground */,
-				DF49966027132DA700AE57F6 /* login.playground */,
 				DF4996612713DE8400AE57F6 /* noticelist.swift */,
 				DF1A5E1F271480D400C130BF /* DataType.swift */,
 				DF5717A9271802E80044FAE6 /* imgurl.swift */,
+				DFCC19A9271B583A0061FE92 /* LoginData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -317,6 +318,7 @@
 				DF1278D426EF4BB700109AD7 /* MainViewController.swift in Sources */,
 				DF8A4E572701A10F001A1EBA /* DataSource.swift in Sources */,
 				DF28DC3427059E6D008FAA0D /* SideMenuViewController.swift in Sources */,
+				DFCC19AA271B583A0061FE92 /* LoginData.swift in Sources */,
 				DF5717AA271802E80044FAE6 /* imgurl.swift in Sources */,
 				DF8A4E542701A097001A1EBA /* ImgTableViewCell.swift in Sources */,
 				DF6A172E270A9BC6000B71F0 /* statisticsViewController.swift in Sources */,

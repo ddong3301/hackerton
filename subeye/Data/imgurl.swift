@@ -9,26 +9,6 @@ import Foundation
 
 
 
-struct imgurl: Codable {
-
-    struct data: Codable {
-
-        var filePath: String
-        var date: String
-
-    }
-
-    var data: [data]
-
-}
-
-struct sharedimgurl {
-
-    var path: String
-    var date: String
-
-}
-
 
 class geturl {
 

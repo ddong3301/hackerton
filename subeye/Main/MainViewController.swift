@@ -391,7 +391,6 @@ class MainViewController: UIViewController {
         
         animationView.play()
         
-       
         
         geturl.shared.fetch {
             print(geturl.shared.imgpath.count)
@@ -401,7 +400,7 @@ class MainViewController: UIViewController {
             
             let url = URL(string: "https://subeye.herokuapp.com/\(geturl.shared.imgpath[0].path)")
             let data = try? Data(contentsOf: url!)
-            self.recentimg.image = UIImage(data: data!)
+            //self.recentimg.image = UIImage(data: data!)
             self.timelabel.text = geturl.shared.imgpath[0].date
             
             

@@ -89,7 +89,7 @@ class LoginViewController: UIViewController {
     
     
 
-    let Id: UITextField = {
+    static let Id: UITextField = {
         let TextField = UITextField()
         TextField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -128,7 +128,7 @@ class LoginViewController: UIViewController {
 
     
     
-    let passWord: UITextField = {
+    static let passWord: UITextField = {
         let TextField = UITextField()
         TextField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -216,11 +216,11 @@ class LoginViewController: UIViewController {
         view.addSubview(Simbol)
         
         view.addSubview(idview)
-        view.addSubview(Id)
+        view.addSubview(LoginViewController.Id)
         view.addSubview(idLabel)
         
         view.addSubview(Passwordview)
-        view.addSubview(passWord)
+        view.addSubview(LoginViewController.passWord)
         view.addSubview(passWordLabel)
         
         view.addSubview(Loginbt)
@@ -245,35 +245,35 @@ class LoginViewController: UIViewController {
             Simbol.topAnchor.constraint(equalTo: view.topAnchor, constant: 170),
             Simbol.heightAnchor.constraint(equalToConstant: 250),
             
-            idLabel.leadingAnchor.constraint(equalTo: Id.leadingAnchor, constant: 5),
-            idLabel.centerYAnchor.constraint(equalTo: Id.topAnchor, constant: -5),
+            idLabel.leadingAnchor.constraint(equalTo: LoginViewController.Id.leadingAnchor, constant: 5),
+            idLabel.centerYAnchor.constraint(equalTo: LoginViewController.Id.topAnchor, constant: -5),
             idLabel.widthAnchor.constraint(equalToConstant: 50),
             idLabel.heightAnchor.constraint(equalToConstant: 30),
             
-            Id.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 75),
-            Id.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -75),
-            Id.topAnchor.constraint(equalTo: Simbol.bottomAnchor, constant: 110),
-            Id.heightAnchor.constraint(equalToConstant: 50),
+            LoginViewController.Id.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 75),
+            LoginViewController.Id.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -75),
+            LoginViewController.Id.topAnchor.constraint(equalTo: Simbol.bottomAnchor, constant: 110),
+            LoginViewController.Id.heightAnchor.constraint(equalToConstant: 50),
             
-            idview.leadingAnchor.constraint(equalTo: Id.leadingAnchor, constant: -20),
-            idview.trailingAnchor.constraint(equalTo: Id.trailingAnchor, constant: 20),
-            idview.topAnchor.constraint(equalTo: Id.topAnchor, constant: -5),
-            idview.bottomAnchor.constraint(equalTo: Id.bottomAnchor, constant: 5),
+            idview.leadingAnchor.constraint(equalTo: LoginViewController.Id.leadingAnchor, constant: -20),
+            idview.trailingAnchor.constraint(equalTo: LoginViewController.Id.trailingAnchor, constant: 20),
+            idview.topAnchor.constraint(equalTo: LoginViewController.Id.topAnchor, constant: -5),
+            idview.bottomAnchor.constraint(equalTo: LoginViewController.Id.bottomAnchor, constant: 5),
             
-            passWordLabel.leadingAnchor.constraint(equalTo: Id.leadingAnchor, constant: 5),
+            passWordLabel.leadingAnchor.constraint(equalTo: LoginViewController.Id.leadingAnchor, constant: 5),
             passWordLabel.centerYAnchor.constraint(equalTo: Passwordview.topAnchor, constant: 0),
             passWordLabel.widthAnchor.constraint(equalToConstant: 120),
             passWordLabel.heightAnchor.constraint(equalToConstant: 30),
         
-            passWord.leadingAnchor.constraint(equalTo: Id.leadingAnchor),
-            passWord.trailingAnchor.constraint(equalTo: Id.trailingAnchor),
-            passWord.topAnchor.constraint(equalTo: Id.bottomAnchor, constant: 50),
-            passWord.heightAnchor.constraint(equalToConstant: 50),
+            LoginViewController.passWord.leadingAnchor.constraint(equalTo: LoginViewController.Id.leadingAnchor),
+            LoginViewController.passWord.trailingAnchor.constraint(equalTo: LoginViewController.Id.trailingAnchor),
+            LoginViewController.passWord.topAnchor.constraint(equalTo: LoginViewController.Id.bottomAnchor, constant: 50),
+            LoginViewController.passWord.heightAnchor.constraint(equalToConstant: 50),
             
-            Passwordview.leadingAnchor.constraint(equalTo: passWord.leadingAnchor, constant: -20),
-            Passwordview.trailingAnchor.constraint(equalTo: passWord.trailingAnchor, constant: 20),
-            Passwordview.topAnchor.constraint(equalTo: passWord.topAnchor, constant: -5),
-            Passwordview.bottomAnchor.constraint(equalTo: passWord.bottomAnchor, constant: 5),
+            Passwordview.leadingAnchor.constraint(equalTo: LoginViewController.passWord.leadingAnchor, constant: -20),
+            Passwordview.trailingAnchor.constraint(equalTo: LoginViewController.passWord.trailingAnchor, constant: 20),
+            Passwordview.topAnchor.constraint(equalTo: LoginViewController.passWord.topAnchor, constant: -5),
+            Passwordview.bottomAnchor.constraint(equalTo: LoginViewController.passWord.bottomAnchor, constant: 5),
             
         
             Loginbt.leadingAnchor.constraint(equalTo: Passwordview.leadingAnchor,constant:  10),
@@ -311,8 +311,8 @@ class LoginViewController: UIViewController {
 
         view.backgroundColor = .white
         
-        Id.delegate = self
-        passWord.delegate = self
+        LoginViewController.Id.delegate = self
+        LoginViewController.passWord.delegate = self
         
         Loginbt.addTarget(self, action: #selector(pressloginbt(_:)), for: .touchUpInside)
         signbt.addTarget(self, action: #selector(pushsignup(_:)), for: .touchUpInside)
@@ -361,14 +361,14 @@ extension LoginViewController: UITextFieldDelegate {
     
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == Id {
+        if textField == LoginViewController.Id {
             self.view.frame.origin.y  = 0
-            passWord.becomeFirstResponder()
+            LoginViewController.passWord.becomeFirstResponder()
             
             return true
-        } else if textField == passWord {
+        } else if textField == LoginViewController.passWord {
             
-            passWord.resignFirstResponder()
+            LoginViewController.passWord.resignFirstResponder()
             pressloginbt(Loginbt)
             
             return true
@@ -390,7 +390,46 @@ extension LoginViewController {
         
         print("pressLogin bt")
         
-        postComment(e_num: Id.text!, user_pw: passWord.text!)
+        LoginDataSource.shared.fetch {
+            print(LoginDataSource.shared.summary?.loginSuccess)
+            if LoginDataSource.shared.summary?.loginSuccess == true {
+                print("loginsuccess")
+
+                let loginalert = UIAlertController(title: "로그인 성공", message: "로그인되었습니다.", preferredStyle: .alert)
+                let loginaction = UIAlertAction(title: "확인", style: .default) { (action) in
+                    let mainViewController = UINavigationController(rootViewController: MainViewController())
+                    LoginViewController.passWord.text = ""
+                    mainViewController.modalPresentationStyle = .fullScreen
+                    mainViewController.modalTransitionStyle = .crossDissolve
+
+
+                    self.present(mainViewController, animated: true, completion: nil)
+                }
+
+                loginalert.addAction(loginaction)
+
+                self.present(loginalert, animated: true, completion: nil)
+                
+                
+                
+            }
+            else {
+                
+                print("failed")
+
+                let loginfailedalert = UIAlertController(title: "로그인 실패", message: "사번 또는 비밀번호를 확인하세요", preferredStyle: .alert)
+                let okaction = UIAlertAction(title: "확인", style: .default) { (Action) in
+                    LoginViewController.passWord.text = ""
+                }
+
+                loginfailedalert.addAction(okaction)
+
+                self.present(loginfailedalert, animated: true, completion: nil)
+                
+            }
+        }
+        
+        //postComment(e_num: LoginViewController.Id.text!, user_pw: LoginViewController.passWord.text!)
         
         
         
@@ -425,7 +464,7 @@ extension LoginViewController {
         
         SingupView.modalTransitionStyle = .crossDissolve
         SingupView.modalPresentationStyle = .fullScreen
-        passWord.text = ""
+        LoginViewController.passWord.text = ""
         present(SingupView, animated: true, completion: nil)
         
         
@@ -449,87 +488,73 @@ extension LoginViewController {
     
         
     func postComment(e_num: String,user_pw: String) {
-        
+
         let comment = Login(e_num: e_num, user_pw: user_pw)
         guard let uploadData = try? JSONEncoder().encode(comment) else { return }
-        
+
         let url = URL(string: "https://subeye.herokuapp.com/login")
-        
-        
+
+
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
         
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = uploadData
-        
+
         let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
             
-            
-            if let e = error{
-                NSLog("An error: \(e.localizedDescription)")
-                return
-            }
-            
+
             let outputStr = String(data: data!, encoding: String.Encoding.utf8)
-            
-            //print("result: \(outputStr)")
-            
+    
+
             print(response)
-            
+
         if ((outputStr?.contains("0")) == true) {
             DispatchQueue.main.async {
                 print("loginsuccess")
-                
+                print(outputStr)
+
                 let loginalert = UIAlertController(title: "로그인 성공", message: "로그인되었습니다.", preferredStyle: .alert)
                 let loginaction = UIAlertAction(title: "확인", style: .default) { (action) in
                     let mainViewController = UINavigationController(rootViewController: MainViewController())
-                    self.passWord.text = ""
+                    LoginViewController.passWord.text = ""
                     mainViewController.modalPresentationStyle = .fullScreen
                     mainViewController.modalTransitionStyle = .crossDissolve
-                    
-                    
+
+
                     self.present(mainViewController, animated: true, completion: nil)
                 }
-                
+
                 loginalert.addAction(loginaction)
-                
+
                 self.present(loginalert, animated: true, completion: nil)
-                
-                
-                
-                
+
+
+
+
                     }
-            
+
                 }
-        
+
         else {DispatchQueue.main.async {
             print("failed")
-            
+
             let loginfailedalert = UIAlertController(title: "로그인 실패", message: "사번 또는 비밀번호를 확인하세요", preferredStyle: .alert)
             let okaction = UIAlertAction(title: "확인", style: .default) { (Action) in
-                self.passWord.text = ""
+                LoginViewController.passWord.text = ""
             }
-            
+
             loginfailedalert.addAction(okaction)
-            
+
             self.present(loginfailedalert, animated: true, completion: nil)
             }
         }
-        
-            
+
+
 
         }
         task.resume()
 
     }
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
+
 }

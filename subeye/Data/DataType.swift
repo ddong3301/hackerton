@@ -15,6 +15,15 @@ struct Login: Codable {
     
 }
 
+struct UserData: Codable {
+    
+    let  loginSuccess: Bool
+    let  name: String
+    let  region: String
+    let phone: String
+
+}
+
 struct signup: Codable {
     
     let e_num:String
@@ -22,5 +31,37 @@ struct signup: Codable {
     let user_name:String
     let phone:String
     let region:String
+    
 }
+
+enum ApiError: Error {
+    
+    case unowned
+    case invalidUrl(String)
+    case invalidResponse
+    case failed(Int)
+    case emptyData
+    
+}
+
+struct imgurl: Codable {
+
+    struct data: Codable {
+
+        var filePath: String
+        var date: String
+
+    }
+
+    var data: [data]
+
+}
+
+struct sharedimgurl {
+
+    var path: String
+    var date: String
+
+}
+
 
