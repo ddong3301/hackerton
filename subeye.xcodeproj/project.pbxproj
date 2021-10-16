@@ -15,6 +15,7 @@
 		DF49965D2713252900AE57F6 /* NoticeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49965C2713252900AE57F6 /* NoticeListViewController.swift */; };
 		DF49965F271325DA00AE57F6 /* noticeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49965E271325DA00AE57F6 /* noticeTableViewCell.swift */; };
 		DF4996622713DE8400AE57F6 /* noticelist.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4996612713DE8400AE57F6 /* noticelist.swift */; };
+		DF5717AA271802E80044FAE6 /* imgurl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5717A9271802E80044FAE6 /* imgurl.swift */; };
 		DF6A172C2709EE99000B71F0 /* noticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A172B2709EE99000B71F0 /* noticeViewController.swift */; };
 		DF6A172E270A9BC6000B71F0 /* statisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A172D270A9BC6000B71F0 /* statisticsViewController.swift */; };
 		DF6A1730270A9D37000B71F0 /* alertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A172F270A9D37000B71F0 /* alertViewController.swift */; };
@@ -43,6 +44,7 @@
 		DF49965E271325DA00AE57F6 /* noticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noticeTableViewCell.swift; sourceTree = "<group>"; };
 		DF49966027132DA700AE57F6 /* login.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = login.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DF4996612713DE8400AE57F6 /* noticelist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noticelist.swift; sourceTree = "<group>"; };
+		DF5717A9271802E80044FAE6 /* imgurl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imgurl.swift; sourceTree = "<group>"; };
 		DF6A172B2709EE99000B71F0 /* noticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noticeViewController.swift; sourceTree = "<group>"; };
 		DF6A172D270A9BC6000B71F0 /* statisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statisticsViewController.swift; sourceTree = "<group>"; };
 		DF6A172F270A9D37000B71F0 /* alertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				DF49966027132DA700AE57F6 /* login.playground */,
 				DF4996612713DE8400AE57F6 /* noticelist.swift */,
 				DF1A5E1F271480D400C130BF /* DataType.swift */,
+				DF5717A9271802E80044FAE6 /* imgurl.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				DF1278D426EF4BB700109AD7 /* MainViewController.swift in Sources */,
 				DF8A4E572701A10F001A1EBA /* DataSource.swift in Sources */,
 				DF28DC3427059E6D008FAA0D /* SideMenuViewController.swift in Sources */,
+				DF5717AA271802E80044FAE6 /* imgurl.swift in Sources */,
 				DF8A4E542701A097001A1EBA /* ImgTableViewCell.swift in Sources */,
 				DF6A172E270A9BC6000B71F0 /* statisticsViewController.swift in Sources */,
 			);

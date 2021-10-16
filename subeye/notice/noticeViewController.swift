@@ -29,8 +29,8 @@ class noticeViewController: UIViewController {
         return label
     }()
     
-    let noticetext: UITextView =  {
-        let text = UITextView()
+    var noticetext: UITextView =  {
+        var text = UITextView()
         
         text.translatesAutoresizingMaskIntoConstraints = false
         

@@ -93,7 +93,7 @@ class MainViewController: UIViewController {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "선택 이미지"
+        label.text = "최근 이미지"
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize:  20)
         label.backgroundColor = .clear
@@ -126,7 +126,7 @@ class MainViewController: UIViewController {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "09-24 19:53"
+        
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textAlignment = .left
@@ -386,12 +386,30 @@ class MainViewController: UIViewController {
         imgTableview.dataSource =  self
         imgTableview.delegate = self
         
-        timelabel.text = datas[0].imagetime
         userOutNum.text = String(datas[0].outNumber)
         imgSuspicion.text = String(datas[0].suspicion)
         
         animationView.play()
         
+       
+        
+        geturl.shared.fetch {
+            print(geturl.shared.imgpath.count)
+            print(geturl.shared.imgpath)
+            
+            self.view.reloadInputViews()
+            
+            let url = URL(string: "https://subeye.herokuapp.com/\(geturl.shared.imgpath[0].path)")
+            let data = try? Data(contentsOf: url!)
+            self.recentimg.image = UIImage(data: data!)
+            self.timelabel.text = geturl.shared.imgpath[0].date
+            
+            
+        }
+        
+        
+        
+
         
         
         
@@ -488,13 +506,20 @@ extension MainViewController {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datas.count - 1
+        return geturl.shared.imgpath.count - 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImgTableViewCell.identifer, for: indexPath) as? ImgTableViewCell else {return UITableViewCell()}
         
         cell.timelabel.text = datas[indexPath.row + 1].imagetime
+        
+        let url = URL(string: "https://subeye.herokuapp.com/\(geturl.shared.imgpath[indexPath.row + 1])")
+        let data = try? Data(contentsOf: url!)
+        cell.images.image = UIImage(data: data!)
+        cell.imgTime.text = geturl.shared.imgpath[indexPath.row + 1].date
+        
+        
         let selectview  = UIView()
         selectview.backgroundColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 0.5)
         cell.selectedBackgroundView = selectview

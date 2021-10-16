@@ -1,19 +1,20 @@
 //
-//  noticelist.swift
+//  url.swift
 //  subeye
 //
-//  Created by 고준혁 on 2021/10/11.
+//  Created by 고준혁 on 2021/10/14.
 //
 
-import UIKit
+import Foundation
 
-struct Noticelist: Codable {
+
+
+struct imgurl: Codable {
 
     struct data: Codable {
-        
-        var title: String
-        var n_seq: Int
-        var content: String
+
+        var filePath: String
+        var date: String
 
     }
 
@@ -21,58 +22,42 @@ struct Noticelist: Codable {
 
 }
 
-struct noticelist {
+struct sharedimgurl {
 
-    var title: String
-    var number: Int
-    var content: String
-}
+    var path: String
+    var date: String
 
-enum ApiError: Error {
-    
-    case unowned
-    case invalidUrl(String)
-    case invalidResponse
-    case failed(Int)
-    case emptyData
-    
 }
 
 
+class geturl {
 
-class Noticetitle {
-
-    static let shared = Noticetitle()
+    static let shared = geturl()
     private init() {}
 
-    var notice = [noticelist]()
-
+    var imgpath = [sharedimgurl]()
+    
     let apiQueue = DispatchQueue(label: "ApiQueue", attributes: .concurrent )
 
     let group = DispatchGroup()
 
-    let urlString = "https://subeye.herokuapp.com/showNoticeList"
+    let urlString = "https://subeye.herokuapp.com/gallery"
 
     func fetch(completion: @escaping () -> ()) {
-        
         group.enter()
         apiQueue.async {
             self.fetch(urlStr: self.urlString) { (result)  in
                 switch result {
                 case .success(let list):
-                    self.notice = list.data.map {
+                    self.imgpath = list.data.map {
 
-                        let title = $0.title
-                        let number = $0.n_seq
-                        let content = $0.content
-
-
-
-
-                        return noticelist(title: title, number: number,content: content)
+                        let path = $0.filePath
+                        let date = $0.date
+                        
+                        return sharedimgurl(path: path, date: date)
                     }
                 default:
-                    self.notice = []
+                    self.imgpath = []
                     print("default")
                 }
                 self.group.leave()
@@ -92,9 +77,11 @@ class Noticetitle {
 
 }
 
-extension Noticetitle {
+    
 
-   private func fetch(urlStr: String, completion: @escaping (Result<Noticelist,Error>) -> ()) {
+extension geturl {
+
+   private func fetch(urlStr: String, completion: @escaping (Result<imgurl,Error>) -> ()) {
 
         guard let url = URL(string: urlStr) else {
 
@@ -129,7 +116,7 @@ extension Noticetitle {
 
             do {
                 let decoder = JSONDecoder()
-                let data = try decoder.decode(Noticelist.self, from: data)
+                let data = try decoder.decode(imgurl.self, from: data)
 
                 completion(.success(data))
 
@@ -143,3 +130,4 @@ extension Noticetitle {
         task.resume()
     }
 }
+

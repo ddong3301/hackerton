@@ -12,7 +12,7 @@ class NoticeListViewController: UIViewController {
     
     
     
-    let noticelist: UITableView = {
+    let noticeTableview: UITableView = {
         let tableview = UITableView()
         tableview.translatesAutoresizingMaskIntoConstraints = false
         
@@ -33,7 +33,7 @@ class NoticeListViewController: UIViewController {
     
     func addviews() {
         
-        view.addSubview(noticelist)
+        view.addSubview(noticeTableview)
         
         
         
@@ -43,10 +43,10 @@ class NoticeListViewController: UIViewController {
     func autolayout() {
         NSLayoutConstraint.activate([
         
-            noticelist.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            noticelist.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            noticelist.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            noticelist.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            noticeTableview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            noticeTableview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            noticeTableview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            noticeTableview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
         
             
             
@@ -64,14 +64,14 @@ class NoticeListViewController: UIViewController {
         
         addviews()
         autolayout()
-        noticelist.dataSource =  self
-        noticelist.delegate = self
+        noticeTableview.dataSource =  self
+        noticeTableview.delegate = self
         
         navigationItem.title = "공지사항"
         
         Noticetitle.shared.fetch {
             
-            self.noticelist.reloadData()
+            self.noticeTableview.reloadData()
         }
         
 
@@ -117,7 +117,12 @@ extension NoticeListViewController: UITableViewDataSource {
 extension NoticeListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        <#code#>
+        
+        let noticeview = noticeViewController()
+        noticeview.noticetext.text = Noticetitle.shared.notice[indexPath.row].content
+        noticeview.noticetitle.text  = Noticetitle.shared.notice[indexPath.row].title
+        
+        navigationController?.pushViewController(noticeview, animated: true)
     }
     
     
