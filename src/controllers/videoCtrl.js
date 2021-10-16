@@ -1,5 +1,3 @@
-const uploadVid = require('../middleware/uploadVideo');
-
 const uploadVideo = (req, res) => {
     try {
         console.log(req.file.filename);

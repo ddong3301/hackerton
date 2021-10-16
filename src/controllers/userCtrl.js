@@ -1,25 +1,20 @@
-const express = require('express');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-const app = express();
 
 const User = require('../models/User');
-const cookieParser = require('cookie-parser');
-
-app.use(cookieParser());
 
 const isDuplication = (req, res) => {
     var parameters = {
-        "e_num" : req.body.e_num
+        "e_num": req.body.e_num
     }
 
     User.dup_UserId(parameters).then((db_data) => {
-        if(db_data.length == 0) {
-            res.send({isDuplication : false});
+        if (db_data.length == 0) {
+            res.send({ isDuplication: false });
         } else {
-            res.send({isDuplication : true});
+            res.send({ isDuplication: true });
         }
-        
+
     })
 }
 
@@ -29,13 +24,15 @@ const login = (req, res) => {
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64')
     }
 
+
     User.findUser(parameters).then((db_data) => {
         if (db_data == "err") {
             res.send({ loginSuccess: false });
         } else {
-            const token = jwt.sign({ name : db_data[0].user_name, region: db_data[0].region, phone: db_data[0].phone , exp: Math.floor(Date.now() / 1000) + (60 * 60) }, 'secret_key');
+            const token = jwt.sign({ name: db_data[0].user_name, region: db_data[0].region, phone: db_data[0].phone }, 'secret_key');
+
             User.insert_Token(parameters, token).then(() => {
-                res.cookie("x_auth", token);
+                res.cookie("x_auth", token, { httpOnly: true, signed: true });
                 var decoded_token = jwt.verify(token, 'secret_key');
                 res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
             }).catch((err) => {
@@ -63,7 +60,7 @@ const user_Update = (req, res) => {
     }
     User.update_userInfo(parameter).then((db_data) => {
         //admin => 0 = false, 1 = true, type = tinyInt
-        res.send({'UpdateSuccess': true})
+        res.send({ 'UpdateSuccess': true })
     })
 }
 
@@ -74,13 +71,12 @@ const delete_User = (req, res) => {
     }
     User.delete_userInfo(parameter).then(() => {
         res.cookie("x_auth", "", { maxAge: 3000 });
-        res.send({'DeleteSuccess': true});
-    })  
+        res.send({ 'DeleteSuccess': true });
+    })
 }
 
 const logout = (req, res) => {
     token = ""
-    console.log(req.cookies.x_auth);
     User.delete_Token(req.cookies.x_auth, token);
     res.cookie("x_auth", "", { maxAge: 3000 });
     res.redirect('/');
