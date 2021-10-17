@@ -27,6 +27,7 @@
 const mysql = require("mysql");
 require('dotenv').config({ path: ".env" });
 
+// Todo: || vs &&
 const db = mysql.createConnection({
   host: process.env.DB_host || "uyu7j8yohcwo35j3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
   port: process.env.DB_port || 3306,
@@ -44,6 +45,7 @@ const db = mysql.createConnection({
 //   dateStrings: true
 // })
 
+// todo: 삼항연산자
 handleDisconnect(db);
 
 function handleDisconnect(client) {

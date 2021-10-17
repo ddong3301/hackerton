@@ -5,6 +5,7 @@ const upload = require('../middleware/uploadImage');
 const { singleFileUpload } = require('../controllers/uploadCtrl');
 const displayCtrl = require('../controllers/displayCtrl');
 
+// todo: Middleware이란?
 router.get('/upload', (req, res) => {
         res.render('upload');
 });

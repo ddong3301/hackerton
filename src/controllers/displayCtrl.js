@@ -1,10 +1,10 @@
 const Photo = require('../models/Photo');
 
 const getSingleImageFromDB = (req, res) => {
-    Photo.display_Photo().then((path) => {
-        //console.log(path[0].filePath);
-        res.render('display', { photo: path[0].filePath });
-        //res.send({photo : path.filePath});
+    Photo.display_Photo()
+    .then((path) => {
+        //res.render('display', { photo: path[0].filePath });
+        res.send({photo : path.filePath});
     })
 }
 

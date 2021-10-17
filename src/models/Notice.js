@@ -4,6 +4,7 @@ const dayjs = require('dayjs');
 const db = require('../config/dbConn');
 const date = new Date();
 
+// todo : pending 겪어보기
 const create_Notice = (parameters) => {
     return new Promise((resolve, reject) => {
         db.query(`INSERT INTO notice_board SET title = '${parameters.title}', content = '${parameters.content}'`, (err, db_data) => {
@@ -14,7 +15,7 @@ const create_Notice = (parameters) => {
             }
         });
     })
-}
+};
 
 const show_Notice_List = () => {
     return new Promise((resolve, reject) => {
@@ -26,33 +27,23 @@ const show_Notice_List = () => {
             }
         })
     })
-}
+};
 
 const show_one_Notice = (parameters) => {
     return new Promise((resolve, reject) => {
-        n_seq = parameters.n_seq;
-        // var titles = [];
-        // var contents = [];
-        // var req_n_seq = [];
-        db.query(`SELECT title, content, n_seq FROM notice_board WHERE n_seq = '${n_seq['n_seq']}'`, (err, noticeData) => {
+        db.query(`SELECT title, content, n_seq FROM notice_board WHERE n_seq = '${parameters.n_seq}'`, (err, noticeData) => {
             if (err) {
                 reject(err)
             } else {
-                // noticeData.forEach(data => {
-                //     titles.push(data.title);
-                //     contents.push(data.content);
-                //     req_n_seq.push(data.n_seq);
-                // });
                 resolve(noticeData);
             }
         })
     })
-}
+};
 
-const update_Notice_Select = (n_seq) => {
+const update_Notice_Select = (parameters) => {
     return new Promise((resolve, reject) => {
-        var req_n_seq = n_seq['n_seq'];
-        db.query(`SELECT title, content FROM notice_board WHERE n_seq = '${req_n_seq}'`, (err, data) => {
+        db.query(`SELECT title, content, n_seq FROM notice_board WHERE n_seq = ${db.escape(parameters.n_seq)}`, (err, data) => {
             if (err) {
                 reject(err);
             } else {
@@ -60,12 +51,12 @@ const update_Notice_Select = (n_seq) => {
             }
         })
     })
-}
+};
 
 const update_Notice = (parameters) => {
     return new Promise((resolve, reject) => {
         console.log(parameters);
-        db.query(`UPDATE notice_board SET title = '${parameters.title}', content = '${parameters.content}' WHERE n_seq = '${parameters.n_seq}'`, (err, db_data) => {
+        db.query(`UPDATE notice_board SET title = '${parameters.title}', content = '${parameters.content}' WHERE n_seq = ${db.escape(parameters.n_seq)}`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -77,8 +68,7 @@ const update_Notice = (parameters) => {
 
 const delete_Notice = (parameters) => {
     return new Promise((resolve, reject) => {
-        console.log(n_seq);
-        db.query(`DELETE FROM notice_board WHERE n_seq = '${parameters.n_seq}'`, (err, db_data) => {
+        db.query(`DELETE FROM notice_board WHERE n_seq = ${db.escape(parameters.n_seq)}`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {

@@ -9,12 +9,16 @@ router.get('/login', (req, res) => {
 });
 router.get('/', (req, res) => {
     res.render('main');
-})
+});
+
+// todo: res.send vs res.json 차이점
+
 
 // router.get('/register', (req, res) => {
 //     res.render('register');
 // });
 
+// todo: post 변경 (조건문 로직 추가)
 router.get('/logout', userCtrl.logout);
 router.post('/login', userCtrl.login);
 router.post('/register', userCtrl.register);

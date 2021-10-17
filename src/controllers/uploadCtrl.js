@@ -2,16 +2,17 @@ const Photo = require('../models/Photo');
 
 const singleFileUpload = (req, res) => {
     try {
-        path = req.file.location
+        // let path = 
         //path = path.replace(/\\/g, '/');
-        console.log(req.file);
+        // console.log(req.file);
         const parameters = {
             fileName: req.file.originalname,
-            filePath: path,
+            filePath: req.file.location,
             fileType: req.file.mimetype,
             g_num: req.body.g_num
         }
-        Photo.insert_Photo(parameters).then((db_data) => {
+        Photo.insert_Photo(parameters)
+        .then(() => {
             // console.log(db_data);
             // res.sendStatus(200);
             res.redirect('display');

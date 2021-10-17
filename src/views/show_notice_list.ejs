@@ -10,10 +10,10 @@
 
 <body>
     <h1>Show List</h1>
-    <% for (var i=0; i < title.length; i++) {%>
+    <% for (var i=0; i < data.length; i++) {%>
         <fieldset>
-            글 번호 : <%= n_seq[i] %><br>
-            제목 : <a href="/showNotice/<%=n_seq[i]%>"><%=title[i]%></a>
+            글 번호 : <%= data[i].n_seq %><br>
+            제목 : <a href="/showNotice/<%=data[i].n_seq%>"><%=data[i].title%></a>
         </fieldset>
     <% } %><br>
     <a href="/">메인</a>

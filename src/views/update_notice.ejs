@@ -8,16 +8,15 @@
 </head>
 <body>
     <h1>update</h1>
-    <!-- <form action = '/updateNotice/<%= n_seq["n_seq"] %>' method = 'POST'> -->
+
     <form action = '/updateNotice' method = 'POST'>
-        <% seq = n_seq['n_seq'] %>
-        <input type = 'hidden' name = 'n_seq' value = "<%= seq %>" >
+        <input type = 'hidden' name = 'n_seq' value = "<%= data.n_seq %>" >
         <table>
             <tr>
-                <td>title : <input type = 'text' name = 'title' value = <%= title %>></td>
+                <td>title : <input type = 'text' name = 'title' value = <%= data.title %>></td>
             </tr>
             <tr>
-                <td><textarea name = 'content' cols = "50" rows = "30"><%= content %></textarea></td>
+                <td><textarea name = 'content' cols = "50" rows = "30"><%= data.content %></textarea></td>
             </tr>
             <tr>
                 <td><input type = 'submit' value = '저장'></td>

@@ -15,7 +15,7 @@ const insert_userInfo = (parameter) => {
 
 const read_userInfo = (parameter) => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT e_num, user_name, admin, phone, region FROM user WHERE token = '${parameter.token}'`, (err, db_data) => {
+        db.query(`SELECT e_num, user_name, admin, phone, region FROM user WHERE token = ${db.escape(parameter.token)}`, (err, db_data) => {
             if(err) {
                 reject(err);
             } else {
@@ -28,7 +28,7 @@ const read_userInfo = (parameter) => {
 const update_userInfo = (parameters) => {
     return new Promise((resolve, reject) => {
         console.log(parameters);
-        db.query(`UPDATE user SET region = '${parameters.user_pw}', phone = '${parameters.phone}', user_pw = '${parameters.user_pw}' WHERE token = '${parameters.token}'`, (err, db_data) => {
+        db.query(`UPDATE user SET region = '${parameters.region}', phone = '${parameters.phone}', user_pw = '${parameters.user_pw}' WHERE token = ${db.escape(parameters.token)}`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -40,7 +40,7 @@ const update_userInfo = (parameters) => {
 
 const delete_userInfo = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`DELETE FROM user WHERE token = '${parameters.token}' && user_pw = '${parameters.user_pw}'`, (err, db_data) => {
+        db.query(`DELETE FROM user WHERE token = ${db.escape(parameters.token)} && user_pw = ${db.escape(parameters.user_pw)}`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -52,7 +52,8 @@ const delete_userInfo = (parameters) => {
 
 const findUser = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT e_num, user_pw, user_name, phone, region FROM user WHERE e_num = '${parameters.e_num}'&& user_pw = '${parameters.user_pw}'`, (err, db_data) => {
+        console.log(parameters);
+        db.query(`SELECT e_num, user_pw, user_name, phone, region FROM user WHERE e_num = ${db.escape(parameters.e_num)}&& user_pw = ${db.escape(parameters.user_pw)}`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -68,7 +69,7 @@ const findUser = (parameters) => {
 
 const insert_Token = (parameters, token) => {
     return new Promise((resolve, reject) => {
-        db.query(`UPDATE user SET token = '${token}' WHERE e_num = '${parameters.e_num}'`, (err, db_data) => {
+        db.query(`UPDATE user SET token = '${token}' WHERE e_num = ${db.escape(parameters.e_num)}`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -80,7 +81,7 @@ const insert_Token = (parameters, token) => {
 
 const delete_Token = (x_auth, token) => {
     return new Promise((resolve, reject) => {
-        db.query(`UPDATE user SET token = '${token}' WHERE token = '${x_auth}'`, (err, db_data) => {
+        db.query(`UPDATE user SET token = '${token}' WHERE token = ${db.escape(x_auth)}`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -92,7 +93,7 @@ const delete_Token = (x_auth, token) => {
 
 const dup_UserId = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT e_num FROM user WHERE e_num = '${parameters.e_num}'`, (err, db_data) => {
+        db.query(`SELECT e_num FROM user WHERE e_num = ${db.escape(parameters.e_num)}`, (err, db_data) => {
             if(err) {
                 reject(err);
             } else {

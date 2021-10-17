@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">    
 
 <head>
     <meta charset="UTF-8">
@@ -9,16 +9,16 @@
 </head>
 
 <body>
-    <form action='/deleteNotice' method='POST'>
+    <form action='/deleteNotice/<%= seq%>' method='POST'>
         <h1>Show Notice</h1>
         <fieldset>
-            <% seq = n_seq %>
+            <% seq = data.n_seq %>
             글 번호 : <%= seq %><br>
-            제목 : <%= title %><br>
-            내용 : <%= content %>
+            제목 : <%= data.title %><br>
+            내용 : <%= data.content %>
         </fieldset><br>
         <input type="hidden" name="n_seq" value="<%= seq %>">
-        <input type="submit" value="글 삭제">
+        <input type="submit" value="글 삭제" onclick="location.href = '/deleteNotice/<%= seq%>' ">
         <input type="button" value="글 수정" onclick="location.href = '/updateNoticeSelect/<%= seq %>' "><br>
         <a href="/">메인</a>
     </form>

@@ -21,21 +21,27 @@ const isDuplication = (req, res) => {
 const login = (req, res) => {
     var parameters = {
         "e_num": req.body.e_num,
-        "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64')
+        "user_pw": crypto
+                    .createHash('sha512')
+                    .update(req.body.user_pw)
+                    .digest('base64')
     }
 
-
-    User.findUser(parameters).then((db_data) => {
+    User.findUser(parameters)
+    .then((db_data) => {
         if (db_data == "err") {
+            // todo: status code ++
             res.send({ loginSuccess: false });
         } else {
             const token = jwt.sign({ name: db_data[0].user_name, region: db_data[0].region, phone: db_data[0].phone }, 'secret_key');
 
-            User.insert_Token(parameters, token).then(() => {
-                res.cookie("x_auth", token, { httpOnly: true, signed: true });
-                var decoded_token = jwt.verify(token, 'secret_key');
+            User.insert_Token(parameters, token)
+            .then(() => {
+                res.cookie("x_auth", token);
+                let decoded_token = jwt.verify(token, 'secret_key');
                 res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
-            }).catch((err) => {
+            })
+            .catch((err) => {
                 console.log(err);
             })
         }
@@ -58,9 +64,11 @@ const user_Update = (req, res) => {
         "phone": req.body.phone,
         "region": req.body.region
     }
-    User.update_userInfo(parameter).then((db_data) => {
+    console.log(parameter);
+    User.update_userInfo(parameter)
+    .then(() => {
         //admin => 0 = false, 1 = true, type = tinyInt
-        res.send({ 'UpdateSuccess': true })
+        res.send({ 'UpdateSuccess': true });
     })
 }
 
@@ -69,21 +77,26 @@ const delete_User = (req, res) => {
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64'),
         "token": req.cookies.x_auth
     }
-    User.delete_userInfo(parameter).then(() => {
+    User.delete_userInfo(parameter).then((db_data) => {
+        console.log(req.cookies);
         res.cookie("x_auth", "", { maxAge: 3000 });
-        res.send({ 'DeleteSuccess': true });
+        if(db_data[0] == undefined)
+            res.send({ 'DeleteSuccess': true });
+        else
+            console.log(db_data[0]);
     })
 }
 
 const logout = (req, res) => {
-    token = ""
+    token = "";
+    console.log(req.cookie);
     User.delete_Token(req.cookies.x_auth, token);
     res.cookie("x_auth", "", { maxAge: 3000 });
     res.redirect('/');
 }
 
 const register = (req, res) => {
-    var parameters = {
+    let parameters = {
         "e_num": req.body.e_num,
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64'),
         "user_name": req.body.user_name,
@@ -91,7 +104,8 @@ const register = (req, res) => {
         "region": req.body.region
     }
 
-    User.insert_userInfo(parameters).then(() => {
+    User.insert_userInfo(parameters)
+    .then(() => {
         console.log(parameters);
         res.redirect('/login');
     })
