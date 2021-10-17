@@ -78,7 +78,6 @@ const delete_User = (req, res) => {
         "token": req.cookies.x_auth
     }
     User.delete_userInfo(parameter).then((db_data) => {
-        console.log(req.cookies);
         res.cookie("x_auth", "", { maxAge: 3000 });
         if(db_data[0] == undefined)
             res.send({ 'DeleteSuccess': true });
