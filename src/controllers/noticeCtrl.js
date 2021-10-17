@@ -1,4 +1,4 @@
-const { connection } = require('mongoose');
+// const { connection } = require('mongoose');
 const Notice = require('../models/Notice');
 
 const create_board = (req, res) => {
