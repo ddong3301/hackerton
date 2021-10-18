@@ -6,7 +6,7 @@ const date = new Date();
 // todo: 애들 insert into 객체형식으로 넣는 방법 기억나는지 확인하기
 const insert_Photo = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`INSERT INTO photo SET fileName = '${parameters.fileName}', filePath = '${parameters.filePath}', fileType = '${parameters.fileType}', g_num = '${parameters.g_num}'`, (err, db_data) => {
+        db.query(`INSERT INTO photo SET fileName = '${parameters.fileName}', simplePath = '${parameters.simplePath}', fullPath = '${parameters.fullPath}', fileType = '${parameters.fileType}', g_num = '${parameters.g_num}'`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -28,9 +28,20 @@ const display_Photo = () => {
     })
 };
 
+// const display_Gallery = () => {
+//     return new Promise((resolve, reject) => {
+//         db.query(`SELECT filePath, date, g_num FROM photo ORDER BY date DESC`, (err, fileData) => {
+//             if (err) {
+//                 reject(err);
+//             } else {
+//                 resolve(fileData);
+//             }
+//         })
+//     })
+// }
 const display_Gallery = () => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT filePath, date, g_num FROM photo ORDER BY date DESC`, (err, fileData) => {
+        db.query(`SELECT simplePath, fullPath, date, g_num FROM photo ORDER BY date DESC`, (err, fileData) => {
             if (err) {
                 reject(err);
             } else {
