@@ -28,20 +28,9 @@ const display_Photo = () => {
     })
 };
 
-// const display_Gallery = () => {
-//     return new Promise((resolve, reject) => {
-//         db.query(`SELECT filePath, date, g_num FROM photo ORDER BY date DESC`, (err, fileData) => {
-//             if (err) {
-//                 reject(err);
-//             } else {
-//                 resolve(fileData);
-//             }
-//         })
-//     })
-// }
 const display_Gallery = () => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT simplePath, fullPath, date, g_num FROM photo ORDER BY date DESC`, (err, fileData) => {
+        db.query(`SELECT filePath, date, g_num FROM photo ORDER BY date DESC`, (err, fileData) => {
             if (err) {
                 reject(err);
             } else {
@@ -50,6 +39,18 @@ const display_Gallery = () => {
         })
     })
 }
+
+// const display_Gallery = () => {
+//     return new Promise((resolve, reject) => {
+//         db.query(`SELECT simplePath, fullPath, date, g_num FROM photo ORDER BY date DESC`, (err, fileData) => {
+//             if (err) {
+//                 reject(err);
+//             } else {
+//                 resolve(fileData);
+//             }
+//         })
+//     })
+// }
 
 module.exports = {
     insert_Photo,
