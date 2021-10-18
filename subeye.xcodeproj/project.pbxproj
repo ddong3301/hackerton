@@ -30,6 +30,8 @@
 		DFC72BA526F426A000A2CCAE /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC72BA426F426A000A2CCAE /* SignupViewController.swift */; };
 		DFC72BA826F84F1E00A2CCAE /* SignupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC72BA726F84F1E00A2CCAE /* SignupTableViewCell.swift */; };
 		DFCC19AA271B583A0061FE92 /* LoginData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCC19A9271B583A0061FE92 /* LoginData.swift */; };
+		DFCC19AC271C26230061FE92 /* Idcheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCC19AB271C26230061FE92 /* Idcheck.swift */; };
+		DFCC19AE271DAAB90061FE92 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCC19AD271DAAB90061FE92 /* UserViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		DFC72BA426F426A000A2CCAE /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		DFC72BA726F84F1E00A2CCAE /* SignupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupTableViewCell.swift; sourceTree = "<group>"; };
 		DFCC19A9271B583A0061FE92 /* LoginData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginData.swift; sourceTree = "<group>"; };
+		DFCC19AB271C26230061FE92 /* Idcheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Idcheck.swift; sourceTree = "<group>"; };
+		DFCC19AD271DAAB90061FE92 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,7 @@
 				DF1A5E1F271480D400C130BF /* DataType.swift */,
 				DF5717A9271802E80044FAE6 /* imgurl.swift */,
 				DFCC19A9271B583A0061FE92 /* LoginData.swift */,
+				DFCC19AB271C26230061FE92 /* Idcheck.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 				DFB30EF926E84A9300686AFB /* Assets.xcassets */,
 				DFB30EFB26E84A9300686AFB /* LaunchScreen.storyboard */,
 				DFB30EFE26E84A9300686AFB /* Info.plist */,
+				DFCC19AD271DAAB90061FE92 /* UserViewController.swift */,
 			);
 			path = subeye;
 			sourceTree = "<group>";
@@ -310,10 +316,12 @@
 				DF49965F271325DA00AE57F6 /* noticeTableViewCell.swift in Sources */,
 				DF49965D2713252900AE57F6 /* NoticeListViewController.swift in Sources */,
 				DFC72BA526F426A000A2CCAE /* SignupViewController.swift in Sources */,
+				DFCC19AE271DAAB90061FE92 /* UserViewController.swift in Sources */,
 				DFB30EF326E84A9300686AFB /* SceneDelegate.swift in Sources */,
 				DF1A5E20271480D400C130BF /* DataType.swift in Sources */,
 				DF6A1730270A9D37000B71F0 /* alertViewController.swift in Sources */,
 				DF4996622713DE8400AE57F6 /* noticelist.swift in Sources */,
+				DFCC19AC271C26230061FE92 /* Idcheck.swift in Sources */,
 				DF6A172C2709EE99000B71F0 /* noticeViewController.swift in Sources */,
 				DF1278D426EF4BB700109AD7 /* MainViewController.swift in Sources */,
 				DF8A4E572701A10F001A1EBA /* DataSource.swift in Sources */,

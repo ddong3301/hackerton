@@ -17,7 +17,11 @@ class SignupViewController: UIViewController {
     
     var btatate = 1
     
+    var isIdCheck = true
+    
     static var area = "배방역"
+    
+    var keyboardHeight:CGFloat = 0
     
     let tapview: UIView = {
         let tapview = UIView()
@@ -74,7 +78,7 @@ class SignupViewController: UIViewController {
         return subview
     }()
     
-    let idTF: UITextField = {
+    static let idTF: UITextField = {
         let TF = UITextField()
         TF.translatesAutoresizingMaskIntoConstraints = false
         
@@ -336,7 +340,7 @@ class SignupViewController: UIViewController {
         view.addSubview(backbt)
         view.addSubview(idview)
         view.addSubview(titleLabel)
-        view.addSubview(idTF)
+        view.addSubview(SignupViewController.idTF)
         view.addSubview(idcheckBT)
         view.addSubview(idtitle)
         
@@ -388,22 +392,22 @@ class SignupViewController: UIViewController {
             titleLabel.heightAnchor.constraint(equalToConstant: 80),
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             
-            idTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 55),
-            idTF.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 100),
-            idTF.widthAnchor.constraint(equalToConstant: 230),
-            idTF.heightAnchor.constraint(equalToConstant: 40),
+            SignupViewController.idTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 55),
+            SignupViewController.idTF.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 100),
+            SignupViewController.idTF.widthAnchor.constraint(equalToConstant: 230),
+            SignupViewController.idTF.heightAnchor.constraint(equalToConstant: 40),
             
-            idview.leadingAnchor.constraint(equalTo: idTF.leadingAnchor, constant: -space - 10),
-            idview.topAnchor.constraint(equalTo: idTF.topAnchor, constant: -space),
-            idview.trailingAnchor.constraint(equalTo: idTF.trailingAnchor, constant: space),
-            idview.bottomAnchor.constraint(equalTo: idTF.bottomAnchor, constant: space),
+            idview.leadingAnchor.constraint(equalTo: SignupViewController.idTF.leadingAnchor, constant: -space - 10),
+            idview.topAnchor.constraint(equalTo: SignupViewController.idTF.topAnchor, constant: -space),
+            idview.trailingAnchor.constraint(equalTo: SignupViewController.idTF.trailingAnchor, constant: space),
+            idview.bottomAnchor.constraint(equalTo: SignupViewController.idTF.bottomAnchor, constant: space),
             
-            idcheckBT.leadingAnchor.constraint(equalTo: idTF.trailingAnchor, constant: 20),
+            idcheckBT.leadingAnchor.constraint(equalTo: SignupViewController.idTF.trailingAnchor, constant: 20),
             idcheckBT.topAnchor.constraint(equalTo: idview.topAnchor),
             idcheckBT.heightAnchor.constraint(equalTo: idview.heightAnchor),
             idcheckBT.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             
-            idtitle.leadingAnchor.constraint(equalTo: idTF.leadingAnchor, constant: -5),
+            idtitle.leadingAnchor.constraint(equalTo: SignupViewController.idTF.leadingAnchor, constant: -5),
             idtitle.bottomAnchor.constraint(equalTo: idview.topAnchor,constant: -5),
             
         ])
@@ -417,7 +421,7 @@ class SignupViewController: UIViewController {
             passview.topAnchor.constraint(equalTo: passTF.topAnchor, constant: -space),
             passview.bottomAnchor.constraint(equalTo: passTF.bottomAnchor, constant: space),
             
-            passTF.leadingAnchor.constraint(equalTo: idTF.leadingAnchor),
+            passTF.leadingAnchor.constraint(equalTo: SignupViewController.idTF.leadingAnchor),
             passTF.topAnchor.constraint(equalTo: idview.bottomAnchor, constant: 50),
             passTF.widthAnchor.constraint(equalToConstant: 250),
             passTF.heightAnchor.constraint(equalToConstant: 40),
@@ -531,10 +535,11 @@ class SignupViewController: UIViewController {
         arealayout()
         namelayout()
         phonelayout()
+        addkeyboardNotification()
         
         tableview.delegate = self
         tableview.dataSource = self
-        idTF.delegate = self
+        SignupViewController.idTF.delegate = self
         passTF.delegate = self
         nameTF.delegate = self
         phoneTF.delegate = self
@@ -594,10 +599,35 @@ extension SignupViewController {
     
     @objc func backloginview(_ sender: UIButton) {
         
-        
-        postsignup(e_num: idTF.text!, user_pw: passTF.text!, user_name: nameTF.text!, phone: phoneTF.text!, region: areaLabel.text!)
-        
+        guard SignupViewController.idTF.text != "" else {
+            showerroralert(kind: "아이디를 입력해주세요")
+            return
+        }
+        guard passTF.text != "" else {
+            showerroralert(kind: "비밀번호를 입력해주세요")
+            return}
+        guard passTF.text!.count >= 7 else {
+            showerroralert(kind: "비밀번호는 7자리 이상이어야 합니다.")
+            return
+        }
+        guard nameTF.text != "" else {
+            showerroralert(kind: "이름을 입력해주세요")
+            return}
+        guard phoneTF.text != "" else {
+            showerroralert(kind: "핸드폰 번호를 입력해주세요")
+            return}
+        if areaLabel.text == "지역을 선택해주세요" {
+            showerroralert(kind: "지역을 선택해주세요")
+            return
+        }
 
+        
+        if isIdCheck != true {
+        
+        postsignup(e_num: SignupViewController.idTF.text!, user_pw: passTF.text!, user_name: nameTF.text!, phone: phoneTF.text!, region: areaLabel.text!)
+        
+            
+            
         
         let alert = UIAlertController(title: "회원가입이 완료되었습니다.", message: nil, preferredStyle: .alert)
         let OKaction = UIAlertAction(title: "OK", style: .default) { (action) in
@@ -607,6 +637,18 @@ extension SignupViewController {
         alert.addAction(OKaction)
         
         present(alert, animated: true, completion: nil)
+        } else {
+            
+            let alert = UIAlertController(title: "사번 중복 체크 해주세요.", message: nil, preferredStyle: .alert)
+            let OKaction = UIAlertAction(title: "OK", style: .default) { (action) in
+                
+            }
+            
+            alert.addAction(OKaction)
+            
+            present(alert, animated: true, completion: nil)
+            
+        }
         
         
     }
@@ -614,7 +656,25 @@ extension SignupViewController {
     @objc func showalert(_sender: UIButton) {
         
         
-        present(alertCheckId, animated: true, completion: nil)
+        IdCheck.shared.fetch {
+            if IdCheck.shared.summary?.isDuplication == true {
+                let alert = UIAlertController(title: "아이디 중복체크", message: "사번을 확인해 주세요.", preferredStyle: .alert)
+                let alertaction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                
+                alert.addAction(alertaction)
+                
+                self.present(alert, animated: true, completion: nil)
+                
+                
+            } else {
+                self.isIdCheck = false
+                self.present(self.alertCheckId, animated: true, completion: nil)
+                
+            }
+        }
+        
+    
+        
     }
     
     @objc func backview(_ sender: UIButton) {
@@ -646,23 +706,22 @@ extension SignupViewController {
             
             
             if let e = error{
-                NSLog("An error")
+                NSLog("An error\(e.localizedDescription)")
                 return
             }
-    
-//            let object = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary
-//
-//            guard let jsonObject = object else {return}
-//
-//            let result = jsonObject["loginSuccess"] as? String
-//
-//            print(result)
-            
-        
-            
 
         }
         task.resume()
+        
+    }
+    
+    func showerroralert(kind:String) {
+        
+        let alert = UIAlertController(title: "회원가입 오류", message: kind, preferredStyle: .alert)
+        let alertaction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+        
+        alert.addAction(alertaction)
+        self.present(alert, animated: true, completion: nil)
         
     }
 }
@@ -702,23 +761,67 @@ extension SignupViewController: UITextFieldDelegate {
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        self.view.frame.origin.y  = 0
         textField.resignFirstResponder()
         
         return true
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        print(textField,"AAAAA\n\n\n")
+        
         if textField == phoneTF {
             
-            self.view.frame.origin.y  = -250
+            if self.view.frame.origin.y == 0 {
+                
+                self.view.frame.origin.y -= keyboardHeight
+                
+            }
             
             return true
+        } else if textField == nameTF {
+            
+            if self.view.frame.origin.y == 0 {
+       
+                UIView.animate(withDuration: 0.3) {
+                    self.view.frame.origin.y -= self.keyboardHeight
+                }
+                
+            }
+            return true
+        } else {
+            
+            self.view.frame.origin.y = 0
+            
+            return true
+        }
+        
+        
+    }
+    private func addkeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardwillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    @objc private func keyboardwillShow( _ notification: Notification) {
+        
+            if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let keybaordRectangle = keyboardFrame.cgRectValue
+                self.keyboardHeight = keybaordRectangle.height
+                print(keyboardHeight)
             
         }
-        return true
+        
+
+          
     }
     
-    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+
+        
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keybaordRectangle = keyboardFrame.cgRectValue
+            self.view.frame.origin.y  = 0
+      }
+    }
 }

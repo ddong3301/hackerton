@@ -262,8 +262,19 @@ class MainViewController: UIViewController {
         return label
     }()
     
+    let newscreen: UIButton = {
+        let bt = UIButton()
+        
+        bt.translatesAutoresizingMaskIntoConstraints = false
+        bt.setImage(UIImage(systemName: "arrow.counterclockwise"), for: .normal)
+        bt.tintColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1)
+        
+        return bt
+    }()
+    
     
     func addView() {
+        
         view.addSubview(animationView)
         view.addSubview(totalView)
         view.addSubview(imgTableview)
@@ -278,6 +289,7 @@ class MainViewController: UIViewController {
         totalView.addSubview(imgSuspicion)
         
         view.addSubview(recenttitle)
+        view.addSubview(newscreen)
         
         
     }
@@ -297,9 +309,12 @@ class MainViewController: UIViewController {
             totalView.topAnchor.constraint(equalTo: animationView.bottomAnchor , constant: -120),
             totalView.heightAnchor.constraint(equalToConstant: 200),
             
+            newscreen.trailingAnchor.constraint(equalTo: imgTableview.trailingAnchor, constant: -5),
+            newscreen.bottomAnchor.constraint(equalTo: imgTableview.topAnchor, constant: -5),
+            
             imgTableview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             imgTableview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            imgTableview.topAnchor.constraint(equalTo: totalView.bottomAnchor, constant: 10),
+            imgTableview.topAnchor.constraint(equalTo: totalView.bottomAnchor, constant: 30),
             imgTableview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
             
             developer.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
@@ -348,15 +363,7 @@ class MainViewController: UIViewController {
         ])
     }
     
-    func menulayout() {
-        
-        
-        
-        
-        
-    }
-    
-    
+
     
     
     
@@ -368,7 +375,7 @@ class MainViewController: UIViewController {
         addView()
         layout()
         recentlayout()
-        menulayout()
+
 
         view.backgroundColor = .white
         
@@ -382,7 +389,7 @@ class MainViewController: UIViewController {
         logoutbt.addTarget(self, action: #selector(presentsidemenu(_:)), for: .touchUpInside)
         totalView.addTarget(self, action: #selector(touchtotalview(_:)), for: .touchUpInside)
         userData.addTarget(self, action: #selector(presentdrop(_:)), for: .touchUpInside)
-        
+        newscreen.addTarget(self, action: #selector(updatetableview(_:)), for: .touchUpInside)
        
         
         userOutNum.text = String(datas[0].outNumber)
@@ -410,14 +417,7 @@ class MainViewController: UIViewController {
             
             self.imgTableview.reloadData()
         }
-        
-        
-        
-
-        
-        
-        
-        
+  
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -504,6 +504,27 @@ extension MainViewController {
         
         
         present(menu, animated: true, completion: nil)
+        
+    }
+    
+    @objc func updatetableview(_ sender: UIButton) {
+        
+        geturl.shared.fetch {
+            print(geturl.shared.imgpath.count)
+            print(geturl.shared.imgpath)
+            
+            self.view.reloadInputViews()
+            
+            let url = URL(string: geturl.shared.imgpath[0].path)
+            let data = try? Data(contentsOf: url!)
+            self.recentimg.image = UIImage(data: data!)
+            self.timelabel.text = geturl.shared.imgpath[0].date
+            
+            
+            self.imgTableview.reloadData()
+            print("UPDATE")
+        }
+        
         
     }
 }
