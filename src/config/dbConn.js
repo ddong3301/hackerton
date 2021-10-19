@@ -3,11 +3,11 @@ require('dotenv').config({ path: ".env" });
 
 // Todo: || vs &&
 const db = mysql.createConnection({
-  host: process.env.DB_host || "uyu7j8yohcwo35j3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-  port: process.env.DB_port || 3306,
-  user: process.env.DB_user || "l30l81n4fti76k02",
-  password: process.env.DB_password || "sp6i6qnjclv70igo",
-  database: process.env.DB_database || "fskqv498j7eqmq1r",
+  host: process.env.DB_host,
+  port: process.env.DB_port,
+  user: process.env.DB_user,
+  password: process.env.DB_password,
+  database: process.env.DB_database,
   dateStrings: true
 })
 

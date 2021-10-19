@@ -3,10 +3,6 @@ const router = express.Router();
 
 const Notice = require('../controllers/noticeCtrl');
 
-router.get('/addNotice', (req, res) => {
-    res.render('create_notice');
-});
-
 router.get('/updateNoticeSelect/:n_seq', Notice.update_board_select);
 router.post('/updateNotice', Notice.update_board);
 router.post('/deleteNotice/:n_seq', Notice.delete_board);
