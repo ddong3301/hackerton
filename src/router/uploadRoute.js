@@ -3,7 +3,6 @@ const router = express.Router();
 
 const upload = require('../middleware/uploadImage');
 const { singleFileUpload } = require('../controllers/uploadCtrl');
-// const { fileUpload } = require('../controllers/uploadCtrl');
 const displayCtrl = require('../controllers/displayCtrl');
 
 // todo: Middleware이란?
@@ -12,10 +11,7 @@ router.get('/upload', (req, res) => {
 });
 
 router.post('/singleFile', upload.single('upload'), singleFileUpload);
-// router.post('/singleFile', upload.single('upload'), (req, res) => {
-//     console.log(req.body.ggg);
-//     res.sendStatus(200)
-// });
+
 
 router.get('/display', displayCtrl.getSingleImageFromDB);
 

@@ -1,4 +1,3 @@
-// const mongoose = require('mongoose');
 const db = require('../config/dbConn');
 const dayjs = require('dayjs');
 const date = new Date();
@@ -16,18 +15,6 @@ const insert_Photo = (parameters) => {
     })
 }
 
-const display_Photo = () => {
-    return new Promise((resolve, reject) => {
-        db.query(`SELECT filePath FROM photo ORDER BY f_num DESC LIMIT 1`, (err, path) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(path);
-            }
-        })
-    })
-};
-
 const display_Gallery = () => {
     return new Promise((resolve, reject) => {
         db.query(`SELECT filePath, date, g_num, c_num FROM photo ORDER BY f_num DESC`, (err, fileData) => {
@@ -39,18 +26,6 @@ const display_Gallery = () => {
         })
     })
 }
-
-// const display_Gallery = () => {
-//     return new Promise((resolve, reject) => {
-//         db.query(`SELECT simplePath, fullPath, date, g_num FROM photo ORDER BY date DESC`, (err, fileData) => {
-//             if (err) {
-//                 reject(err);
-//             } else {
-//                 resolve(fileData);
-//             }
-//         })
-//     })
-// }
 
 module.exports = {
     insert_Photo,

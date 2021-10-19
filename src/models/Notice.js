@@ -1,4 +1,3 @@
-// const mongoose = require('mongoose');
 //앱에서 요청을 하면 서버에서 전송하는형태
 const dayjs = require('dayjs');
 const db = require('../config/dbConn');

@@ -1,22 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-// const { auth } = require('../middleware/auth');
 const userCtrl = require('../controllers/userCtrl');
 
-router.get('/login', (req, res) => {
-    res.render('login');
-});
-router.get('/', (req, res) => {
-    res.render('main');
-});
+// router.get('/login', (req, res) => {
+//     res.render('login');
+// });
+// router.get('/', (req, res) => {
+//     res.render('main');
+// });
 
 // todo: res.send vs res.json 차이점
-
-
-// router.get('/register', (req, res) => {
-//     res.render('register');
-// });
 
 // todo: post 변경 (조건문 로직 추가)
 router.get('/logout', userCtrl.logout);
