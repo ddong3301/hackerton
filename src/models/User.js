@@ -51,7 +51,6 @@ const delete_userInfo = (parameters) => {
 
 const findUser = (parameters) => {
     return new Promise((resolve, reject) => {
-        console.log(parameters);
         db.query(`SELECT e_num, user_pw, user_name, phone, region FROM user WHERE e_num = ${db.escape(parameters.e_num)}&& user_pw = ${db.escape(parameters.user_pw)}`, (err, db_data) => {
             if (err) {
                 reject(err);
@@ -105,11 +104,23 @@ const dup_UserId = (parameters) => {
 
 const check_pw = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT user_pw FROM user WHERE user_pw = ${db.escape(parameters.user_pw)}`, (err, db_data) => {
+        db.query(`SELECT user_pw FROM user WHERE user_pw = ${db.escape(parameters.user_pw)} && token = ${db.escape(parameters.token)}`, (err, db_data) => {
             if(err) {
                 reject(err);
             } else {
                 resolve(db_data);
+            }
+        })
+    })
+}
+
+const isLogged_in = (parameters) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT token FROM user WHERE e_num = ${db.escape(parameters.e_num)} && user_pw = ${db.escape(parameters.user_pw)}`, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data)
             }
         })
     })
@@ -124,5 +135,6 @@ module.exports = {
     insert_Token,
     delete_Token,
     dup_UserId,
-    check_pw
+    check_pw,
+    isLogged_in
 };

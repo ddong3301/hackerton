@@ -22,44 +22,53 @@ const login = (req, res) => {
     var parameters = {
         "e_num": req.body.e_num,
         "user_pw": crypto
-                    .createHash('sha512')
-                    .update(req.body.user_pw)
-                    .digest('base64')
+            .createHash('sha512')
+            .update(req.body.user_pw)
+            .digest('base64')
     }
 
+    // todo: status code ++
     User.findUser(parameters)
-    .then((db_data) => {
-        if (db_data == "err") {
-            // todo: status code ++
-            res.send({ loginSuccess: false });
-        } else {
-            const token = jwt.sign({ name: db_data[0].user_name, region: db_data[0].region, phone: db_data[0].phone }, 'secret_key');
+        .then((data) => {
+            User.isLogged_in(parameters).then((db_data) => {
+                console.log(db_data[0]);
+                if (db_data[0].token != '') {
+                    res.send({ isLoggedin: true });
+                } else {
+                    if (data == "err") {
+                        res.send({ loginSuccess: false });
+                    } else {
+                        const token = jwt.sign({ name: data[0].user_name, region: data[0].region, phone: data[0].phone }, 'secret_key');
 
-            User.insert_Token(parameters, token)
-            .then(() => {
-                res.cookie("x_auth", token);
-                let decoded_token = jwt.verify(token, 'secret_key');
-                res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-        }
-    })
+                        User.insert_Token(parameters, token)
+                            .then(() => {
+                                res.cookie("x_auth", token);
+                                let decoded_token = jwt.verify(token, 'secret_key');
+                                res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            })
+                    }
+                }
+            });
+
+        })
 }
 
 const checkPassword = (req, res) => {
-    parameter  = {
-        "user_pw": req.body.user_pw
+    parameter = {
+        "token": req.cookies.x_auth,
+        "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64')
     }
     User.check_pw(parameter)
-    .then((db_data) => {
-        if(db_data.user_pw == parameter.user_pw) {
-            res.send({ isDuplication: true });
-        } else {
-            res.send({ isDuplication: false });
-        }
-    })
+        .then((db_data) => {
+            if (db_data.length == 0) {
+                res.send({ isDuplication: false });
+            } else {
+                res.send({ isDuplication: true });
+            }
+        })
 }
 
 const read_User = (req, res) => {
@@ -80,10 +89,10 @@ const user_Update = (req, res) => {
     }
     console.log(parameter);
     User.update_userInfo(parameter)
-    .then(() => {
-        //admin => 0 = false, 1 = true, type = tinyInt
-        res.send({ 'UpdateSuccess': true });
-    })
+        .then(() => {
+            //admin => 0 = false, 1 = true, type = tinyInt
+            res.send({ 'UpdateSuccess': true });
+        })
 }
 
 const delete_User = (req, res) => {
@@ -93,7 +102,7 @@ const delete_User = (req, res) => {
     }
     User.delete_userInfo(parameter).then((db_data) => {
         res.cookie("x_auth", "", { maxAge: 3000 });
-        if(db_data[0] == undefined)
+        if (db_data[0] == undefined)
             res.send({ 'DeleteSuccess': true });
         else
             console.log(db_data[0]);
@@ -118,10 +127,10 @@ const register = (req, res) => {
     }
 
     User.insert_userInfo(parameters)
-    .then(() => {
-        console.log(parameters);
-        res.redirect('/login');
-    })
+        .then(() => {
+            console.log(parameters);
+            res.redirect('/login');
+        })
 }
 
 module.exports = {
