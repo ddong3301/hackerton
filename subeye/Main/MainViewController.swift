@@ -371,8 +371,9 @@ class MainViewController: UIViewController {
             self.view.reloadInputViews()
             
             let url = URL(string: geturl.shared.imgpath[0].path)
-            let data = try? Data(contentsOf: url!)
-            self.recentimg.image = UIImage(data: data!)
+            guard let data = try? Data(contentsOf: url!) else {return}
+            
+            self.recentimg.image = UIImage(data: data)
             self.timelabel.text = geturl.shared.imgpath[0].date
             
             
@@ -528,16 +529,16 @@ extension MainViewController {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return geturl.shared.imgpath.count - 1
+        return geturl.shared.imgpath.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImgTableViewCell.identifer, for: indexPath) as? ImgTableViewCell else {return UITableViewCell()}
         
-        cell.timelabel.text = datas[indexPath.row + 1].imagetime
+        cell.timelabel.text = datas[indexPath.row].imagetime
         cell.images.tag = indexPath.row
         
-        let url: String =  geturl.shared.imgpath[indexPath.row + 1].path
+        let url: String =  geturl.shared.imgpath[indexPath.row].path
         let placeholder:UIImage? = UIImage.init(named: "placeholder.png")
         
         cell.images.imageFromURL(urlString: url, placeholder: placeholder) {
@@ -548,7 +549,7 @@ extension MainViewController: UITableViewDataSource {
                 tableView.endUpdates()
             }
         }
-        cell.timelabel.text = geturl.shared.imgpath[indexPath.row + 1].date
+        cell.timelabel.text = geturl.shared.imgpath[indexPath.row].date
         
         
         let selectview  = UIView()

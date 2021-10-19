@@ -156,7 +156,7 @@ class alertViewController: UIViewController {
     
     func layout() {
         NSLayoutConstraint.activate([
-        
+    
             alertview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             alertview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             alertview.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
@@ -168,7 +168,7 @@ class alertViewController: UIViewController {
             titleimg.leadingAnchor.constraint(equalTo: alertview.leadingAnchor, constant: 30),
             titleimg.trailingAnchor.constraint(equalTo: alertview.trailingAnchor, constant: -30),
             titleimg.topAnchor.constraint(equalTo: alertview.topAnchor, constant: 50),
-            titleimg.heightAnchor.constraint(equalToConstant: 200),
+            titleimg.heightAnchor.constraint(equalToConstant: (view.frame.height / 4) * 2),
             
             date.leadingAnchor.constraint(equalTo: titleimg.leadingAnchor, constant: 10),
             date.topAnchor.constraint(equalTo: titleimg.bottomAnchor, constant: 20),

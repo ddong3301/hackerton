@@ -19,11 +19,17 @@ struct send_passnum: Codable {
     
 }
 
+struct updatepw: Codable {
+    
+    var UpdateSuccess: Bool
+}
+
 class PassCheck {
     static let shared = PassCheck()
     private init() { }
     
     var summary: passDuplication?
+    var isupdate: updatepw?
     
     let apiQueue = DispatchQueue(label: "ApiQueue", attributes: .concurrent)
     
@@ -39,6 +45,29 @@ class PassCheck {
                     
                 default:
                 self.summary = nil
+                }
+                
+                self.group.leave()
+            }
+        }
+        group.notify(queue: .main) {
+            
+            completion()
+            
+        }
+        
+    }
+    
+    func updatefetch(completion: @escaping ()-> ()) {
+        group.enter()
+        apiQueue.async {
+            self.updatepass() { (result) in
+                switch result {
+                case .success(let data):
+                    self.isupdate = data
+                    
+                default:
+                self.isupdate = nil
                 }
                 
                 self.group.leave()
@@ -115,6 +144,14 @@ extension PassCheck {
         let url = "https://subeye.herokuapp.com/checkPw"
         
         fetch(urlStr: url, pass_num: CheckUserViewController.checkpassWordTF.text ?? "",completion: completion)
+        
+    }
+    
+    private func updatepass(completion: @escaping (Result<updatepw,Error>) -> ()) {
+
+        let url = "https://subeye.herokuapp.com/user_update"
+        
+        fetch(urlStr: url, pass_num: updatepassView.checkpassWordTF.text ?? "",completion: completion)
         
     }
 }

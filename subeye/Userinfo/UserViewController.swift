@@ -235,7 +235,7 @@ class UserViewController: UIViewController {
             
             remove.leadingAnchor.constraint(equalTo: IDlabel.leadingAnchor, constant: 0),
             remove.trailingAnchor.constraint(equalTo: userPhone.trailingAnchor, constant: 0),
-            remove.topAnchor.constraint(equalTo: region.bottomAnchor, constant: 150),
+            remove.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
             remove.heightAnchor.constraint(equalTo: userID.heightAnchor),
         
         ])
@@ -268,7 +268,8 @@ class UserViewController: UIViewController {
         userRegion.text = LoginDataSource.shared.summary?.region
         
         
-        
+        userPassWord.addTarget(self, action: #selector(presentupdate(_:)), for: .touchUpInside)
+        remove.addTarget(self, action: #selector(pressremove(_:)), for: .touchUpInside)
         
         
         // Do any additional setup after loading the view.
@@ -285,4 +286,80 @@ class UserViewController: UIViewController {
     }
     */
 
+}
+
+
+extension UserViewController {
+    
+    @objc func presentupdate(_ sender: UIButton) {
+        
+        let vc = updatepassView()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        
+        present(vc, animated: true, completion: nil)
+        
+    }
+    
+    func removedata() {
+        
+            let url = URL(string: "https://subeye.herokuapp.com/deleteUser")
+            
+            var request = URLRequest(url: url!)
+            request.httpMethod = "GET"
+            
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let e = error{
+                    NSLog("two error: \(e.localizedDescription)")
+                    return
+                }
+                
+                print("Success delete")
+            }
+            task.resume()
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+    
+    
+    @objc func pressremove(_ sender: UIButton) {
+        
+        let alert = UIAlertController(title: "데이터 삭제", message: "정말 삭제하시겠습니까?", preferredStyle: .alert)
+        let removeaction = UIAlertAction(title: "삭제", style: .cancel) { (action) in
+            self.removedata()
+            self.restartApplication()
+        }
+        let alertaction = UIAlertAction(title: "취소", style: .default) { (action) in
+            self.dismiss(animated: true, completion: nil)
+            
+        }
+        alert.addAction(removeaction)
+        alert.addAction(alertaction)
+        
+        present(alert, animated: true, completion: nil)
+        
+        
+    }
+    func restartApplication () {
+        
+        let navCtrl = UINavigationController(rootViewController: LoginViewController())
+
+        guard
+                let window = UIApplication.shared.keyWindow,
+                let rootViewController = window.rootViewController
+                else {
+            return
+        }
+
+        navCtrl.view.frame = rootViewController.view.frame
+        navCtrl.view.layoutIfNeeded()
+
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            window.rootViewController = navCtrl
+        })
+
+    }
+    
+
+    
 }

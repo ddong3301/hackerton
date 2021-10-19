@@ -141,16 +141,18 @@ extension SideMenuViewController: UITableViewDelegate {
                 
                 dismiss(animated: false, completion: nil)
                 navigationController?.pushViewController(notice, animated: true)
-                
-                
-               
-                
-                
-                
+  
             case 2:
-                print("present 통계")
-            case 3:
                 print("present 고객센터")
+                let sendmail = MailViewController()
+                
+                sendmail.modalTransitionStyle = .crossDissolve
+                sendmail.modalPresentationStyle = .fullScreen
+                
+                dismiss(animated: false, completion: nil)
+                navigationController?.pushViewController(sendmail, animated: true)
+            case 3:
+                print("question")
             default:
                 return
         }
