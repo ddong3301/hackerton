@@ -29,6 +29,5 @@ const display_Gallery = () => {
 
 module.exports = {
     insert_Photo,
-    display_Photo,
     display_Gallery
 };

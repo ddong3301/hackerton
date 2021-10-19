@@ -7,7 +7,6 @@ require('dotenv').config();
 const userRouter = require('./router/userRoute');
 const uploadRouter = require('./router/uploadRoute');
 const noticeRouter = require('./router/noticeRoute');
-const vidRouter = require('./router/vidRouter');
 require('./config/dbConn');
 
 const app = express();
@@ -29,6 +28,5 @@ app.use(express.static(path.join(__dirname, '../')));
 app.use('/', userRouter);
 app.use('/', uploadRouter);
 app.use('/', noticeRouter);
-app.use('/', vidRouter);
 
 module.exports = app;
