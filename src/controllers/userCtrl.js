@@ -38,7 +38,7 @@ const login = (req, res) => {
                     if (data == "err") {
                         res.send({ loginSuccess: false });
                     } else {
-                        const token = jwt.sign({ name: data[0].user_name, region: data[0].region, phone: data[0].phone }, 'secret_key');
+                        const token = jwt.sign({ e_num: data[0].e_num, name: data[0].user_name, region: data[0].region, phone: data[0].phone }, 'secret_key');
 
                         User.insert_Token(parameters, token)
                             .then(() => {
