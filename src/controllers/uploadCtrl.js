@@ -9,8 +9,10 @@ const singleFileUpload = (req, res) => {
             fileName: req.file.originalname,
             filePath: req.file.location,
             fileType: req.file.mimetype,
-            g_num: req.body.g_num
+            g_num: req.body.g_num,
+            c_num: req.body.c_num
         }
+        console.log(parameters.c_num);
         Photo.insert_Photo(parameters)
         .then(() => {
             // console.log(db_data);

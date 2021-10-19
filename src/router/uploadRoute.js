@@ -17,8 +17,6 @@ router.post('/singleFile', upload.single('upload'), singleFileUpload);
 //     res.sendStatus(200)
 // });
 
-//router.post('/uploadFile', upload.fields('upload'), fileUpload);
-
 router.get('/display', displayCtrl.getSingleImageFromDB);
 
 router.get('/gallery', displayCtrl.getImagesFromDB);
