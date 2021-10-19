@@ -27,7 +27,7 @@ const update_userInfo = (parameters) => {
 
 const delete_userInfo = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`DELETE FROM user WHERE token = ${db.escape(parameters.token)} && user_pw = ${db.escape(parameters.user_pw)}`, (err, db_data) => {
+        db.query(`DELETE FROM user WHERE token = ${db.escape(parameters.token)}`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
