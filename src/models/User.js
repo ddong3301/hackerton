@@ -15,7 +15,7 @@ const insert_userInfo = (parameter) => {
 const update_userInfo = (parameters) => {
     return new Promise((resolve, reject) => {
         console.log(parameters);
-        db.query(`UPDATE user SET region = '${parameters.region}', phone = '${parameters.phone}', user_pw = '${parameters.user_pw}' WHERE token = ${db.escape(parameters.token)}`, (err, db_data) => {
+        db.query(`UPDATE user SET user_pw = '${parameters.user_pw}' WHERE token = ${db.escape(parameters.token)}`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {

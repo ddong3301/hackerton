@@ -31,7 +31,6 @@ const login = (req, res) => {
     User.findUser(parameters)
         .then((data) => {
             User.isLogged_in(parameters).then((db_data) => {
-                console.log(db_data[0]);
                 if (db_data[0].token != '') {
                     res.send({ isLoggedin: true });
                 } else {
@@ -74,8 +73,6 @@ const user_Update = (req, res) => {
     var parameter = {
         "token": req.cookies.x_auth,
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64'),
-        "phone": req.body.phone,
-        "region": req.body.region
     }
     console.log(parameter);
     User.update_userInfo(parameter)
