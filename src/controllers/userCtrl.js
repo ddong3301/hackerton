@@ -55,9 +55,9 @@ const checkPassword = (req, res) => {
     User.check_pw(parameter)
     .then((db_data) => {
         if(db_data.user_pw == parameter.user_pw) {
-            res.redirect('/readUser');
+            res.send({ isDuplication: true });
         } else {
-            res.sendStatus(401);
+            res.send({ isDuplication: false });
         }
     })
 }
