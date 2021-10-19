@@ -17,7 +17,8 @@ const upload = multer({
         bucket: "hackerton",
         acl: 'public-read-write',
         key: (req, file, cb) => {
-            let filename = timezoneDate.toISOString().replace(/:/g, '-') + '-' + file.originalname;
+            //let filename = timezoneDate.toISOString().replace(/:/g, '-') + '-' + file.originalname;
+            let filename = file.originalname + req.body.createAt;
             cb(null, filename);
         },
         limits: {
