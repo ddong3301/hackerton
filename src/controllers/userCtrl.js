@@ -38,7 +38,7 @@ const login = (req, res) => {
                     if (data == "err") {
                         res.send({ loginSuccess: false });
                     } else {
-                        const token = jwt.sign({ e_num: data[0].e_num, name: data[0].user_name, region: data[0].region, phone: data[0].phone }, 'secret_key');
+                        const token = jwt.sign({ id: data[0].e_num, name: data[0].user_name, region: data[0].region, phone: data[0].phone }, 'secret_key');
 
                         User.insert_Token(parameters, token)
                             .then(() => {
@@ -69,15 +69,6 @@ const checkPassword = (req, res) => {
                 res.send({ isDuplication: true });
             }
         })
-}
-
-const read_User = (req, res) => {
-    parameter = {
-        "token": req.cookies.x_auth
-    }
-    User.read_userInfo(parameter).then((db_data) => {
-        res.send(db_data);
-    })
 }
 
 const user_Update = (req, res) => {
@@ -140,6 +131,5 @@ module.exports = {
     isDuplication,
     user_Update,
     delete_User,
-    read_User,
     checkPassword
 }

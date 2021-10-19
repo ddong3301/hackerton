@@ -12,18 +12,6 @@ const insert_userInfo = (parameter) => {
     })
 }
 
-const read_userInfo = (parameter) => {
-    return new Promise((resolve, reject) => {
-        db.query(`SELECT e_num, user_name, admin, phone, region FROM user WHERE token = ${db.escape(parameter.token)}`, (err, db_data) => {
-            if(err) {
-                reject(err);
-            } else {
-                resolve(db_data);
-            }
-        })
-    })
-}
-
 const update_userInfo = (parameters) => {
     return new Promise((resolve, reject) => {
         console.log(parameters);
@@ -128,7 +116,6 @@ const isLogged_in = (parameters) => {
  
 module.exports = {
     insert_userInfo,
-    read_userInfo,
     update_userInfo,
     delete_userInfo,
     findUser,
