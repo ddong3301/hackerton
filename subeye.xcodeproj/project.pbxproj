@@ -23,6 +23,8 @@
 		DF8A4E5127017738001A1EBA /* 34593-train-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DF8A4E5027017738001A1EBA /* 34593-train-animation.json */; };
 		DF8A4E542701A097001A1EBA /* ImgTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A4E532701A097001A1EBA /* ImgTableViewCell.swift */; };
 		DF8A4E572701A10F001A1EBA /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A4E562701A10F001A1EBA /* DataSource.swift */; };
+		DF962801271EBFB40077FB79 /* CheckUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF962800271EBFB40077FB79 /* CheckUserViewController.swift */; };
+		DF962803271EFCEB0077FB79 /* PassWordCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF962802271EFCEB0077FB79 /* PassWordCheck.swift */; };
 		DFB30EF126E84A9300686AFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB30EF026E84A9300686AFB /* AppDelegate.swift */; };
 		DFB30EF326E84A9300686AFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB30EF226E84A9300686AFB /* SceneDelegate.swift */; };
 		DFB30EFA26E84A9300686AFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFB30EF926E84A9300686AFB /* Assets.xcassets */; };
@@ -54,6 +56,8 @@
 		DF8A4E5027017738001A1EBA /* 34593-train-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "34593-train-animation.json"; sourceTree = "<group>"; };
 		DF8A4E532701A097001A1EBA /* ImgTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgTableViewCell.swift; sourceTree = "<group>"; };
 		DF8A4E562701A10F001A1EBA /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		DF962800271EBFB40077FB79 /* CheckUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUserViewController.swift; sourceTree = "<group>"; };
+		DF962802271EFCEB0077FB79 /* PassWordCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassWordCheck.swift; sourceTree = "<group>"; };
 		DFB30EED26E84A9300686AFB /* subeye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = subeye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFB30EF026E84A9300686AFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DFB30EF226E84A9300686AFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +151,16 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		DF9627FF271EBE070077FB79 /* Userinfo */ = {
+			isa = PBXGroup;
+			children = (
+				DFCC19AD271DAAB90061FE92 /* UserViewController.swift */,
+				DF962800271EBFB40077FB79 /* CheckUserViewController.swift */,
+				DF962802271EFCEB0077FB79 /* PassWordCheck.swift */,
+			);
+			path = Userinfo;
+			sourceTree = "<group>";
+		};
 		DFB30EE426E84A9300686AFB = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +183,7 @@
 		DFB30EEF26E84A9300686AFB /* subeye */ = {
 			isa = PBXGroup;
 			children = (
+				DF9627FF271EBE070077FB79 /* Userinfo */,
 				DF6A172A2709EDCD000B71F0 /* statistics */,
 				DF6A17292709C41C000B71F0 /* notice */,
 				DF28DC352705A2D9008FAA0D /* SideMenu */,
@@ -180,7 +195,6 @@
 				DFB30EF926E84A9300686AFB /* Assets.xcassets */,
 				DFB30EFB26E84A9300686AFB /* LaunchScreen.storyboard */,
 				DFB30EFE26E84A9300686AFB /* Info.plist */,
-				DFCC19AD271DAAB90061FE92 /* UserViewController.swift */,
 			);
 			path = subeye;
 			sourceTree = "<group>";
@@ -309,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF962803271EFCEB0077FB79 /* PassWordCheck.swift in Sources */,
 				DF820D6C26E9BB0100BD04CC /* LoginViewController.swift in Sources */,
 				DF28DC372705A2F4008FAA0D /* SideViewTableViewCell.swift in Sources */,
 				DFC72BA826F84F1E00A2CCAE /* SignupTableViewCell.swift in Sources */,
@@ -323,6 +338,7 @@
 				DF4996622713DE8400AE57F6 /* noticelist.swift in Sources */,
 				DFCC19AC271C26230061FE92 /* Idcheck.swift in Sources */,
 				DF6A172C2709EE99000B71F0 /* noticeViewController.swift in Sources */,
+				DF962801271EBFB40077FB79 /* CheckUserViewController.swift in Sources */,
 				DF1278D426EF4BB700109AD7 /* MainViewController.swift in Sources */,
 				DF8A4E572701A10F001A1EBA /* DataSource.swift in Sources */,
 				DF28DC3427059E6D008FAA0D /* SideMenuViewController.swift in Sources */,

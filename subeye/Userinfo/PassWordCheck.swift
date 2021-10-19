@@ -1,34 +1,29 @@
 //
-//  LoginData.swift
+//  PassWordCheck.swift
 //  subeye
 //
-//  Created by 고준혁 on 2021/10/17.
+//  Created by 고준혁 on 2021/10/19.
 //
-
-//struct Login: Codable {
-//
-//    let e_num:String
-//    let user_pw:String
-//
-//}
-//
-//struct UserData: Codable {
-//
-//    let  loginSuccess: Bool
-//    let  name: String
-//    let  region: String
-//    let phone: String
-//
-//}
 
 import UIKit
 
+struct passDuplication: Codable {
+    
+    var isDuplication: Bool
+    
+}
 
-class LoginDataSource {
-    static let shared = LoginDataSource()
+struct send_passnum: Codable {
+    
+    var user_pw: String
+    
+}
+
+class PassCheck {
+    static let shared = PassCheck()
     private init() { }
     
-    var summary: UserData?
+    var summary: passDuplication?
     
     let apiQueue = DispatchQueue(label: "ApiQueue", attributes: .concurrent)
     
@@ -37,13 +32,12 @@ class LoginDataSource {
     func fetch(completion: @escaping ()-> ()) {
         group.enter()
         apiQueue.async {
-            self.login() { (result) in
+            self.sendpass() { (result) in
                 switch result {
                 case .success(let data):
                     self.summary = data
                     
                 default:
-                print("default")
                 self.summary = nil
                 }
                 
@@ -60,25 +54,22 @@ class LoginDataSource {
     
 }
 
-extension LoginDataSource {
+extension PassCheck {
     
-    private func fetch<parshingType: Codable>(urlStr: String, e_num:String, user_pw:String, completion: @escaping (Result<parshingType,Error>) -> ()) {
+    private func fetch<parshingType: Codable>(urlStr: String, pass_num:String, completion: @escaping (Result<parshingType,Error>) -> ()) {
         
         guard let url = URL(string: urlStr) else {
             completion(.failure(ApiError.invalidUrl(urlStr)))
             return
         }
         
-        
-        let comment = Login(e_num: e_num, user_pw: user_pw)
-        print(comment)
+        let comment = send_passnum(user_pw: pass_num)
         guard let uploadData = try? JSONEncoder().encode(comment) else { return }
         
         var request = URLRequest.init(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = uploadData
-        
         
         
         let task = URLSession.shared.dataTask(with: request) {
@@ -119,11 +110,11 @@ extension LoginDataSource {
         task.resume()
     }
     
-    private func login(completion: @escaping (Result<UserData,Error>) -> ()) {
+    private func sendpass(completion: @escaping (Result<passDuplication,Error>) -> ()) {
 
-        let url = "https://subeye.herokuapp.com/login"
+        let url = "https://subeye.herokuapp.com/checkPw"
         
-        fetch(urlStr: url, e_num: LoginViewController.Id.text ?? "", user_pw: LoginViewController.passWord.text ?? "" ,completion: completion)
+        fetch(urlStr: url, pass_num: CheckUserViewController.checkpassWordTF.text ?? "",completion: completion)
         
     }
 }

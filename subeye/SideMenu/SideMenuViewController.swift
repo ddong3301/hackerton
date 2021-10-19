@@ -9,9 +9,9 @@ import UIKit
 
 class SideMenuViewController: UIViewController {
 
-    let sidemenuLabels = ["Home","공지사항","통계","고객센터", "앱 설명"]
+    let sidemenuLabels = ["Home","공지사항","고객센터", "앱 설명"]
     
-    let icons = [UIImage(named: "22.png"), UIImage(named: "26.png"), UIImage(named: "25.png"), UIImage(named: "24.png"), UIImage(named: "23.png")]
+    let icons = [UIImage(named: "22.png"), UIImage(named: "26.png"), UIImage(named: "24.png"), UIImage(named: "23.png")]
     
     let simbol: UIImageView  = {
         let imgview = UIImageView()

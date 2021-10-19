@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
     
     let datas = imageset.generateData()
     
+    static var indexnum = 0
     
     let dropDown: DropDown = {
         let dropDown = DropDown()
@@ -108,7 +109,7 @@ class MainViewController: UIViewController {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "시간 :"
+        label.text = "시간 "
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textAlignment = .left
@@ -136,41 +137,7 @@ class MainViewController: UIViewController {
         return label
     }()
     
-    let outNum: UILabel = {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        label.text = "출구 번호 :"
-        label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textAlignment = .left
-        
-        
-        
-        return label
-    }()
-    
-    
-    
-    
-    let userOutNum: UILabel = {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        label.text = "1"
-        label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textAlignment = .left
-        
-        
-        
-        return label
-    }()
-    
-    
-    
+  
     
     let imgTableview: UITableView = {
         let totalview = UITableView()
@@ -240,7 +207,7 @@ class MainViewController: UIViewController {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "의심 확률 :"
+        label.text = "의심 사유 "
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 15)
         
@@ -254,7 +221,7 @@ class MainViewController: UIViewController {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "어린이가 아님"
-        label.textColor = .orange
+        label.textColor = .systemRed
         label.font = UIFont.boldSystemFont(ofSize: 15)
         
         
@@ -283,8 +250,6 @@ class MainViewController: UIViewController {
         totalView.addSubview(recentimg)
         totalView.addSubview(imgtime)
         totalView.addSubview(timelabel)
-        totalView.addSubview(outNum)
-        totalView.addSubview(userOutNum)
         totalView.addSubview(Suspicion)
         totalView.addSubview(imgSuspicion)
         
@@ -344,20 +309,14 @@ class MainViewController: UIViewController {
             imgtime.leadingAnchor.constraint(equalTo: recentimg.trailingAnchor, constant: 10),
             imgtime.topAnchor.constraint(equalTo: recentimg.topAnchor),
             
-            timelabel.leadingAnchor.constraint(equalTo: imgtime.trailingAnchor, constant: 10),
-            timelabel.topAnchor.constraint(equalTo: imgtime.topAnchor, constant: 0),
+            timelabel.leadingAnchor.constraint(equalTo: imgtime.leadingAnchor, constant: 10),
+            timelabel.topAnchor.constraint(equalTo: imgtime.bottomAnchor, constant: 10),
             
-            outNum.leadingAnchor.constraint(equalTo: imgtime.leadingAnchor),
-            outNum.topAnchor.constraint(equalTo: imgtime.bottomAnchor, constant: 20),
+            Suspicion.leadingAnchor.constraint(equalTo: imgtime.leadingAnchor, constant: 0),
+            Suspicion.topAnchor.constraint(equalTo: timelabel.bottomAnchor, constant: 20),
             
-            userOutNum.leadingAnchor.constraint(equalTo: outNum.trailingAnchor, constant: 10),
-            userOutNum.topAnchor.constraint(equalTo: outNum.topAnchor),
-            
-            Suspicion.leadingAnchor.constraint(equalTo: imgtime.leadingAnchor),
-            Suspicion.topAnchor.constraint(equalTo: outNum.bottomAnchor, constant: 20),
-            
-            imgSuspicion.leadingAnchor.constraint(equalTo: Suspicion.trailingAnchor, constant: 10),
-            imgSuspicion.topAnchor.constraint(equalTo: Suspicion.topAnchor),
+            imgSuspicion.leadingAnchor.constraint(equalTo: Suspicion.leadingAnchor, constant: 10),
+            imgSuspicion.topAnchor.constraint(equalTo: Suspicion.bottomAnchor,constant: 10),
             
         
         ])
@@ -379,7 +338,11 @@ class MainViewController: UIViewController {
 
         view.backgroundColor = .white
         
-        navigationController?.navigationBar.barTintColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1)
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1)
+        navigationController?.navigationBar.standardAppearance = appearance;
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
         
         navigationItem.titleView = titleview
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: userData)
@@ -391,9 +354,7 @@ class MainViewController: UIViewController {
         userData.addTarget(self, action: #selector(presentdrop(_:)), for: .touchUpInside)
         newscreen.addTarget(self, action: #selector(updatetableview(_:)), for: .touchUpInside)
        
-        
-        userOutNum.text = String(datas[0].outNumber)
-        imgSuspicion.text = String(datas[0].suspicion)
+        imgSuspicion.text = "어린이가 아님"
         
         animationView.play()
         
@@ -459,7 +420,7 @@ extension MainViewController {
     @objc func touchtotalview(_ sender: UIButton) {
         
         let alertview = alertViewController()
-        
+        MainViewController.indexnum = 0
         alertview.modalPresentationStyle = .overFullScreen
         alertview.modalTransitionStyle = .crossDissolve
         present(alertview, animated: true, completion: nil)
@@ -483,12 +444,12 @@ extension MainViewController {
             print("선택한 아이템 : \(item)")
             print("인덱스 : \(index)")
             if index ==  0 {
-                
                 logout()
+            } else if index == 1 {
                 
                 
-                
-                
+                let checkview = CheckUserViewController()
+                navigationController?.pushViewController(checkview, animated: true)
             }
         }
     }
@@ -527,6 +488,42 @@ extension MainViewController {
         
         
     }
+    
+    func logout() {
+        
+        
+        let logoutalert = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겟습니까?", preferredStyle: .alert)
+        let Okaction = UIAlertAction(title: "확인", style: .cancel) { (action) in
+            let url = URL(string: "https://subeye.herokuapp.com/logout")
+            
+            var request = URLRequest(url: url!)
+            request.httpMethod = "GET"
+            
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let e = error{
+                    NSLog("two error: \(e.localizedDescription)")
+                    return
+                }
+                
+                print("Success 2")
+            }
+            task.resume()
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        let cancelaction = UIAlertAction(title: "취소", style: .default) { (action) in
+            print("logout cancel")
+        }
+        
+        logoutalert.addAction(Okaction)
+        logoutalert.addAction(cancelaction)
+        
+        self.present(logoutalert, animated: true, completion: nil)
+        
+        
+
+    }
 }
 
 extension MainViewController: UITableViewDataSource {
@@ -564,41 +561,17 @@ extension MainViewController: UITableViewDataSource {
     
 extension MainViewController: UITableViewDelegate {
     
-    func logout() {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let alertview = alertViewController()
+        MainViewController.indexnum = indexPath.row + 1
+        alertview.modalPresentationStyle = .overFullScreen
+        alertview.modalTransitionStyle = .crossDissolve
+        present(alertview, animated: true, completion: nil)
         
-        let logoutalert = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겟습니까?", preferredStyle: .alert)
-        let Okaction = UIAlertAction(title: "확인", style: .cancel) { (action) in
-            let url = URL(string: "https://subeye.herokuapp.com/logout")
-            
-            var request = URLRequest(url: url!)
-            request.httpMethod = "GET"
-            
-            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                if let e = error{
-                    NSLog("two error: \(e.localizedDescription)")
-                    return
-                }
-                
-                print("Success 2")
-            }
-            task.resume()
-            
-            self.dismiss(animated: true, completion: nil)
-        }
-        
-        let cancelaction = UIAlertAction(title: "취소", style: .default) { (action) in
-            print("logout cancel")
-        }
-        
-        logoutalert.addAction(Okaction)
-        logoutalert.addAction(cancelaction)
-        
-        self.present(logoutalert, animated: true, completion: nil)
-        
-        
-
+        imgTableview.deselectRow(at: indexPath, animated: true)
     }
+    
 }
     
 extension UIImageView {

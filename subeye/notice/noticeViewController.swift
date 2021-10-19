@@ -92,10 +92,12 @@ class noticeViewController: UIViewController {
         let bt = UIButton()
         bt.translatesAutoresizingMaskIntoConstraints = false
         
-        bt.setTitle("Home ", for: .normal)
+        bt.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        bt.setTitle("리스트로 이동", for: .normal)
         bt.setTitleColor(.black, for: .normal)
         bt.setTitleColor(.systemGray4, for: .highlighted)
-        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        bt.tintColor = .black
         
         return bt
     }()
@@ -153,6 +155,7 @@ class noticeViewController: UIViewController {
         
         backbt.addTarget(self, action: #selector(presentsidemenu(_:)), for: .touchUpInside)
         userData.addTarget(self, action: #selector(presentdrop(_:)), for: .touchUpInside)
+        userData.setTitle(LoginDataSource.shared.summary?.name, for: .normal)
         
         Noticetitle.shared.fetch {
             print(Noticetitle.shared.notice.count)
@@ -186,6 +189,11 @@ extension noticeViewController {
                 
                 
                 
+            }else if index == 1 {
+                
+                
+                let checkview = CheckUserViewController()
+                navigationController?.pushViewController(checkview, animated: true)
             }
         }
     }

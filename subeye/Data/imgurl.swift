@@ -33,8 +33,10 @@ class geturl {
 
                         let path = $0.filePath
                         let date = $0.date
+                        let gate = $0.g_num
+                        let cctv = $0.c_num
                         
-                        return sharedimgurl(path: path, date: date)
+                        return sharedimgurl(path: path, date: date, gate: gate,cctv: cctv)
                     }
                 default:
                     self.imgpath = []

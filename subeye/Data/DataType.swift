@@ -50,6 +50,8 @@ struct imgurl: Codable {
 
         var filePath: String
         var date: String
+        var g_num: Int
+        var c_num: Int?
 
     }
 
@@ -61,6 +63,8 @@ struct sharedimgurl {
 
     var path: String
     var date: String
+    var gate: Int
+    var cctv: Int?
 
 }
 

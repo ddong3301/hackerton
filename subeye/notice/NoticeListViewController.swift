@@ -6,11 +6,25 @@
 //
 
 import UIKit
+import DropDown
 
 class NoticeListViewController: UIViewController {
     
     
-    
+    let userData: UIButton = {
+        let bt = UIButton()
+        bt.translatesAutoresizingMaskIntoConstraints = false
+        
+        bt.setTitle("고준혁님", for: .normal)
+        bt.setTitleColor(.black, for: .normal)
+        bt.setTitleColor(.systemGray4, for: .highlighted)
+        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        
+        
+        
+        return bt
+    }()
+
     
     let noticeTableview: UITableView = {
         let tableview = UITableView()
@@ -55,19 +69,61 @@ class NoticeListViewController: UIViewController {
         ])
     }
     
-    
+    let dropDown: DropDown = {
+        let dropDown = DropDown()
 
+        dropDown.textFont = UIFont.boldSystemFont(ofSize: 20)
+        dropDown.bottomOffset = CGPoint(x: 0, y: 40)
+        dropDown.direction = .bottom
+        dropDown.dataSource = ["Logout","사용자 정보"]
+        dropDown.backgroundColor = .white
+        dropDown.cornerRadius = 15
+        
+        
+       return dropDown
+    }()
+    
+    let titleview: UILabel = {
+        let label = UILabel()
+        
+        label.text = "공지사항"
+        label.textAlignment = .center
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 25)
+        
+        
+        return label
+    }()
+    
+    let backbt: UIButton = {
+        let bt = UIButton()
+        bt.translatesAutoresizingMaskIntoConstraints = false
+        
+        bt.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        bt.setTitle("홈으로 이동", for: .normal)
+        bt.setTitleColor(.black, for: .normal)
+        bt.setTitleColor(.systemGray4, for: .highlighted)
+        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        bt.tintColor = .black
+        return bt
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: userData)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backbt)
+        backbt.addTarget(self, action: #selector(presentsidemenu(_:)), for: .touchUpInside)
+        userData.addTarget(self, action: #selector(presentdrop(_:)), for: .touchUpInside)
+        userData.setTitle(LoginDataSource.shared.summary?.name, for: .normal)
         
         addviews()
         autolayout()
         noticeTableview.dataSource =  self
         noticeTableview.delegate = self
         
-        navigationItem.title = "공지사항"
+        navigationItem.titleView = titleview
         
         Noticetitle.shared.fetch {
             
@@ -127,4 +183,38 @@ extension NoticeListViewController: UITableViewDelegate {
     
     
     
+}
+
+extension NoticeListViewController {
+    @objc func presentdrop(_ sender: UIButton) {
+
+        dropDown.show()
+        dropDown.anchorView = userData
+        print("active")
+
+        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+           
+            print("선택한 아이템 : \(item)")
+            print("인덱스 : \(index)")
+            if index ==  0 {
+                
+                dismiss(animated: true, completion: nil)
+                
+                
+                
+            }else if index == 1 {
+                
+                
+                let checkview = CheckUserViewController()
+                navigationController?.pushViewController(checkview, animated: true)
+            }
+        }
+    }
+    
+    @objc func presentsidemenu(_ sender: UIButton) {
+        
+        navigationController?.popViewController(animated: true)
+        
+    }
+
 }

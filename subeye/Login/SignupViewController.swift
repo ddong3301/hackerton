@@ -146,7 +146,7 @@ class SignupViewController: UIViewController {
         return subview
     }()
     
-    let passTF: UITextField = {
+    static let passTF: UITextField = {
         let TF = UITextField()
         TF.translatesAutoresizingMaskIntoConstraints = false
         
@@ -345,7 +345,7 @@ class SignupViewController: UIViewController {
         view.addSubview(idtitle)
         
         view.addSubview(passview)
-        view.addSubview(passTF)
+        view.addSubview(SignupViewController.passTF)
         view.addSubview(passtitle)
         
        
@@ -418,13 +418,13 @@ class SignupViewController: UIViewController {
         
             passview.leadingAnchor.constraint(equalTo: idview.leadingAnchor),
             passview.trailingAnchor.constraint(equalTo: idcheckBT.trailingAnchor),
-            passview.topAnchor.constraint(equalTo: passTF.topAnchor, constant: -space),
-            passview.bottomAnchor.constraint(equalTo: passTF.bottomAnchor, constant: space),
+            passview.topAnchor.constraint(equalTo: SignupViewController.passTF.topAnchor, constant: -space),
+            passview.bottomAnchor.constraint(equalTo: SignupViewController.passTF.bottomAnchor, constant: space),
             
-            passTF.leadingAnchor.constraint(equalTo: SignupViewController.idTF.leadingAnchor),
-            passTF.topAnchor.constraint(equalTo: idview.bottomAnchor, constant: 50),
-            passTF.widthAnchor.constraint(equalToConstant: 250),
-            passTF.heightAnchor.constraint(equalToConstant: 40),
+            SignupViewController.passTF.leadingAnchor.constraint(equalTo: SignupViewController.idTF.leadingAnchor),
+            SignupViewController.passTF.topAnchor.constraint(equalTo: idview.bottomAnchor, constant: 50),
+            SignupViewController.passTF.widthAnchor.constraint(equalToConstant: 250),
+            SignupViewController.passTF.heightAnchor.constraint(equalToConstant: 40),
             
             passtitle.leadingAnchor.constraint(equalTo: idtitle.leadingAnchor),
             passtitle.trailingAnchor.constraint(equalTo: idtitle.trailingAnchor),
@@ -480,7 +480,7 @@ class SignupViewController: UIViewController {
             nameview.topAnchor.constraint(equalTo: nameTF.topAnchor, constant: -space),
             nameview.bottomAnchor.constraint(equalTo: nameTF.bottomAnchor, constant: space),
             
-            nameTF.leadingAnchor.constraint(equalTo: passTF.leadingAnchor),
+            nameTF.leadingAnchor.constraint(equalTo: SignupViewController.passTF.leadingAnchor),
             nameTF.topAnchor.constraint(equalTo: areaview.bottomAnchor, constant: 50),
             nameTF.widthAnchor.constraint(equalToConstant: 250),
             nameTF.heightAnchor.constraint(equalToConstant: 40),
@@ -500,7 +500,7 @@ class SignupViewController: UIViewController {
         phoneview.topAnchor.constraint(equalTo: phoneTF.topAnchor, constant: -space),
         phoneview.bottomAnchor.constraint(equalTo: phoneTF.bottomAnchor, constant: space),
         
-        phoneTF.leadingAnchor.constraint(equalTo: passTF.leadingAnchor),
+        phoneTF.leadingAnchor.constraint(equalTo: SignupViewController.passTF.leadingAnchor),
         phoneTF.topAnchor.constraint(equalTo: nameview.bottomAnchor, constant: 50),
         phoneTF.widthAnchor.constraint(equalToConstant: 250),
         phoneTF.heightAnchor.constraint(equalToConstant: 40),
@@ -540,7 +540,7 @@ class SignupViewController: UIViewController {
         tableview.delegate = self
         tableview.dataSource = self
         SignupViewController.idTF.delegate = self
-        passTF.delegate = self
+        SignupViewController.passTF.delegate = self
         nameTF.delegate = self
         phoneTF.delegate = self
         
@@ -603,10 +603,10 @@ extension SignupViewController {
             showerroralert(kind: "아이디를 입력해주세요")
             return
         }
-        guard passTF.text != "" else {
+        guard SignupViewController.passTF.text != "" else {
             showerroralert(kind: "비밀번호를 입력해주세요")
             return}
-        guard passTF.text!.count >= 7 else {
+        guard SignupViewController.passTF.text!.count >= 7 else {
             showerroralert(kind: "비밀번호는 7자리 이상이어야 합니다.")
             return
         }
@@ -624,7 +624,7 @@ extension SignupViewController {
         
         if isIdCheck != true {
         
-        postsignup(e_num: SignupViewController.idTF.text!, user_pw: passTF.text!, user_name: nameTF.text!, phone: phoneTF.text!, region: areaLabel.text!)
+            postsignup(e_num: SignupViewController.idTF.text!, user_pw: SignupViewController.passTF.text!, user_name: nameTF.text!, phone: phoneTF.text!, region: areaLabel.text!)
         
             
             
