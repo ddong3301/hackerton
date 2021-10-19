@@ -27,7 +27,7 @@ const isArrest = (parameters) => {
 
 const display_Gallery = () => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT filePath, date, g_num, c_num FROM photo ORDER BY f_num DESC`, (err, fileData) => {
+        db.query(`SELECT filePath, date, g_num, c_num, arrest FROM photo ORDER BY f_num DESC`, (err, fileData) => {
             if (err) {
                 reject(err);
             } else {
