@@ -48,6 +48,20 @@ const login = (req, res) => {
     })
 }
 
+const checkPassword = (req, res) => {
+    parameter  = {
+        "user_pw": req.body.user_pw
+    }
+    User.check_pw(parameter)
+    .then((db_data) => {
+        if(db_data.user_pw == parameter.user_pw) {
+            res.redirect('/readUser');
+        } else {
+            res.sendStatus(401);
+        }
+    })
+}
+
 const read_User = (req, res) => {
     parameter = {
         "token": req.cookies.x_auth
@@ -117,5 +131,6 @@ module.exports = {
     isDuplication,
     user_Update,
     delete_User,
-    read_User
+    read_User,
+    checkPassword
 }

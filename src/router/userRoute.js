@@ -20,5 +20,6 @@ router.post('/dup', userCtrl.isDuplication);
 router.post('/user_update', userCtrl.user_Update);
 router.post('/deleteUser', userCtrl.delete_User);
 router.get('/readUser', userCtrl.read_User);
+router.post('/checkPw', userCtrl.checkPassword);
 
 module.exports = router;

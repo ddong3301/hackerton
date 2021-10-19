@@ -103,6 +103,18 @@ const dup_UserId = (parameters) => {
     })
 }
 
+const check_pw = (parameters) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT user_pw FROM user WHERE user_pw = ${db.escape(parameters.user_pw)}`, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+ 
 module.exports = {
     insert_userInfo,
     read_userInfo,
@@ -111,5 +123,6 @@ module.exports = {
     findUser,
     insert_Token,
     delete_Token,
-    dup_UserId
+    dup_UserId,
+    check_pw
 };

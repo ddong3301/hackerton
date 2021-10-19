@@ -10,16 +10,24 @@ const singleFileUpload = (req, res) => {
             c_num: req.body.c_num,
             createAt: req.body.createAt
         }
-        console.log(parameters);
         Photo.insert_Photo(parameters)
         .then(() => {
-            res.redirect('display');
+            res.sendStatus(200);
         })
     } catch(err) {
         res.status(400).send(err.message);
     }
 }
 
+const is_Arrest = (req, res) => {
+    const parameters = {
+        f_num : req.body.f_num
+    }
+    Photo.isArrest(parameters)
+    .then()
+}
+
 module.exports = {
-    singleFileUpload
+    singleFileUpload,
+    is_Arrest
 }
