@@ -30,12 +30,12 @@ const login = (req, res) => {
     // todo: status code ++
     User.findUser(parameters)
         .then((data) => {
-            User.isLogged_in(parameters).then((db_data) => {
-                if (db_data[0].token != '') {
-                    res.send({ isLoggedin: true });
-                } else {
-                    if (data == "err") {
-                        res.send({ loginSuccess: false });
+            if (data.length == 0) {
+                res.send({ loginSuccess: false });
+            } else {
+                User.isLogged_in(parameters).then((db_data) => {
+                    if (db_data[0].token != '') {
+                        res.send({ isLoggedin: true });
                     } else {
                         const token = jwt.sign({ name: data[0].user_name, region: data[0].region, phone: data[0].phone }, 'secret_key');
                         User.insert_Token(parameters, token)
@@ -48,9 +48,8 @@ const login = (req, res) => {
                                 console.log(err);
                             })
                     }
-                }
-            });
-
+                });
+            }
         })
 }
 

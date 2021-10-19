@@ -44,7 +44,8 @@ const findUser = (parameters) => {
                 reject(err);
             } else {
                 if(db_data.length == 0) {
-                    resolve("err");
+                    console.log(db_data);
+                    resolve(db_data);
                 } else {
                     resolve(db_data);
                 }
