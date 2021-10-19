@@ -12,7 +12,7 @@ const singleFileUpload = (req, res) => {
             g_num: req.body.g_num,
             c_num: req.body.c_num
         }
-        console.log(parameters.c_num);
+        console.log(parameters);
         Photo.insert_Photo(parameters)
         .then(() => {
             // console.log(db_data);
