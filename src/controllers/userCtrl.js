@@ -84,7 +84,6 @@ const user_Update = (req, res) => {
 
 const delete_User = (req, res) => {
     let parameter = {
-        // "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64'),
         "token": req.cookies.x_auth
     }
     User.delete_userInfo(parameter).then((db_data) => {

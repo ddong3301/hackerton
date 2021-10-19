@@ -8,9 +8,7 @@ const displayCtrl = require('../controllers/displayCtrl');
 // todo: Middleware이란?
 
 router.post('/singleFile', upload.single('upload'), singleFileUpload);
-
 router.get('/gallery', displayCtrl.getImagesFromDB);
-
-router.post('/isArrest', is_Arrest)
+router.post('/isArrest', is_Arrest);
 
 module.exports = router;
