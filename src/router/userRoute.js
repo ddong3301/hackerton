@@ -3,12 +3,12 @@ const router = express.Router();
 
 const userCtrl = require('../controllers/userCtrl');
 
-// router.get('/login', (req, res) => {
-//     res.render('login');
-// });
-// router.get('/', (req, res) => {
-//     res.render('main');
-// });
+router.get('/login', (req, res) => {
+    res.render('login');
+});
+router.get('/', (req, res) => {
+    res.render('main');
+});
 
 // todo: res.send vs res.json 차이점
 
