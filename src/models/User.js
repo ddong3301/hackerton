@@ -103,6 +103,18 @@ const findUser = (parameters) => {
     })
 }
 
+const loggedIn = (parameters) => {
+    return new Promise((resolve, reject) => {
+        db.query(`UPDATE user SET loggedin = 1 WHERE e_num = ${db.escape(parameters.e_num)}`, (err, db_data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        });
+    })
+}
+
 // const insert_Token = (parameters, token) => {
 //     return new Promise((resolve, reject) => {
 //         db.query(`UPDATE user SET token = '${token}' WHERE e_num = ${db.escape(parameters.e_num)}`, (err, db_data) => {
@@ -126,6 +138,18 @@ const findUser = (parameters) => {
 //         })
 //     });
 // }
+
+const delete_loggedIn = (parameter) => {
+    return new Promise((resolve, reject) => {
+        db.query(`UPDATE user SET loggedin = 0 WHERE e_num = ${db.escape(parameter.e_num)}`, (err, db_data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    });
+}
 
 const dup_UserId = (parameters) => {
     return new Promise((resolve, reject) => {
@@ -166,7 +190,7 @@ const check_pw = (parameters) => {
 
 const isLogged_in = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT token FROM user WHERE e_num = ${db.escape(parameters.e_num)} && user_pw = ${db.escape(parameters.user_pw)}`, (err, db_data) => {
+        db.query(`SELECT loggedin FROM user WHERE e_num = ${db.escape(parameters.e_num)} && user_pw = ${db.escape(parameters.user_pw)}`, (err, db_data) => {
             if(err) {
                 reject(err);
             } else {
@@ -188,4 +212,6 @@ module.exports = {
     isLogged_in,
     none_allowed_user_info,
     change_user_auth,
+    loggedIn,
+    delete_loggedIn
 };

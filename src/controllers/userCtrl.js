@@ -34,17 +34,18 @@ const login = (req, res) => {
             } else {
                 User.isLogged_in(parameters)
                     .then((db_data) => {
-                        if (db_data[0].token != '') {
+                        if (db_data[0].loggedin == 1) {
                             res.send({ isLoggedin: true });
                         } else {
-                            const token = jwt.sign({ name: data[0].user_name, region: data[0].region, phone: data[0].phone, admin: data[0].admin, allow : data[0].allow }, 'secret_key')
+                            const token = jwt.sign({ e_num: data[0].e_num, name: data[0].user_name, region: data[0].region, phone: data[0].phone, admin: data[0].admin, allow : data[0].allow }, 'secret_key')
                             let decoded_token = jwt.verify(token, 'secret_key');
                             if(decoded_token.allow == 0) {
-                                console.log(decoded_token);
                                 res.sendStatus(401);
                             } else {
-                                res.cookie("x_auth", token);
-                                res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
+                                User.loggedIn(parameters).then(() => {
+                                    res.cookie("x_auth", token);
+                                    res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
+                                })
                                 // User.insert_Token(parameters, token).then(() => {
                                 //     res.cookie("x_auth", token);
                                 //     res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
@@ -105,8 +106,14 @@ const delete_User = (req, res) => {
 }
 
 const logout = (req, res) => {
-    token = "";
+    let token = req.cookies.x_auth;
+    let decoded_token = jwt.verify(token, 'secret_key');
+
+    let parameter = {
+        "e_num" : decoded_token.e_num
+    }
     // User.delete_Token(req.cookies.x_auth, token);
+    User.delete_loggedIn(parameter);
     res.cookie("x_auth", "", { maxAge: 3000 });
     res.sendStatus(200);
 }
