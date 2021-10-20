@@ -1,6 +1,4 @@
 const multer = require('multer');
-var timezoneOffset = new Date().getTimezoneOffset() * 60000;
-var timezoneDate = new Date(Date.now() - timezoneOffset);
 const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
 require('dotenv').config({ path : ".env" });

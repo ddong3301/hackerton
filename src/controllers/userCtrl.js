@@ -27,7 +27,6 @@ const login = (req, res) => {
             .digest('base64')
     }
 
-    // todo: status code ++
     User.findUser(parameters)
         .then((data) => {
             if (data.length == 0) {
@@ -120,17 +119,6 @@ const register = (req, res) => {
         })
 }
 
-// const sendUnAllowedUserInfo = (req, res) => {
-//     User.check_admin(parameters)
-//         .then((db_data) => {
-//             if (db_data[0] == 1) {
-//                 User.none_allowed_user_info()
-//                     .then((user_data) => {
-//                         res.send({data : user_data});
-//                     })
-//             }
-//         })
-// }
 const sendUnAllowedUserInfo = (req, res) => {
     let token = req.cookies.x_auth;
     let decoded_token = jwt.verify(token, 'secret_key');
@@ -145,21 +133,6 @@ const sendUnAllowedUserInfo = (req, res) => {
 
 }
 
-// const changeUserAuth = (req, res) => {
-//     let parameter = {
-//         "e_num": req.body.e_num,
-//         "token": req.cookies.x_auth
-//     }
-//     User.check_admin(parameters)
-//         .then((db_data) => {
-//             if (db_data[0] == 1) {
-//                 User.change_user_auth(parameter)
-//                     .then(() => {
-//                         res.sendStatus(200);
-//                     })
-//             }
-//         })
-// }
 const changeUserAuth = (req, res) => {
     let parameter = {
         "e_num": req.body.e_num,

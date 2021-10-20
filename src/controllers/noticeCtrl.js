@@ -6,14 +6,14 @@ const create_board = (req, res) => {
         title: req.body.title,
         content: req.body.content
     };
-    // [중요] todo : escape 처리 : sql injection
+
 
     Notice.create_Notice(parameters).then(() => {
         res.redirect('/showNoticeList');
     });
 }
 
-// todo: 중복 되는 코드
+
 const read_board_List = (req, res) => {
     Notice.show_Notice_List()
     .then((data) => {
