@@ -1,8 +1,8 @@
 const db = require('../config/dbConn');
 
-const none_allowed_user_info = () => {
+const none_allowed_user_info = (parameter) => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT e_num, user_name FROM user WHERE allow = 0`, (err, user_data) => {
+        db.query(`SELECT e_num, user_name FROM user WHERE allow = 0 && region = ${db.escape(parameter)}`, (err, user_data) => {
             if(err) {
                 reject(err);
             } else {

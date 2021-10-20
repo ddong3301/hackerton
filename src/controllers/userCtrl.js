@@ -42,7 +42,6 @@ const login = (req, res) => {
                             User.insert_Token(parameters, token).then(() => {
                                 res.cookie("x_auth", token);
                                 let decoded_token = jwt.verify(token, 'secret_key');
-                                console.log(decoded_token);
                                 res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
                             })
                                 .catch((err) => {
@@ -75,7 +74,6 @@ const user_Update = (req, res) => {
         "token": req.cookies.x_auth,
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64'),
     }
-    console.log(parameter);
     User.update_userInfo(parameter)
         .then(() => {
             //admin => 0 = false, 1 = true, type = tinyInt
@@ -115,8 +113,7 @@ const register = (req, res) => {
 
     User.insert_userInfo(parameters)
         .then(() => {
-            console.log(parameters);
-            res.redirect('/login');
+            res.sendStatus(200);
         })
 }
 
@@ -135,7 +132,7 @@ const sendUnAllowedUserInfo = (req, res) => {
     let token = req.cookies.x_auth;
     let decoded_token = jwt.verify(token, 'secret_key');
     if (decoded_token.admin == 1) {
-        User.none_allowed_user_info()
+        User.none_allowed_user_info(decoded_token.region)
             .then((user_data) => {
                 res.send({ data: user_data });
             })
