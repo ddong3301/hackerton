@@ -38,10 +38,11 @@ const login = (req, res) => {
                         if (db_data[0].token != '') {
                             res.send({ isLoggedin: true });
                         } else {
-                            const token = jwt.sign({ name: data[0].user_name, region: data[0].region, phone: data[0].phone }, 'secret_key');
+                            const token = jwt.sign({ name: data[0].user_name, region: data[0].region, phone: data[0].phone, admin: data[0].admin, allow : data[0].allow }, 'secret_key');
                             User.insert_Token(parameters, token).then(() => {
                                 res.cookie("x_auth", token);
                                 let decoded_token = jwt.verify(token, 'secret_key');
+                                console.log(decoded_token);
                                 res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
                             })
                                 .catch((err) => {
@@ -119,32 +120,60 @@ const register = (req, res) => {
         })
 }
 
+// const sendUnAllowedUserInfo = (req, res) => {
+//     User.check_admin(parameters)
+//         .then((db_data) => {
+//             if (db_data[0] == 1) {
+//                 User.none_allowed_user_info()
+//                     .then((user_data) => {
+//                         res.send({data : user_data});
+//                     })
+//             }
+//         })
+// }
 const sendUnAllowedUserInfo = (req, res) => {
-    User.check_admin(parameters)
-        .then((db_data) => {
-            if (db_data[0] == 1) {
-                User.none_allowed_user_info()
-                    .then((user_data) => {
-                        res.send({data : user_data});
-                    })
-            }
-        })
+    let token = req.cookies.x_auth;
+    let decoded_token = jwt.verify(token, 'secret_key');
+    if (decoded_token.admin == 1) {
+        User.none_allowed_user_info()
+            .then((user_data) => {
+                res.send({ data: user_data });
+            })
+    } else {
+        res.sendStatus(403);
+    }
+
 }
 
+// const changeUserAuth = (req, res) => {
+//     let parameter = {
+//         "e_num": req.body.e_num,
+//         "token": req.cookies.x_auth
+//     }
+//     User.check_admin(parameters)
+//         .then((db_data) => {
+//             if (db_data[0] == 1) {
+//                 User.change_user_auth(parameter)
+//                     .then(() => {
+//                         res.sendStatus(200);
+//                     })
+//             }
+//         })
+// }
 const changeUserAuth = (req, res) => {
     let parameter = {
         "e_num": req.body.e_num,
-        "token": req.cookies.x_auth
     }
-    User.check_admin(parameters)
-        .then((db_data) => {
-            if (db_data[0] == 1) {
-                User.change_user_auth(parameter)
-                    .then(() => {
-                        res.sendStatus(200);
-                    })
-            }
-        })
+    let token = req.cookies.x_auth;
+    let decoded_token = jwt.verify(token, 'secret_key');
+    if (decoded_token.admin == 1) {
+        User.change_user_auth(parameter)
+            .then(() => {
+                res.sendStatus(200);
+            })
+    } else {
+        res.sendStatus(403);
+    }
 }
 
 module.exports = {

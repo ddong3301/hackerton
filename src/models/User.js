@@ -63,7 +63,7 @@ const delete_userInfo = (parameters) => {
 
 const findUser = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT e_num, user_pw, user_name, phone, region FROM user WHERE e_num = ${db.escape(parameters.e_num)}&& user_pw = ${db.escape(parameters.user_pw)}`, (err, db_data) => {
+        db.query(`SELECT e_num, user_pw, user_name, phone, region, admin FROM user WHERE e_num = ${db.escape(parameters.e_num)}&& user_pw = ${db.escape(parameters.user_pw)}`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
