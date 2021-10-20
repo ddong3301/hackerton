@@ -4,7 +4,10 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const checkAdmin = (req, res) => {
-
+    let parameter = {
+        token = res.cookies.x_auth
+    };
+    User.check_admin
 }
 
 const isDuplication = (req, res) => {
