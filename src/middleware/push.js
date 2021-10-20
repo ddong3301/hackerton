@@ -1,48 +1,42 @@
-// var apn = require('apn');
+const apn = require('apn');
 
-// var options = {
-//     gateway: "gateway.sandbox.push.apple.com",
-//     cert: './keys/cert.pem',
-//     key: './keys/key.pem'
+// Developer mode
+var dev_options = {
+    gateway : "gateway.sandbox.push.apple.com",
+    cert: './ios-certificates/development/swift_apns_development_cert.pem',
+    key: './ios-certificates/development/swift_apns_development_server.pem',
+    production: false
+};
+
+// Production(App store)
+// var pro_options = {
+//     gateway : "gateway.push.apple.com",
+//     cert: './ios-certificates/development/swift_apns_production_cert.pem',
+//     key: './ios-certificates/development/swift_apns_production_server.pem',
+//     production: true
 // };
 
-// var apnConnection = new apn.Connection(options);
+var apnConnection = new apn.Connection(dev_options);
 
-// var token = '획득한 디바이스토큰을 넣는다.';
+var note = new apn.Notification();
+note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+note.badge = 1;
+note.sound = "ping.aiff";
+note.alert = "Swift프로젝트에서 Push 메시지 수신!";
 
-// var myDevice = new apn.Device(token);
+var tokenArr =
+    [
+        '수집된 디바이스 토큰값',
+    ];
+var deviceArr = [];
 
-// var note = new apn.Notification();
-// note.badge = 3;
-// note.alert = 'New Photo Arrive';
-// note.payload = { 'message': 'New Photo Arrive' };
+for(var i=0;i<tokenArr.length;i++){
+    var token = tokenArr[i];
+    var myDevice = new apn.Device(token);
+    deviceArr.push(myDevice); 
+} 
 
+apnConnection.pushNotification(note, deviceArr);
 
-// apnConnection.on("connected", function () {
-//     console.log("Connected");
-// });
+module.exports = apnConnection;
 
-// apnConnection.on("transmitted", function (notification, device) {
-//     console.log("Notification transmitted to:" + device.token.toString("hex"));
-// });
-
-// apnConnection.on("transmissionError", function (errCode, notification, device) {
-//     console.error("Notification caused error: " + errCode + " for device ", device, notification);
-//     if (errCode === 8) {
-//         console.log("A error code of 8 indicates that the device token is invalid. This could be for a number of reasons - are you using the correct environment? i.e. Production vs. Sandbox");
-//     }
-// });
-
-// apnConnection.on("timeout", function () {
-//     console.log("Connection Timeout");
-// });
-
-// apnConnection.on("disconnected", function () {
-//     console.log("Disconnected from APNS");
-// });
-
-// apnConnection.on("socketError", console.error);
-
-// const sendAlert = apnConnection.pushNotification(note, myDevice);
-
-// module.exports = sendAlerts;

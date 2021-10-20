@@ -1,5 +1,4 @@
 const Photo = require('../models/Photo');
-// const sendAlert = require('../middleware/push');
 
 const singleFileUpload = (req, res) => {
     try {
