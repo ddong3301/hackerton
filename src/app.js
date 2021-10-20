@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({extended: true, limit: '5mb'}));
 
-app.use(cookieParser('asddsadas'));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../')));
 
 app.use('/', userRouter);
