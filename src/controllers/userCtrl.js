@@ -5,7 +5,7 @@ const User = require('../models/User');
 
 const checkAdmin = (req, res) => {
     let parameter = {
-        token = res.cookies.x_auth
+        token : res.cookies.x_auth
     };
     User.check_admin
 }
