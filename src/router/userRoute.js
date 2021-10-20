@@ -13,5 +13,7 @@ router.post('/dup', userCtrl.isDuplication);
 router.post('/user_update', userCtrl.user_Update);
 router.get('/deleteUser', userCtrl.delete_User);
 router.post('/checkPw', userCtrl.checkPassword);
+router.get('/getUser', userCtrl.sendUnAllowedUserInfo);
+router.post('/changeUserAuth', userCtrl.changeUserAuth);
 
 module.exports = router;

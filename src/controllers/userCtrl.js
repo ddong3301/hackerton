@@ -3,6 +3,10 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 
+const checkAdmin = (req, res) => {
+
+}
+
 const isDuplication = (req, res) => {
     var parameters = {
         "e_num": req.body.e_num
@@ -58,6 +62,7 @@ const checkPassword = (req, res) => {
         "token": req.cookies.x_auth,
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64')
     }
+    console.log(parameter.user_pw);
     User.check_pw(parameter)
         .then((db_data) => {
             if (db_data.length == 0) {
@@ -118,6 +123,25 @@ const register = (req, res) => {
         })
 }
 
+const sendUnAllowedUserInfo = (req, res) => {
+    User.none_allowed_user_info()
+    .then((user_data) => {
+        console.log(user_data);
+        res.send(user_data);    
+    })
+} 
+
+const changeUserAuth = (req, res) => {
+    let parameter = {
+        "e_num" : req.body.e_num
+    }
+
+    User.change_user_auth(parameter)
+    .then(() => {
+        res.sendStatus(200);
+    })
+}
+
 module.exports = {
     login,
     logout,
@@ -125,5 +149,7 @@ module.exports = {
     isDuplication,
     user_Update,
     delete_User,
-    checkPassword
+    checkPassword,
+    sendUnAllowedUserInfo,
+    changeUserAuth
 }
