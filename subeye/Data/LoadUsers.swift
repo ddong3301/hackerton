@@ -1,27 +1,24 @@
 //
-//  url.swift
+//  LoadUsers.swift
 //  subeye
 //
-//  Created by 고준혁 on 2021/10/14.
+//  Created by 고준혁 on 2021/10/20.
 //
 
 import Foundation
 
+class Users {
 
-
-
-class geturl {
-
-    static let shared = geturl()
+    static let shared = Users()
     private init() {}
 
-    var imgpath = [sharedimgurl]()
+    var sammery = [unUsers]()
     
     let apiQueue = DispatchQueue(label: "ApiQueue", attributes: .concurrent )
 
     let group = DispatchGroup()
 
-    let urlString = "https://subeye.herokuapp.com/gallery"
+    let urlString = "https://subeye.herokuapp.com/getUser"
 
     func fetch(completion: @escaping () -> ()) {
         group.enter()
@@ -29,18 +26,16 @@ class geturl {
             self.fetch(urlStr: self.urlString) { (result)  in
                 switch result {
                 case .success(let list):
-                    self.imgpath = list.data.map {
+                    self.sammery = list.data.map {
 
-                        let path = $0.filePath
-                        let date = $0.date
-                        let gate = $0.g_num
-                        let cctv = $0.c_num
-                        let number = $0.f_num
+                        let num = $0.e_num
+                        let name = $0.user_name
+
                         
-                        return sharedimgurl(path: path, date: date, gate: gate,cctv: cctv, f_num: number)
+                        return unUsers(e_num: num, user_name: name)
                     }
                 default:
-                    self.imgpath = []
+                    self.sammery = []
                     print("default")
                 }
                 self.group.leave()
@@ -62,9 +57,9 @@ class geturl {
 
     
 
-extension geturl {
+extension Users {
 
-   private func fetch(urlStr: String, completion: @escaping (Result<imgurl,Error>) -> ()) {
+   private func fetch(urlStr: String, completion: @escaping (Result<loadUsers,Error>) -> ()) {
 
         guard let url = URL(string: urlStr) else {
 
@@ -99,7 +94,7 @@ extension geturl {
 
             do {
                 let decoder = JSONDecoder()
-                let data = try decoder.decode(imgurl.self, from: data)
+                let data = try decoder.decode(loadUsers.self, from: data)
 
                 completion(.success(data))
 
@@ -113,4 +108,3 @@ extension geturl {
         task.resume()
     }
 }
-

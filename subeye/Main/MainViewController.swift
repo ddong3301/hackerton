@@ -479,7 +479,12 @@ extension MainViewController {
             
             let url = URL(string: geturl.shared.imgpath[0].path)
             let data = try? Data(contentsOf: url!)
-            self.recentimg.image = UIImage(data: data!)
+            
+            let useurl = URL(string: "https://hackerton.s3.ap-northeast-2.amazonaws.com/no-image.jpg2021-10-21%2001%3A31%3A20")
+            let usedata = try? Data(contentsOf: useurl!)
+            let img  = UIImage(data: (data ?? usedata)!)
+            
+            self.recentimg.image = img
             self.timelabel.text = geturl.shared.imgpath[0].date
             
             
@@ -529,16 +534,21 @@ extension MainViewController {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return geturl.shared.imgpath.count
+        return geturl.shared.imgpath.count - 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImgTableViewCell.identifer, for: indexPath) as? ImgTableViewCell else {return UITableViewCell()}
         
-        cell.timelabel.text = datas[indexPath.row].imagetime
+        if(indexPath.row > geturl.shared.imgpath.count - 1){
+                return UITableViewCell()
+        } else {
+        
+        
+        cell.timelabel.text = datas[indexPath.row + 1].imagetime
         cell.images.tag = indexPath.row
         
-        let url: String =  geturl.shared.imgpath[indexPath.row].path
+        let url: String =  geturl.shared.imgpath[indexPath.row + 1].path
         let placeholder:UIImage? = UIImage.init(named: "placeholder.png")
         
         cell.images.imageFromURL(urlString: url, placeholder: placeholder) {
@@ -549,13 +559,14 @@ extension MainViewController: UITableViewDataSource {
                 tableView.endUpdates()
             }
         }
-        cell.timelabel.text = geturl.shared.imgpath[indexPath.row].date
+        cell.timelabel.text = geturl.shared.imgpath[indexPath.row + 1].date
         
         
         let selectview  = UIView()
         selectview.backgroundColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 0.5)
         cell.selectedBackgroundView = selectview
-        
+            
+        }
         return  cell
     }
 }

@@ -599,6 +599,8 @@ extension SignupViewController {
     
     @objc func backloginview(_ sender: UIButton) {
         
+        view.endEditing(true)
+        
         guard SignupViewController.idTF.text != "" else {
             showerroralert(kind: "아이디를 입력해주세요")
             return
@@ -606,7 +608,7 @@ extension SignupViewController {
         guard SignupViewController.passTF.text != "" else {
             showerroralert(kind: "비밀번호를 입력해주세요")
             return}
-        guard SignupViewController.passTF.text!.count >= 7 else {
+        guard SignupViewController.passTF.text!.count >= 1 else {
             showerroralert(kind: "비밀번호는 7자리 이상이어야 합니다.")
             return
         }

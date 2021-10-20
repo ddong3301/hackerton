@@ -52,7 +52,7 @@ struct imgurl: Codable {
         var date: String
         var g_num: Int
         var c_num: Int?
-
+        var f_num: Int
     }
 
     var data: [data]
@@ -65,7 +65,26 @@ struct sharedimgurl {
     var date: String
     var gate: Int
     var cctv: Int?
+    var f_num: Int
 
+}
+
+struct loadUsers: Codable {
+    
+    struct data: Codable {
+        
+        var e_num: String
+        var user_name: String
+    }
+    
+    var data: [data]
+}
+
+struct unUsers {
+    
+    var e_num: String
+    var user_name: String
+    
 }
 
 

@@ -103,6 +103,8 @@ extension PassCheck {
         
         let task = URLSession.shared.dataTask(with: request) {
             (data, response, error) in
+            
+            print(response)
             if let error = error {
     //            fatalError(error.localizedDescription)
                 completion(.failure(error))
@@ -143,6 +145,10 @@ extension PassCheck {
 
         let url = "https://subeye.herokuapp.com/checkPw"
         
+        print("A")
+        print(CheckUserViewController.checkpassWordTF.text)
+        print("A")
+        
         fetch(urlStr: url, pass_num: CheckUserViewController.checkpassWordTF.text ?? "",completion: completion)
         
     }
@@ -151,7 +157,9 @@ extension PassCheck {
 
         let url = "https://subeye.herokuapp.com/user_update"
         
+        
         fetch(urlStr: url, pass_num: updatepassView.checkpassWordTF.text ?? "",completion: completion)
+        
         
     }
 }

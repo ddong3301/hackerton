@@ -8,7 +8,7 @@
 import UIKit
 import MessageUI
 
-class MailViewController: UIViewController {
+class MailViewController: UIViewController, UIGestureRecognizerDelegate {
 
     
     let titleview: UILabel = {
@@ -165,11 +165,16 @@ class MailViewController: UIViewController {
         view.backgroundColor = .white
         navigationController?.navigationBar.tintColor = .black
         navigationItem.titleView = titleview
+        mailtitle.delegate = self
+        mailtext.delegate = self
         
         sendmail.addTarget(self, action: #selector(sendEmailTapped(_:)), for: .touchUpInside)
         
         
-        
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer()
+           tapGesture.delegate = self
+                
+           self.view.addGestureRecognizer(tapGesture)
         
 
         // Do any additional setup after loading the view.
@@ -190,8 +195,9 @@ class MailViewController: UIViewController {
 
 extension MailViewController: UITextFieldDelegate, UITextViewDelegate {
     
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        mailtext.resignFirstResponder()
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
     }
     
 }
@@ -201,19 +207,22 @@ extension MailViewController: MFMailComposeViewControllerDelegate {
     
     @objc func sendEmailTapped(_ sender: UIButton) {
         
+        print("mail")
         
         if MFMailComposeViewController.canSendMail() {
-            
+            print("A")
             let VC = MFMailComposeViewController()
             VC.mailComposeDelegate = self
             VC.setToRecipients(["ssuny303@gmail.com"])
             VC.setSubject(mailtitle.text ?? "")
             VC.setMessageBody(mailtext.text, isHTML: false)
+            present(VC, animated: true, completion: nil)
         }
         else {
+            print("fail")
             let alert = UIAlertController(title: "메일 전송", message: "메일 전송 실패", preferredStyle: .alert)
             let alertaction = UIAlertAction(title: "확인", style: .default) { (action) in
-                self.dismiss(animated: true, completion: nil)
+                
             }
             alert.addAction(alertaction)
             
@@ -225,6 +234,10 @@ extension MailViewController: MFMailComposeViewControllerDelegate {
         controller.dismiss(animated: true, completion: nil)
     }
     
-    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+
     
 }

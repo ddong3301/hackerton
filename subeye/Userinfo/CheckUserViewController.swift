@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CheckUserViewController: UIViewController {
+class CheckUserViewController: UIViewController, UIGestureRecognizerDelegate {
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -154,7 +154,10 @@ class CheckUserViewController: UIViewController {
         navigationItem.titleView = titleview
         
         
-        
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer()
+           tapGesture.delegate = self
+                
+           self.view.addGestureRecognizer(tapGesture)
         
         
         // Do any additional setup after loading the view.
@@ -181,12 +184,13 @@ extension CheckUserViewController {
             guard let check = PassCheck.shared.summary?.isDuplication else {
                 print("isNULL")
                 return }
-            CheckUserViewController.checkpassWordTF.text = ""
+            
             print(check)
             
             if check == true {
                 let alert = UIAlertController(title: "", message: "확인되었습니다.", preferredStyle: .alert)
                 let alertaction = UIAlertAction(title: "확인", style: .default, handler: { (action) in
+                    CheckUserViewController.checkpassWordTF.text = ""
                     let VC = UserViewController()
                     self.navigationController?.pushViewController(VC, animated: true)
                 })
@@ -213,11 +217,17 @@ extension CheckUserViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
-        CheckUserViewController.checkpassWordTF.text = ""
         checkpass(checkbt)
         
        return  true
     }
     
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+    
 }
+
+
 

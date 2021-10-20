@@ -198,6 +198,8 @@ extension updatepassView {
                 let alert = UIAlertController(title: "비밀번호 변경", message: "비밀번호 변경에 성공하였습니다.", preferredStyle: .alert)
                 let alertaction = UIAlertAction(title: "확인", style:.default) { (action) in
                     //self.logout()
+                    self.logout()
+                    self.restartApplication()
                 }
                 alert.addAction(alertaction)
                 
@@ -237,5 +239,23 @@ extension updatepassView {
             self.dismiss(animated: true, completion: nil)
         }
         
+    func restartApplication () {
+        
+        let navCtrl = UINavigationController(rootViewController: LoginViewController())
 
+        guard
+                let window = UIApplication.shared.keyWindow,
+                let rootViewController = window.rootViewController
+                else {
+            return
+        }
+
+        navCtrl.view.frame = rootViewController.view.frame
+        navCtrl.view.layoutIfNeeded()
+
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            window.rootViewController = navCtrl
+        })
+
+    }
 }

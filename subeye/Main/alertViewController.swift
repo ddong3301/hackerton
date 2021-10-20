@@ -7,7 +7,15 @@
 
 import UIKit
 
+
+
 class alertViewController: UIViewController {
+    
+    struct sendf_num: Codable {
+        
+        var f_num: Int
+        
+    }
 
     let dissmissbt: UIButton = {
         let bt = UIButton()
@@ -137,6 +145,31 @@ class alertViewController: UIViewController {
         return label
     }()
     
+    let complete :UIButton =  {
+        let bt = UIButton()
+        
+        bt.translatesAutoresizingMaskIntoConstraints = false
+        
+        let label = UILabel()
+        
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.text = "처리 완료"
+        
+        bt.addSubview(label)
+        
+        label.centerYAnchor.constraint(equalTo: bt.centerYAnchor).isActive = true
+        label.centerXAnchor.constraint(equalTo: bt.centerXAnchor).isActive = true
+        bt.layer.cornerRadius = 15
+        bt.layer.borderColor = UIColor(red: 123/255, green: 180/255, blue: 72/255, alpha: 1).cgColor
+        bt.layer.borderWidth = 2
+        bt.layer.masksToBounds = true
+        bt.setBackgroundColor(UIColor.systemGray5, for: .highlighted)
+        
+        
+        return bt
+    }()
     
     func addviews() {
         
@@ -151,6 +184,7 @@ class alertViewController: UIViewController {
         alertview.addSubview(cuaseString)
         alertview.addSubview(cctv)
         alertview.addSubview(cctvnumber)
+        alertview.addSubview(complete)
 
     }
     
@@ -168,7 +202,7 @@ class alertViewController: UIViewController {
             titleimg.leadingAnchor.constraint(equalTo: alertview.leadingAnchor, constant: 30),
             titleimg.trailingAnchor.constraint(equalTo: alertview.trailingAnchor, constant: -30),
             titleimg.topAnchor.constraint(equalTo: alertview.topAnchor, constant: 50),
-            titleimg.heightAnchor.constraint(equalToConstant: (view.frame.height / 4) * 2),
+            titleimg.heightAnchor.constraint(equalToConstant: (view.frame.height / 5) * 2),
             
             date.leadingAnchor.constraint(equalTo: titleimg.leadingAnchor, constant: 10),
             date.topAnchor.constraint(equalTo: titleimg.bottomAnchor, constant: 20),
@@ -194,6 +228,10 @@ class alertViewController: UIViewController {
             cuaseString.leadingAnchor.constraint(equalTo: cuase.trailingAnchor, constant: 10),
             cuaseString.topAnchor.constraint(equalTo: cuase.topAnchor),
             
+            complete.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            complete.bottomAnchor.constraint(equalTo: alertview.bottomAnchor,constant: -20),
+            complete.widthAnchor.constraint(equalToConstant: view.frame.width / 2),
+            complete.heightAnchor.constraint(equalToConstant: view.frame.height / 15),
         
         
         ])
@@ -213,6 +251,7 @@ class alertViewController: UIViewController {
         titleimg.image = UIImage(data: data!)
         imgdate.text = geturl.shared.imgpath[MainViewController.indexnum].date
         dissmissbt.addTarget(self, action: #selector(dissmissalert(_:)), for: .touchUpInside)
+        complete.addTarget(self, action: #selector(pressbt(_:)), for: .touchUpInside)
         
         addviews()
         layout()
@@ -220,6 +259,8 @@ class alertViewController: UIViewController {
         gateNumber.text = String(geturl.shared.imgpath[MainViewController.indexnum].gate)
         let num = geturl.shared.imgpath[MainViewController.indexnum].cctv ?? 1
         cctvnumber.text = String(num)
+        
+        
         
     }
     
@@ -243,5 +284,57 @@ extension alertViewController {
         dismiss(animated: true, completion: nil)
    
     }
+    
+   
+        
+    func updateimg() {
+            
+            guard let url = URL(string: "https://subeye.herokuapp.com/isArrest") else {
+                print("nil")
+                return
+            }
+            let comment = sendf_num(f_num: geturl.shared.imgpath[MainViewController.indexnum].f_num)
+            print(comment)
+            guard let uploadData = try? JSONEncoder().encode(comment) else { return }
+            
+            var request = URLRequest.init(url: url)
+        
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = uploadData
+            
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let e = error{
+                    NSLog("two error: \(e.localizedDescription)")
+                    return
+                }
+                print(response)
+                print("Success sent f_num")
+            }
+            task.resume()
+            
+            
+        }
+        
+        
+    @objc func pressbt(_ sender: UIButton) {
+        
+        updateimg()
+        
+        let alert = UIAlertController(title: "사진관리", message: "확인되었습니다.", preferredStyle: .alert)
+        let alertaction = UIAlertAction(title: "확인", style: .default) { (action) in
+            self.dismiss(animated: true) {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+        
+        alert.addAction(alertaction)
+        present(alert, animated: true, completion: nil)
+        
+        
+        
+    }
+        
+    
    
 }
