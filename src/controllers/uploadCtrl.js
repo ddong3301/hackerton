@@ -1,5 +1,5 @@
 const Photo = require('../models/Photo');
-const sendAlert = require('../middleware/push');
+// const sendAlert = require('../middleware/push');
 
 const singleFileUpload = (req, res) => {
     try {
@@ -13,7 +13,7 @@ const singleFileUpload = (req, res) => {
         }
         Photo.insert_Photo(parameters)
         .then(() => {
-            sendAlert;
+            // sendAlert;
             res.sendStatus(200);
         })
     } catch(err) {

@@ -37,19 +37,21 @@ const login = (req, res) => {
                         if (db_data[0].token != '') {
                             res.send({ isLoggedin: true });
                         } else {
-                            const token = jwt.sign({ name: data[0].user_name, region: data[0].region, phone: data[0].phone, admin: data[0].admin, allow : data[0].allow }, 'secret_key')
+                            const token = jwt.sign({ 
+                                name: data[0].user_name, region: data[0].region, phone: data[0].phone, admin: data[0].admin, allow : data[0].allow }, 'secret_key')
                             let decoded_token = jwt.verify(token, 'secret_key');
                             if(decoded_token.allow == 0) {
                                 console.log(decoded_token);
                                 res.sendStatus(401);
                             } else {
-                                User.insert_Token(parameters, token).then(() => {
-                                    res.cookie("x_auth", token);
-                                    res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
-                                })
-                                    .catch((err) => {
-                                        console.log(err);
-                                    })
+                                res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
+                                // User.insert_Token(parameters, token).then(() => {
+                                //     res.cookie("x_auth", token);
+                                //     res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
+                                // })
+                                //     .catch((err) => {
+                                //         console.log(err);
+                                //     })
                             }   
                         }
                     });
@@ -59,7 +61,6 @@ const login = (req, res) => {
 
 const checkPassword = (req, res) => {
     parameter = {
-        "token": req.cookies.x_auth,
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64')
     }
     User.check_pw(parameter)
@@ -73,9 +74,12 @@ const checkPassword = (req, res) => {
 }
 
 const user_Update = (req, res) => {
+    let token = req.cookies.x_auth;
+    let decoded_token = jwt.verify(token, 'secret_key');
     var parameter = {
-        "token": req.cookies.x_auth,
-        "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64'),
+        //"token": req.cookies.x_auth,
+        "e_num" : decoded_token.e_num,
+        "user_pw" : crypto.createHash('sha512').update(req.body.user_pw).digest('base64'),
     }
     User.update_userInfo(parameter)
         .then(() => {
@@ -85,8 +89,11 @@ const user_Update = (req, res) => {
 }
 
 const delete_User = (req, res) => {
+    let token = req.cookies.x_auth;
+    let decoded_token = jwt.verify(token, 'secret_key');
     let parameter = {
-        "token": req.cookies.x_auth
+        // "token": req.cookies.x_auth
+        "e_num" : decoded_token.e_num,
     }
     User.delete_userInfo(parameter).then((db_data) => {
         res.cookie("x_auth", "", { maxAge: 3000 });
@@ -99,7 +106,7 @@ const delete_User = (req, res) => {
 
 const logout = (req, res) => {
     token = "";
-    User.delete_Token(req.cookies.x_auth, token);
+    // User.delete_Token(req.cookies.x_auth, token);
     res.cookie("x_auth", "", { maxAge: 3000 });
     res.sendStatus(200);
 }
