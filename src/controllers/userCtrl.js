@@ -3,13 +3,6 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 
-const checkAdmin = (req, res) => {
-    let parameter = {
-        token : res.cookies.x_auth
-    };
-    User.check_admin
-}
-
 const isDuplication = (req, res) => {
     var parameters = {
         "e_num": req.body.e_num
@@ -41,21 +34,21 @@ const login = (req, res) => {
                 res.send({ loginSuccess: false });
             } else {
                 User.isLogged_in(parameters)
-                .then((db_data) => {
-                    if (db_data[0].token != '') {
-                        res.send({ isLoggedin: true });
-                    } else {
-                        const token = jwt.sign({ name: data[0].user_name, region: data[0].region, phone: data[0].phone }, 'secret_key');
-                        User.insert_Token(parameters, token).then(() => {
+                    .then((db_data) => {
+                        if (db_data[0].token != '') {
+                            res.send({ isLoggedin: true });
+                        } else {
+                            const token = jwt.sign({ name: data[0].user_name, region: data[0].region, phone: data[0].phone }, 'secret_key');
+                            User.insert_Token(parameters, token).then(() => {
                                 res.cookie("x_auth", token);
                                 let decoded_token = jwt.verify(token, 'secret_key');
                                 res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
                             })
-                            .catch((err) => {
-                                console.log(err);
-                            })
-                    }
-                });
+                                .catch((err) => {
+                                    console.log(err);
+                                })
+                        }
+                    });
             }
         })
 }
@@ -127,22 +120,31 @@ const register = (req, res) => {
 }
 
 const sendUnAllowedUserInfo = (req, res) => {
-    User.none_allowed_user_info()
-    .then((user_data) => {
-        console.log(user_data);
-        res.send(user_data);    
-    })
-} 
+    User.check_admin(parameters)
+        .then((db_data) => {
+            if (db_data[0] == 1) {
+                User.none_allowed_user_info()
+                    .then((user_data) => {
+                        res.send({data : user_data});
+                    })
+            }
+        })
+}
 
 const changeUserAuth = (req, res) => {
     let parameter = {
-        "e_num" : req.body.e_num
+        "e_num": req.body.e_num,
+        "token": req.cookies.x_auth
     }
-
-    User.change_user_auth(parameter)
-    .then(() => {
-        res.sendStatus(200);
-    })
+    User.check_admin(parameters)
+        .then((db_data) => {
+            if (db_data[0] == 1) {
+                User.change_user_auth(parameter)
+                    .then(() => {
+                        res.sendStatus(200);
+                    })
+            }
+        })
 }
 
 module.exports = {
@@ -154,5 +156,5 @@ module.exports = {
     delete_User,
     checkPassword,
     sendUnAllowedUserInfo,
-    changeUserAuth
+    changeUserAuth,
 }

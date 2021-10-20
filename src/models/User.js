@@ -141,9 +141,9 @@ const isLogged_in = (parameters) => {
 
  const check_admin = (parameters) => {
      return new Promise((resolve, reject) => {
-         db.query(`SELECT admin FROM user WHERE token = ${db.escape(parametrs.token)}`, (err, db_data) => {
+         db.query(`SELECT admin FROM user WHERE token = ${db.escape(parameters.token)}`, (err, db_data) => {
              if(err) {
-                 resolve(err);
+                 reject(err);
              } else {
                  resolve(db_data);
              }
