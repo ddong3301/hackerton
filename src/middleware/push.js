@@ -8,13 +8,13 @@
 //     production: false
 // };
 
-// // Production(App store)
-// // var pro_options = {
-// //     gateway : "gateway.push.apple.com",
-// //     cert: './ios-certificates/development/swift_apns_production_cert.pem',
-// //     key: './ios-certificates/development/swift_apns_production_server.pem',
-// //     production: true
-// // };
+// Production(App store)
+// var pro_options = {
+//     gateway : "gateway.push.apple.com",
+//     cert: './ios-certificates/development/swift_apns_production_cert.pem',
+//     key: './ios-certificates/development/swift_apns_production_server.pem',
+//     production: true
+// };
 
 // var apnConnection = new apn.Connection(dev_options);
 
