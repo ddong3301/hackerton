@@ -23,8 +23,11 @@ const is_Arrest = (req, res) => {
     const parameters = {
         f_num : req.body.f_num
     }
+    console.log(parameters)
     Photo.isArrest(parameters)
-    .then()
+    .then(() => {
+        res.sendStatus(200);
+    })
 }
 
 module.exports = {
