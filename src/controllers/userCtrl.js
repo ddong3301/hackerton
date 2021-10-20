@@ -38,15 +38,20 @@ const login = (req, res) => {
                         if (db_data[0].token != '') {
                             res.send({ isLoggedin: true });
                         } else {
-                            const token = jwt.sign({ name: data[0].user_name, region: data[0].region, phone: data[0].phone, admin: data[0].admin, allow : data[0].allow }, 'secret_key');
-                            User.insert_Token(parameters, token).then(() => {
-                                res.cookie("x_auth", token);
-                                let decoded_token = jwt.verify(token, 'secret_key');
-                                res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
-                            })
-                                .catch((err) => {
-                                    console.log(err);
+                            const token = jwt.sign({ name: data[0].user_name, region: data[0].region, phone: data[0].phone, admin: data[0].admin, allow : data[0].allow }, 'secret_key')
+                            let decoded_token = jwt.verify(token, 'secret_key');
+                            if(decoded_token.allow == 0) {
+                                console.log(decoded_token);
+                                res.sendStatus(401);
+                            } else {
+                                User.insert_Token(parameters, token).then(() => {
+                                    res.cookie("x_auth", token);
+                                    res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
                                 })
+                                    .catch((err) => {
+                                        console.log(err);
+                                    })
+                            }   
                         }
                     });
             }
@@ -58,7 +63,6 @@ const checkPassword = (req, res) => {
         "token": req.cookies.x_auth,
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64')
     }
-    console.log(parameter.user_pw);
     User.check_pw(parameter)
         .then((db_data) => {
             if (db_data.length == 0) {
@@ -96,10 +100,9 @@ const delete_User = (req, res) => {
 
 const logout = (req, res) => {
     token = "";
-    console.log(req.cookie);
     User.delete_Token(req.cookies.x_auth, token);
     res.cookie("x_auth", "", { maxAge: 3000 });
-    res.redirect('/');
+    res.sendStatus(200);
 }
 
 const register = (req, res) => {
