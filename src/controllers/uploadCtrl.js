@@ -13,7 +13,6 @@ const singleFileUpload = (req, res) => {
         }
         Photo.insert_Photo(parameters)
         .then(() => {
-            // sendAlert;
             res.sendStatus(200);
         })
     } catch(err) {
