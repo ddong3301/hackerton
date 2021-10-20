@@ -37,13 +37,13 @@ const login = (req, res) => {
                         if (db_data[0].token != '') {
                             res.send({ isLoggedin: true });
                         } else {
-                            const token = jwt.sign({ 
-                                name: data[0].user_name, region: data[0].region, phone: data[0].phone, admin: data[0].admin, allow : data[0].allow }, 'secret_key')
+                            const token = jwt.sign({ name: data[0].user_name, region: data[0].region, phone: data[0].phone, admin: data[0].admin, allow : data[0].allow }, 'secret_key')
                             let decoded_token = jwt.verify(token, 'secret_key');
                             if(decoded_token.allow == 0) {
                                 console.log(decoded_token);
                                 res.sendStatus(401);
                             } else {
+                                res.cookie("x_auth", token);
                                 res.send({ loginSuccess: true, name: decoded_token.name, region: decoded_token.region, phone: decoded_token.phone });
                                 // User.insert_Token(parameters, token).then(() => {
                                 //     res.cookie("x_auth", token);
