@@ -198,6 +198,7 @@ extension updatepassView {
                 let alert = UIAlertController(title: "비밀번호 변경", message: "비밀번호 변경에 성공하였습니다.", preferredStyle: .alert)
                 let alertaction = UIAlertAction(title: "확인", style:.default) { (action) in
                     //self.logout()
+                    updatepassView.checkpassWordTF.text = ""
                     self.logout()
                     self.restartApplication()
                 }
@@ -208,6 +209,8 @@ extension updatepassView {
             } else {
                 let alert = UIAlertController(title: "비밀번호 변경", message: "비밀번호 변경에 실패하였습니다.", preferredStyle: .alert)
                 let alertaction = UIAlertAction(title: "확인", style:.default) { (action) in
+                    
+                    updatepassView.checkpassWordTF.text = ""
                 }
                 alert.addAction(alertaction)
                 
