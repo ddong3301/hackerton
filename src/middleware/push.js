@@ -28,7 +28,6 @@ const sendNoti = () => {
     }).catch(function (err) {
         throw (err);
     });
-    
 }
 
 module.exports = sendNoti;
