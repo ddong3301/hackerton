@@ -2,7 +2,8 @@ const db = require('../config/dbConn');
 
 const insert_Photo = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`INSERT INTO photo SET fileName = '${parameters.fileName}', filePath = '${parameters.filePath}', fileType = '${parameters.fileType}', g_num = '${parameters.g_num}', c_num = '${parameters.c_num}', date = '${parameters.createAt}'`, (err, db_data) => {
+        db.query(`INSERT INTO photo SET fileName = '${parameters.fileName}', filePath = '${parameters.filePath}', fileType = '${parameters.fileType}', 
+        g_num = '${parameters.g_num}', c_num = '${parameters.c_num}', date = '${parameters.createAt}', photoRegion = '${parameters.photoRegion}'`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -26,7 +27,7 @@ const isArrest = (parameters) => {
 
 const display_Gallery = () => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT f_num, filePath, date, g_num, c_num, arrest FROM photo WHERE arrest = 0 ORDER BY f_num DESC`, (err, fileData) => {
+        db.query(`SELECT f_num, filePath, date, g_num, c_num, arrest, photoRegion FROM photo WHERE arrest = 0 ORDER BY f_num DESC`, (err, fileData) => {
             if (err) {
                 reject(err);
             } else {

@@ -9,7 +9,8 @@ const singleFileUpload = (req, res) => {
             fileType: req.file.mimetype,
             g_num: req.body.g_num,
             c_num: req.body.c_num,
-            createAt: req.body.createAt
+            createAt: req.body.createAt,
+            photoRegion: req.body.photoRegion
         }
         Photo.insert_Photo(parameters)
         .then(() => {
