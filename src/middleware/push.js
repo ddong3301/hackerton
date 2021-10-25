@@ -3,24 +3,15 @@
 const sendNoti = () => {
     const apn = require('apn');
 
-    // var options = {
-    //     // gateway: "gateway.sandbox.push.apple.com",
-    //     cert: "./cert/cert.pem",
-    //     key: "./cert/key.pem",
-    //     keyId: "Subeye key",
-    //     teamId: "JUNHYEOK GO"
-    // };
+    var options = {
+        gateway: "gateway.sandbox.push.apple.com",
+        cert: "./cert/cert.pem",
+        key: "./cert/key.pem",
+        keyId: "Subeye key",
+        teamId: "JUNHYEOK GO"
+    };
 
-    // var apnConnection = new apn.Provider(options);
-
-    var apnConnection = new apn.Provider({
-        token : {
-            key: 'key.p12',
-            keyId: "Subeye key",
-            teamId: "JUNHYEOK GO"
-        },
-        production: false
-    })
+    var apnConnection = new apn.Provider(options);
 
     let deviceToken = "1f7c29ec69bd2f9dde62bbece81b60a6453698f1e6fa7a3648aa8f79a7509c1e";
 
@@ -34,9 +25,11 @@ const sendNoti = () => {
 
     apnConnection.send(note, deviceToken).then(function (result) {
         console.log(result);
+        apnConnection.shutdown();
     }).catch(function (err) {
         throw (err);
     });
+    console.log(apnConnection);
 }
 
 module.exports = sendNoti;
