@@ -9,7 +9,6 @@ const getImagesFromDB = (req, res) => {
         for (var i = 0; i < data.length; i++) {
             if (decoded_token.region == data[i].photoRegion) {
                 asd = [data];
-                
             }
         }
         res.send(asd);
