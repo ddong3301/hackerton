@@ -127,6 +127,12 @@ const register = (req, res) => {
         "region": req.body.region
     }
 
+    let token = {
+        "deviceToken" : req.body.deviceToken
+    }
+
+    console.log(token);
+
     User.insert_userInfo(parameters)
         .then(() => {
             res.sendStatus(200);
