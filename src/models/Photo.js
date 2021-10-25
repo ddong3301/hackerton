@@ -25,9 +25,9 @@ const isArrest = (parameters) => {
     })
 }
 
-const display_Gallery = () => {
+const display_Gallery = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT f_num, filePath, date, g_num, c_num, arrest, photoRegion FROM photo WHERE arrest = 0 ORDER BY f_num DESC`, (err, fileData) => {
+        db.query(`SELECT f_num, filePath, date, g_num, c_num, arrest, photoRegion FROM photo WHERE arrest = 0 && photoRegion = '${parameters.region}' ORDER BY f_num DESC`, (err, fileData) => {
             if (err) {
                 reject(err);
             } else {

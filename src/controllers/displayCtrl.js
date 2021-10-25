@@ -4,16 +4,11 @@ const jwt = require('jsonwebtoken');
 const getImagesFromDB = (req, res) => {
     let token = req.cookies.x_auth;
     let decoded_token = jwt.verify(token, 'secret_key');
-    let organizeData;
-    Photo.display_Gallery().then((data) => {
-        for (var i = 0; i < data.length; i++) {
-            if (decoded_token.region == data[i].photoRegion) {
-                organizeData = data;
-
-            }
-        }
-        console.log(organizeData);
-        res.send({data : organizeData});
+    let parameters = {
+        region: decoded_token.region
+    }
+    Photo.display_Gallery(parameters).then((data) => {
+        res.send({data : data});
     });
 }
 

@@ -1,4 +1,4 @@
-require('dotenv').config({ path: ".env" });
+// require('dotenv').config({ path: ".env" });
 
 const sendNoti = () => {
     const apn = require('apn');
@@ -8,14 +8,12 @@ const sendNoti = () => {
         cert: "./cert/cert.pem",
         key: "./cert/key.pem",
         keyId: "Subeye key",
-        teamId: "JUNHYEOK GO",
+        teamId: "JUNHYEOK GO"
     };
-
-    console.log(options);
 
     var apnConnection = new apn.Provider(options);
 
-    let deviceToken = "b42f0038bda996cb120ea3dbf3bd8e81dd43efe30b77ec04eef26b9dfebb3c5a";
+    let deviceToken = "1f7c29ec69bd2f9dde62bbece81b60a6453698f1e6fa7a3648aa8f79a7509c1e";
 
     var note = new apn.Notification();
     note.badge = 1;
@@ -24,10 +22,9 @@ const sendNoti = () => {
     note.topic = 'Twogudak.Subeye';
     note.payload = { 'message': '푸쉬테스트입니다' };
 
-    apnConnection.send(note, deviceToken).then((result) => {
+    apnConnection.send(note, deviceToken).then(function (result) {
         console.log(result);
     }).catch(function (err) {
-        console.log(err);
         throw (err);
     });
 }
