@@ -17,7 +17,6 @@ const sendNoti = () => {
     let deviceToken = process.env.deviceToken;
 
     var note = new apn.Notification();
-    note.expiry = Math.floor(Date.now()/1000);
     note.badge = 1;
     note.sound = "default";
     note.alert = '무임승차 적발';
