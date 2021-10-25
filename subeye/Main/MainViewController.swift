@@ -13,7 +13,12 @@ import SideMenu
 
 class MainViewController: UIViewController {
     
-    let datas = imageset.generateData()
+    
+    var dataSource: [AnyObject] = []
+    var session: URLSession = URLSession.shared
+    lazy var cache: NSCache<AnyObject, UIImage> = NSCache()
+    
+
     
     static var indexnum = 0
     
@@ -334,8 +339,8 @@ class MainViewController: UIViewController {
         addView()
         layout()
         recentlayout()
-
-
+        
+        
         view.backgroundColor = .white
         
         let appearance = UINavigationBarAppearance()
@@ -361,12 +366,13 @@ class MainViewController: UIViewController {
         userData.setTitle(LoginDataSource.shared.summary?.name, for: .normal)
         titleview.text = LoginDataSource.shared.summary?.region
         
-        self.imgTableview.dataSource = self
-        self.imgTableview.delegate = self
+        
         
         geturl.shared.fetch {
             print(geturl.shared.imgpath.count)
             print(geturl.shared.imgpath)
+            self.imgTableview.dataSource = self
+            self.imgTableview.delegate = self
             
             self.view.reloadInputViews()
             
@@ -432,6 +438,7 @@ extension MainViewController {
         
     }
     
+
     
     
     
@@ -515,6 +522,7 @@ extension MainViewController {
                 }
                 
                 print("Success 2")
+                
             }
             task.resume()
             
@@ -537,21 +545,21 @@ extension MainViewController {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return geturl.shared.imgpath.count - 1
+        return geturl.shared.imgpath.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImgTableViewCell.identifer, for: indexPath) as? ImgTableViewCell else {return UITableViewCell()}
         
-        if(indexPath.row > geturl.shared.imgpath.count - 1){
+        
+        if(indexPath.row > geturl.shared.imgpath.count){
                 return UITableViewCell()
         } else {
         
-        
-        cell.timelabel.text = datas[indexPath.row + 1].imagetime
+    
         cell.images.tag = indexPath.row
         
-        let url: String =  geturl.shared.imgpath[indexPath.row + 1].path
+        let url: String =  geturl.shared.imgpath[indexPath.row].path
         let placeholder:UIImage? = UIImage.init(named: "placeholder.png")
         
         cell.images.imageFromURL(urlString: url, placeholder: placeholder) {
@@ -562,7 +570,7 @@ extension MainViewController: UITableViewDataSource {
                 tableView.endUpdates()
             }
         }
-        cell.timelabel.text = geturl.shared.imgpath[indexPath.row + 1].date
+        cell.timelabel.text = geturl.shared.imgpath[indexPath.row].date
         
         
         let selectview  = UIView()
@@ -579,7 +587,7 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let alertview = alertViewController()
-        MainViewController.indexnum = indexPath.row + 1
+        MainViewController.indexnum = indexPath.row
         alertview.modalPresentationStyle = .overFullScreen
         alertview.modalTransitionStyle = .crossDissolve
         present(alertview, animated: true, completion: nil)

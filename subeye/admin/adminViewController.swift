@@ -210,7 +210,7 @@ extension adminVIewController {
             if index ==  0 {
                 logout()
                 
-                
+                LoginDataSource.cookies = []
                 
                 
             }else if index == 1 {
