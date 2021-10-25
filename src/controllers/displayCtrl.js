@@ -11,7 +11,7 @@ const getImagesFromDB = (req, res) => {
                 asd = [data];
             }
         }
-        res.send(asd);
+        res.send({data : asd});
     });
 }
 
