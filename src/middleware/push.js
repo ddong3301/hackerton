@@ -1,6 +1,6 @@
 // require('dotenv').config({ path: ".env" });
 
-const sendNoti = () => {
+const sendNoti = (token) => {
     const apn = require('apn');
 
     var options = {
@@ -14,7 +14,8 @@ const sendNoti = () => {
 
     var apnConnection = new apn.Provider(options);
 
-    let deviceToken = "1f7c29ec69bd2f9dde62bbece81b60a6453698f1e6fa7a3648aa8f79a7509c1e";
+    // let deviceToken = "1f7c29ec69bd2f9dde62bbece81b60a6453698f1e6fa7a3648aa8f79a7509c1e";
+    let deviceToken = token;
 
     var note = new apn.Notification();
     note.badge = 1;

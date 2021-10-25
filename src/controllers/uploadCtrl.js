@@ -3,6 +3,7 @@ const User = require('../models/User');
 const sendNoti = require('../middleware/push');
 
 const singleFileUpload = (req, res) => {
+    let deviceToken;
     try {
         const parameters = {
             fileName: req.file.originalname,
@@ -24,6 +25,11 @@ const singleFileUpload = (req, res) => {
                 User.getSameRegion(parameters)
                     .then((data) => {
                         if (data[0].region == parameters.photoRegion) {
+                            User.getDeviceToken(paramters.photoRegion)
+                            .then((token) => {
+                                deviceToken = [token]
+                            }) 
+                            console.log(deviceToken);
                             sendNoti();
                         }
                     })

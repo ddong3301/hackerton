@@ -26,9 +26,9 @@ const change_user_auth = (parameter) => {
 
 const insert_userInfo = (parameter) => {
     return new Promise((resolve, reject) => {
-        db.query(`INSERT INTO user SET e_num = '${parameter.e_num}', user_pw = '${parameter.user_pw}', user_name = '${parameter.user_name}', phone = '${parameter.phone}', region = '${parameter.region}'`, (err, db_data) => {
+        db.query(`INSERT INTO user SET e_num = ${db.escape(parameter.e_num)}, user_pw = ${db.escape(parameter.user_pw)}, user_name = ${db.escape(parameter.user_name)}, phone = ${db.escape(parameter.phone)}, region = ${db.escape(parameter.region)}, deviceToken = ${db.escape(parameter.deviceToken)}`, (err, db_data) => {
             if (err) {
-                console.log(err);
+                reject(err);
             } else {
                 resolve(db_data);
             }
@@ -39,7 +39,7 @@ const insert_userInfo = (parameter) => {
 const update_userInfo = (parameters) => {
     return new Promise((resolve, reject) => {
         console.log(parameters);
-        db.query(`UPDATE user SET user_pw = '${parameters.user_pw}' WHERE e_num = ${db.escape(parameters.e_num)}`, (err, db_data) => {
+        db.query(`UPDATE user SET user_pw = ${db.escape(parameters.user_pw)} WHERE e_num = ${db.escape(parameters.e_num)}`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -150,6 +150,18 @@ const getSameRegion = (parameters) => {
         })
     })
 }
+
+const getDeviceToken = (parameter) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT deviceToken FROM user WHERE region = ${db.escape(parameters.photoRegion)}`, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
  
 module.exports = {
     insert_userInfo,
@@ -163,5 +175,6 @@ module.exports = {
     change_user_auth,
     loggedIn,
     delete_loggedIn,
-    getSameRegion
+    getSameRegion,
+    getDeviceToken
 };

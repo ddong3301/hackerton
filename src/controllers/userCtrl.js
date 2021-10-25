@@ -124,7 +124,8 @@ const register = (req, res) => {
         "user_pw": crypto.createHash('sha512').update(req.body.user_pw).digest('base64'),
         "user_name": req.body.user_name,
         "phone": req.body.phone,
-        "region": req.body.region
+        "region": req.body.region,
+        "deviceToken" : req.body.deviceToken
     }
 
     let token = {
