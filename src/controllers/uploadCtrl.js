@@ -25,7 +25,7 @@ const singleFileUpload = (req, res) => {
                 User.getSameRegion(parameters)
                     .then((data) => {
                         if (data[0].region == parameters.photoRegion) {
-                            User.getDeviceToken(paramters.photoRegion)
+                            User.getDeviceToken(parameters.photoRegion)
                             .then((token) => {
                                 deviceToken = [token]
                             }) 
