@@ -382,6 +382,7 @@ class MainViewController: UIViewController {
             
             self.recentimg.image = UIImage(data: data)
             self.timelabel.text = geturl.shared.imgpath[0].date
+            self.imgSuspicion.text = "\(geturl.shared.imgpath[0].reason)표 사용"
             
             
             self.imgTableview.reloadData()

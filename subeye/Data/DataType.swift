@@ -24,6 +24,7 @@ struct UserData: Codable {
 
 }
 
+
 struct signup: Codable {
     
     let e_num:String
@@ -54,6 +55,7 @@ struct imgurl: Codable {
         var g_num: Int
         var c_num: Int?
         var f_num: Int
+        var u_num: String
     }
 
     var data: [data]
@@ -67,6 +69,7 @@ struct sharedimgurl {
     var gate: Int
     var cctv: Int?
     var f_num: Int
+    var reason: String
 
 }
 

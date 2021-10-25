@@ -254,6 +254,9 @@ class alertViewController: UIViewController {
         gateNumber.text = String(geturl.shared.imgpath[MainViewController.indexnum].gate)
         let num = geturl.shared.imgpath[MainViewController.indexnum].cctv ?? 1
         cctvnumber.text = String(num)
+            
+            let reason: String = geturl.shared.imgpath[MainViewController.indexnum].reason
+            cuaseString.text = "\(reason)표 사용"
         }
         dissmissbt.addTarget(self, action: #selector(dissmissalert(_:)), for: .touchUpInside)
         complete.addTarget(self, action: #selector(pressbt(_:)), for: .touchUpInside)
