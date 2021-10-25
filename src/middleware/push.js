@@ -14,9 +14,13 @@ const sendNoti = (token) => {
 
     var apnConnection = new apn.Provider(options);
 
-    // let deviceToken = "1f7c29ec69bd2f9dde62bbece81b60a6453698f1e6fa7a3648aa8f79a7509c1e";
-    let deviceToken = token;
-
+    let deviceToken = []
+    let sendToken = []
+    for(let i = 0; i < token.length; i++) {
+        deviceToken = token;
+        sendToken[i] = deviceToken[i].deviceToken;
+    }
+   
     var note = new apn.Notification();
     note.badge = 1;
     note.sound = "default";
@@ -24,7 +28,7 @@ const sendNoti = (token) => {
     note.topic = 'Twogudak.Subeye';
     note.payload = { 'message': '푸쉬테스트입니다' };
 
-    apnConnection.send(note, deviceToken).then(function (result) {
+    apnConnection.send(note, sendToken).then(function (result) {
         console.log(result);
         apnConnection.shutdown();
     }).catch(function (err) {

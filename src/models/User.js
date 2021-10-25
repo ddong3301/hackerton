@@ -151,9 +151,9 @@ const getSameRegion = (parameters) => {
     })
 }
 
-const getDeviceToken = (parameter) => {
+const getDeviceToken = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT deviceToken FROM user WHERE region = ${db.escape(parameters.photoRegion)}`, (err, db_data) => {
+        db.query(`SELECT deviceToken FROM user WHERE region = ${db.escape(parameters.photoRegion)} && deviceToken != ""`, (err, db_data) => {
             if(err) {
                 reject(err);
             } else {

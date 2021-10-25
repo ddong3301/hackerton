@@ -128,12 +128,6 @@ const register = (req, res) => {
         "deviceToken" : req.body.deviceToken
     }
 
-    let token = {
-        "deviceToken" : req.body.deviceToken
-    }
-
-    console.log(token);
-
     User.insert_userInfo(parameters)
         .then(() => {
             res.sendStatus(200);
