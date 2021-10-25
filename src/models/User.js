@@ -63,7 +63,7 @@ const delete_userInfo = (parameters) => {
 
 const findUser = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT e_num, user_pw, user_name, phone, region, admin, allow FROM user WHERE e_num = ${db.escape(parameters.e_num)}&& user_pw = ${db.escape(parameters.user_pw)}`, (err, db_data) => {
+        db.query(`SELECT e_num, user_pw, user_name, phone, region, admin, allow, loggedin FROM user WHERE e_num = ${db.escape(parameters.e_num)}&& user_pw = ${db.escape(parameters.user_pw)}`, (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -138,6 +138,18 @@ const isLogged_in = (parameters) => {
         })
     })
 }
+
+const getSameRegion = (parameters) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT region FROM user WHERE region = ${db.escape(parameters.photoRegion)}`, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
  
 module.exports = {
     insert_userInfo,
@@ -150,5 +162,6 @@ module.exports = {
     none_allowed_user_info,
     change_user_auth,
     loggedIn,
-    delete_loggedIn
+    delete_loggedIn,
+    getSameRegion
 };

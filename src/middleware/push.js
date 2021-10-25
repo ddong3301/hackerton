@@ -22,7 +22,6 @@ const sendNoti = () => {
     note.alert = '무임승차 적발';
     note.topic = 'Twogudak.Subeye';
     note.payload = { 'message': '푸쉬테스트입니다' };
-    console.log('asd');
 
     apnConnection.send(note, deviceToken).then(function (result) {
         console.log(result);
@@ -30,7 +29,6 @@ const sendNoti = () => {
     }).catch(function (err) {
         throw (err);
     });
-    console.log(apnConnection);
 }
 
 module.exports = sendNoti;

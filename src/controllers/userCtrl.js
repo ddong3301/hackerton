@@ -37,7 +37,7 @@ const login = (req, res) => {
                         if (db_data[0].loggedin == 1) {
                             res.send({ isLoggedin: true });
                         } else {
-                            const token = jwt.sign({ e_num: data[0].e_num, name: data[0].user_name, region: data[0].region, phone: data[0].phone, admin: data[0].admin, allow : data[0].allow }, 'secret_key')
+                            const token = jwt.sign({ e_num: data[0].e_num, name: data[0].user_name, region: data[0].region, phone: data[0].phone, admin: data[0].admin, allow : data[0].allow, loggedin : data[0].loggedin }, 'secret_key')
                             let decoded_token = jwt.verify(token, 'secret_key');
                             if(decoded_token.allow == 0) {
                                 res.sendStatus(401);
