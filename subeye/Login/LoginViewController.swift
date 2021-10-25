@@ -12,6 +12,8 @@ class LoginViewController: UIViewController {
     static var loginId:String? = "1111"
     
     
+    let loading = UIActivityIndicatorView()
+    
     let extraview: UIView = {
         let extra = UIView()
         extra.translatesAutoresizingMaskIntoConstraints = false
@@ -229,11 +231,15 @@ class LoginViewController: UIViewController {
         
         view.addSubview(forget)
         view.addSubview(extraview)
+        
+        view.addSubview(loading)
     }
     
     
     func autolayout() {
         NSLayoutConstraint.activate([
+            loading.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loading.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             extraview.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
             extraview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -296,14 +302,33 @@ class LoginViewController: UIViewController {
     
     
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if ((LoginDataSource.cookies?.count  ?? 0) > 0) {
+            print(LoginDataSource.cookies?.count)
+            print("isnull")
+            let mainViewController = UINavigationController(rootViewController: MainViewController())
+            LoginViewController.passWord.text = ""
+            mainViewController.modalPresentationStyle = .fullScreen
+            mainViewController.modalTransitionStyle = .crossDissolve
+
+
+            self.present(mainViewController, animated: true, completion: nil)
+            
+            
+        }
+    }
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("A")
+        print(LoginDataSource.cookies)
        
+        loading.isHidden = true
+        loading.startAnimating()
         
         //gradeintLayer.frame = view.bounds
         addView()
@@ -384,12 +409,17 @@ extension LoginViewController {
     @objc func pressloginbt(_ sender: UIButton) {
         
         print("pressLogin bt")
+        loading.isHidden = false
+        sender.isUserInteractionEnabled = false
         
         LoginDataSource.shared.fetch {
             print(LoginDataSource.shared.summary?.loginSuccess)
+            sender.isUserInteractionEnabled = true
             if LoginDataSource.shared.summary?.loginSuccess == true {
                 print("loginsuccess")
                 LoginViewController.loginId = LoginViewController.Id.text
+                self.loading.isHidden = true
+                
                 let loginalert = UIAlertController(title: "로그인 성공", message: "로그인되었습니다.", preferredStyle: .alert)
                 let loginaction = UIAlertAction(title: "확인", style: .default) { (action) in
                     let mainViewController = UINavigationController(rootViewController: MainViewController())

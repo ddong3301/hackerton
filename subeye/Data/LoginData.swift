@@ -5,26 +5,12 @@
 //  Created by 고준혁 on 2021/10/17.
 //
 
-//struct Login: Codable {
-//
-//    let e_num:String
-//    let user_pw:String
-//
-//}
-//
-//struct UserData: Codable {
-//
-//    let  loginSuccess: Bool
-//    let  name: String
-//    let  region: String
-//    let phone: String
-//
-//}
-
 import UIKit
 
 
+
 class LoginDataSource {
+    static var cookies: [HTTPCookie]?
     static let shared = LoginDataSource()
     private init() { }
     
@@ -91,6 +77,13 @@ extension LoginDataSource {
             
             print(response)
             
+            if let httpResponse = response as? HTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
+                    let cookies: [HTTPCookie] = HTTPCookie.cookies(withResponseHeaderFields: fields, for: response!.url!)
+                LoginDataSource.cookies = cookies
+            } else {
+                LoginDataSource.cookies = []
+            }
+            print("print cookies: \(LoginDataSource.cookies)")
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 completion(.failure(ApiError.invalidResponse))
@@ -101,6 +94,7 @@ extension LoginDataSource {
                 completion(.failure(ApiError.failed(httpResponse.statusCode)))
                 return
             }
+            
             
             guard let data = data else {
                 completion(.failure(ApiError.emptyData))

@@ -245,20 +245,23 @@ class alertViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .black.withAlphaComponent(0.5)
-        
+        if geturl.shared.imgpath.count > 0 {
         let url = URL(string: geturl.shared.imgpath[MainViewController.indexnum].path)
         let data = try? Data(contentsOf: url!)
         titleimg.image = UIImage(data: data!)
         imgdate.text = geturl.shared.imgpath[MainViewController.indexnum].date
+            
+        gateNumber.text = String(geturl.shared.imgpath[MainViewController.indexnum].gate)
+        let num = geturl.shared.imgpath[MainViewController.indexnum].cctv ?? 1
+        cctvnumber.text = String(num)
+        }
         dissmissbt.addTarget(self, action: #selector(dissmissalert(_:)), for: .touchUpInside)
         complete.addTarget(self, action: #selector(pressbt(_:)), for: .touchUpInside)
         
         addviews()
         layout()
         
-        gateNumber.text = String(geturl.shared.imgpath[MainViewController.indexnum].gate)
-        let num = geturl.shared.imgpath[MainViewController.indexnum].cctv ?? 1
-        cctvnumber.text = String(num)
+        
         
         
         

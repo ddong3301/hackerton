@@ -370,14 +370,16 @@ class MainViewController: UIViewController {
             
             self.view.reloadInputViews()
             
-            let url = URL(string: geturl.shared.imgpath[0].path)
-            guard let data = try? Data(contentsOf: url!) else {return}
+            if geturl.shared.imgpath.count > 0 {
+            guard let url = URL(string: geturl.shared.imgpath[0].path) else {return}
+            guard let data = try? Data(contentsOf: url) else {return}
             
             self.recentimg.image = UIImage(data: data)
             self.timelabel.text = geturl.shared.imgpath[0].date
             
             
             self.imgTableview.reloadData()
+            }
         }
   
     }
@@ -446,6 +448,7 @@ extension MainViewController {
             print("인덱스 : \(index)")
             if index ==  0 {
                 logout()
+                LoginDataSource.cookies = []
             } else if index == 1 {
                 
                 
