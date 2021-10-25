@@ -4,7 +4,7 @@ const sendNoti = () => {
     const apn = require('apn');
 
     var options = {
-        gateway: "gateway.sandbox.push.apple.com",
+        // gateway: "gateway.sandbox.push.apple.com",
         cert: "./cert/cert.pem",
         key: "./cert/key.pem",
         keyId: "Subeye key",
