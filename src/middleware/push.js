@@ -8,7 +8,8 @@ const sendNoti = () => {
         cert: "./cert/cert.pem",
         key: "./cert/key.pem",
         keyId: "Subeye key",
-        teamId: "JUNHYEOK GO"
+        teamId: "JUNHYEOK GO",
+        production: false
     };
 
     var apnConnection = new apn.Provider(options);
