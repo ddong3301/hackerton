@@ -608,7 +608,7 @@ extension SignupViewController {
         guard SignupViewController.passTF.text != "" else {
             showerroralert(kind: "비밀번호를 입력해주세요")
             return}
-        guard SignupViewController.passTF.text!.count >= 1 else {
+        guard SignupViewController.passTF.text!.count >= 7 else {
             showerroralert(kind: "비밀번호는 7자리 이상이어야 합니다.")
             return
         }
@@ -693,8 +693,8 @@ extension SignupViewController {
     }
     
     func postsignup(e_num: String, user_pw:String, user_name:String, phone:String, region:String) {
-        
-        let signupuser = signup(e_num: e_num, user_pw: user_pw, user_name: user_name, phone: phone, region: region )
+        print("devicetoken\(AppDelegate.deviceToken)")
+        let signupuser = signup(e_num: e_num, user_pw: user_pw, user_name: user_name, phone: phone, region: region, deviceToken: AppDelegate.deviceToken )
         guard let uploadData = try? JSONEncoder().encode(signupuser) else { return }
         
         let url = URL(string: "https://subeye.herokuapp.com/register")

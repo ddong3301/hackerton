@@ -198,7 +198,7 @@ class LoginViewController: UIViewController {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "아이디 비밀번호 찾기"
+        label.text = ""
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15)
@@ -301,24 +301,6 @@ class LoginViewController: UIViewController {
     }
     
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        if ((LoginDataSource.cookies?.count  ?? 0) > 0) {
-            print(LoginDataSource.cookies?.count)
-            print("isnull")
-            let mainViewController = UINavigationController(rootViewController: MainViewController())
-            LoginViewController.passWord.text = ""
-            mainViewController.modalPresentationStyle = .fullScreen
-            mainViewController.modalTransitionStyle = .crossDissolve
-
-
-            self.present(mainViewController, animated: true, completion: nil)
-            
-            
-        }
-    }
     
     
     

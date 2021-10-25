@@ -22,7 +22,6 @@
 		DF820D6C26E9BB0100BD04CC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF820D6B26E9BB0100BD04CC /* LoginViewController.swift */; };
 		DF8A4E5127017738001A1EBA /* 34593-train-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DF8A4E5027017738001A1EBA /* 34593-train-animation.json */; };
 		DF8A4E542701A097001A1EBA /* ImgTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A4E532701A097001A1EBA /* ImgTableViewCell.swift */; };
-		DF8A4E572701A10F001A1EBA /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A4E562701A10F001A1EBA /* DataSource.swift */; };
 		DF962801271EBFB40077FB79 /* CheckUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF962800271EBFB40077FB79 /* CheckUserViewController.swift */; };
 		DF962803271EFCEB0077FB79 /* PassWordCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF962802271EFCEB0077FB79 /* PassWordCheck.swift */; };
 		DF962805271F49AD0077FB79 /* updatepassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF962804271F49AD0077FB79 /* updatepassViewController.swift */; };
@@ -62,7 +61,6 @@
 		DF820D6B26E9BB0100BD04CC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DF8A4E5027017738001A1EBA /* 34593-train-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "34593-train-animation.json"; sourceTree = "<group>"; };
 		DF8A4E532701A097001A1EBA /* ImgTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgTableViewCell.swift; sourceTree = "<group>"; };
-		DF8A4E562701A10F001A1EBA /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		DF962800271EBFB40077FB79 /* CheckUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUserViewController.swift; sourceTree = "<group>"; };
 		DF962802271EFCEB0077FB79 /* PassWordCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassWordCheck.swift; sourceTree = "<group>"; };
 		DF962804271F49AD0077FB79 /* updatepassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updatepassViewController.swift; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 		DF8A4E552701A0EB001A1EBA /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				DF8A4E562701A10F001A1EBA /* DataSource.swift */,
 				DF49965B2713224D00AE57F6 /* MyPlayground.playground */,
 				DF4996612713DE8400AE57F6 /* noticelist.swift */,
 				DF1A5E1F271480D400C130BF /* DataType.swift */,
@@ -385,7 +382,6 @@
 				DF962801271EBFB40077FB79 /* CheckUserViewController.swift in Sources */,
 				DF1278D426EF4BB700109AD7 /* MainViewController.swift in Sources */,
 				DF96280F27203C830077FB79 /* LoadUsers.swift in Sources */,
-				DF8A4E572701A10F001A1EBA /* DataSource.swift in Sources */,
 				DF96280D27203A330077FB79 /* adminTableViewCell.swift in Sources */,
 				DF28DC3427059E6D008FAA0D /* SideMenuViewController.swift in Sources */,
 				DFCC19AA271B583A0061FE92 /* LoginData.swift in Sources */,
@@ -543,7 +539,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Twogudak.Subeye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -565,7 +561,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Twogudak.Subeye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -9,9 +9,9 @@ import UIKit
 
 class SideMenuViewController: UIViewController {
 
-    let sidemenuLabels = ["Home","공지사항","고객센터", "앱 설명", "관리자"]
+    let sidemenuLabels = ["Home","공지사항","고객센터", "관리자"]
     
-    let icons = [UIImage(named: "22.png"), UIImage(named: "26.png"), UIImage(named: "24.png"), UIImage(named: "23.png"),UIImage(named: "25.png")]
+    let icons = [UIImage(named: "22.png"), UIImage(named: "26.png"), UIImage(named: "24.png"),UIImage(named: "25.png")]
     
     let simbol: UIImageView  = {
         let imgview = UIImageView()
@@ -152,8 +152,6 @@ extension SideMenuViewController: UITableViewDelegate {
                 dismiss(animated: false, completion: nil)
                 navigationController?.pushViewController(sendmail, animated: true)
             case 3:
-                print("question")
-            case 4:
                 let admin = adminVIewController()
                 
                 admin.modalTransitionStyle = .crossDissolve
@@ -161,6 +159,7 @@ extension SideMenuViewController: UITableViewDelegate {
                 
                 dismiss(animated: false, completion: nil)
                 navigationController?.pushViewController(admin, animated: true)
+                
             default:
                 return
         }

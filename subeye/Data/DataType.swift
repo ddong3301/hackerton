@@ -31,6 +31,7 @@ struct signup: Codable {
     let user_name:String
     let phone:String
     let region:String
+    let deviceToken:String
     
 }
 
